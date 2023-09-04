@@ -19,6 +19,8 @@ Min su Park
 ## Meeting Minutes
 - [Summary of the progress reports, discussions, decisions, and matters to be confirmed from the meeting.]
 - Inception deck (10 Questions). Everyone is on the same page in terms of commitment and expectations
+  - [question 1 - 5](https://anu365-my.sharepoint.com/:i:/g/personal/u7582380_anu_edu_au/ETEtsw3uvR1JoewvpPEc5ZQBJOVI6Mgjj-8S3eNWNd5JlA?e=jlsMI0)
+  - [question 6 - 10](https://anu365-my.sharepoint.com/:i:/g/personal/u7582380_anu_edu_au/EYmxFT24gNpMkWU4AIl8iiYB_annEC3tIdVxPGLehD1aew?e=EZlJqM)
 - Conflict resolution protocol: 
   1. Not finishing assigned work (whatever the reason) : 
      A. Valid reason: Let the group know asap so that other members can fill in, or at least be aware.
@@ -28,6 +30,7 @@ Min su Park
 - Team policy: healthy time allocation such that we can get enough mark for the grade
 - Development policy: We agreed to program a readable code (e.g. descriptive method/variable name, comment in English).
 - Product design: We decided to develop a simple twitter (X) clone
+  - [user story mapping](https://anu365-my.sharepoint.com/:i:/g/personal/u7582380_anu_edu_au/Ec_4ia-soppBkHYhycxFHYsBE8IuiocSuEfwdMhF1PbgNQ?e=YBb7iI)
 
 ## Action Items
 | Task           | Assigned To | Due Date |
