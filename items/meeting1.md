@@ -1,4 +1,4 @@
-# [Team Name]
+# Course++
 This following is a very simple team meeting template. You should expand it based on the scope and nature of your discussion.
 
 ## Team Meeting [1] - Week [Teaching Break 1] - [04/09/2023] (10:00 AM - 12:30 PM)
