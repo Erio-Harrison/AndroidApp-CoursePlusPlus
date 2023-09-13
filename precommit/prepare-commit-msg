@@ -1,5 +1,7 @@
 #!/bin/bash
 
+RED='\033[0;31m'
+
 commit_msg_file="$1"
 commit_source="$2"
 sha1="$3"
@@ -11,7 +13,7 @@ commit_msg=$(cat "$commit_msg_file")
 if [[ $commit_msg =~ $issue_pattern ]]; then
     exit 0
 else
-    echo "Nop, no GitLab issue # was found in commit message p(@.@)"
+    printf "{RED}Nop{NC}, no GitLab issue # was found in commit message p(@.@)"
     exit 1
 fi
 
