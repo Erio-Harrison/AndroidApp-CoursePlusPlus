@@ -7,7 +7,7 @@ PURPLE='\033[1;35m'
 NC='\033[0m'
 
 echo "Lemme check ya code.."
-src/gradlew spotlessCheck || { echo -e "${RED}Nah${NC}, format pls p(@.@)"; exit 1; }
+src/gradlew -p src spotlessCheck || { echo -e "${RED}Nah${NC}, format pls p(@.@)"; exit 1; }
 
 echo -e "${GREEN}B${BLUE}e${PURPLE}A${BLUE}u${GREEN}T${BLUE}i${PURPLE}F${BLUE}u${GREEN}L${BLUE}${NC}! (@.<)b"
 exit 0
