@@ -6,6 +6,7 @@
 - run `src/gradlew -p src spotlessApply` at project root
 - or, run `./gradlew spotlessApply` at `src` directory
 
+---
 # Instructions
 - One member of your group should `fork` this repository, add all the members to the repository and set it as private.
   > The forked repository will be where you continuously update your progress, and
