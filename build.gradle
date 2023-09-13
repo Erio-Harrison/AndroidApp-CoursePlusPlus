@@ -1,0 +1,6 @@
+task installGitHooks(type: Exec) {
+    commandLine 'cp', 'precommit/prepare-commit-msg', '.git/hooks/prepare-commit-msg'
+    workingDir project.rootDir
+    onlyIf { !file('.git/hooks/prepare-commit-msg').exists() }
+}
+
