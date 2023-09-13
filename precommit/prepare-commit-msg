@@ -4,13 +4,10 @@ commit_msg_file="$1"
 commit_source="$2"
 sha1="$3"
 
-# Define a regular expression pattern to match issue numbers (#[0-9]+)
 issue_pattern='#[0-9]+'
 
-# Read the commit message from the file
 commit_msg=$(cat "$commit_msg_file")
 
-# Check if the commit message contains an issue number
 if [[ $commit_msg =~ $issue_pattern ]]; then
     exit 0
 else
