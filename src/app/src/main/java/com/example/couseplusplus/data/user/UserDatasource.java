@@ -5,7 +5,7 @@ import com.example.couseplusplus.model.user.UserRepository;
 
 public class UserDatasource implements UserRepository {
   @Override
-  public User get(User user) {
+  public User get(String username) {
     return null;
   }
 }
