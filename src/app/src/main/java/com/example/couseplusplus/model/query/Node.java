@@ -10,4 +10,8 @@ public abstract class Node {
   public Token token() {
     return token;
   }
+
+  public Object value() {
+    return token.value();
+  }
 }

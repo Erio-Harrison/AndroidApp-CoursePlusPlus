@@ -31,12 +31,6 @@ public class PostorderParseTreeWalkerTest {
           }
 
           @Override
-          public List<String> processComparison(
-              List<String> left, Token operator, List<String> right) {
-            return List.of(String.format("%s %s %s", left, operator.tokenType(), right));
-          }
-
-          @Override
           public List<String> processConditional(
               List<String> left, Token operator, List<String> right) {
             return List.of(String.format("%s %s %s", left, operator.tokenType(), right));

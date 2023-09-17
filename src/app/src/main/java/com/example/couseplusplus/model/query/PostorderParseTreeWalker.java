@@ -11,12 +11,9 @@ public interface PostorderParseTreeWalker<T> {
       Node left = comparisonNode.left();
       Node right = comparisonNode.right();
       Token operator = comparisonNode.token();
-      if (left instanceof IdNode && right instanceof TerminalNode) {
+      if (left instanceof IdNode && right instanceof TerminalNode)
         return processComparison((IdNode) left, operator, (TerminalNode) right);
-      }
-      T leftResult = traverse(left);
-      T rightResult = traverse(right);
-      return processComparison(leftResult, operator, rightResult);
+      throw new IllegalStateException();
     }
     if (node instanceof ConditionalNode) {
       var conditionalNode = (ConditionalNode) node;
@@ -29,8 +26,6 @@ public interface PostorderParseTreeWalker<T> {
   }
 
   T processComparison(IdNode left, Token operator, TerminalNode right);
-
-  T processComparison(T left, Token operator, T right);
 
   T processConditional(T left, Token operator, T right);
 }
