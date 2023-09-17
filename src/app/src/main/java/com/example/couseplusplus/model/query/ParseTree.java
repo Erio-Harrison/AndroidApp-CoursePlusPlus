@@ -6,4 +6,8 @@ public class ParseTree {
   public ParseTree(Node root) {
     this.root = root;
   }
+
+  public Node root() {
+    return root;
+  }
 }
