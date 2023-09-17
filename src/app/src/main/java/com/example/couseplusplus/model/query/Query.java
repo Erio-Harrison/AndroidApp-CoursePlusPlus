@@ -12,10 +12,6 @@ public class Query {
     length = value.length();
   }
 
-  public String value() {
-    return value;
-  }
-
   public Optional<Character> find(int index) {
     if (isOutOfRange(index)) return Optional.empty();
     return Optional.of(value.charAt(index));
