@@ -23,6 +23,6 @@ public class ParserTest {
     Tokenizer tokenizer = new Tokenizer(new Query(queryString));
     Parser uut = new Parser(tokenizer);
     ParseTree result = uut.parse();
-    assertNotNull(result);
+    assertNotNull(result); // FIXME test node structure
   }
 }
