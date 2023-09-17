@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PostorderParseTreeWalkerTest {
-  PostorderParseTreeWalker<String> uut;
+  PostorderParseTreeWalker<List<String>> uut;
 
   @Test
   public void walks() {
