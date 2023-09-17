@@ -12,6 +12,7 @@ public enum TokenType {
   EqualOrMoreThan,
   EqualOrLessThan,
   Equal,
+  // like
   Like,
   // operand
   Integer,
@@ -27,4 +28,17 @@ public enum TokenType {
   // end
   End,
   ;
+
+  public boolean isComparable() {
+    switch (this) {
+      case MoreThan:
+      case LessThan:
+      case EqualOrMoreThan:
+      case EqualOrLessThan:
+      case Equal:
+        return true;
+      default:
+        return false;
+    }
+  }
 }

@@ -9,6 +9,10 @@ public class Tokenizer {
     index = 0;
   }
 
+  public boolean hasNext() {
+    return !query.isOutOfRange(index);
+  }
+
   public Token getNextToken() {
     while (query.find(index).isPresent()) {
       if (query.isSpace(index)) {
