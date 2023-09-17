@@ -30,7 +30,8 @@ public class TokenizerTest {
             new Token(TokenType.Equal, null)));
     testAllTokens(new Tokenizer(new Query("~")), List.of(new Token(TokenType.Like, null)));
     testAllTokens(
-        new Tokenizer(new Query("2023-09-20")), List.of(new Token(TokenType.Date, LocalDate.parse("2023-09-20"))));
+        new Tokenizer(new Query("2023-09-20")),
+        List.of(new Token(TokenType.Date, LocalDate.parse("2023-09-20"))));
     testAllTokens(
         new Tokenizer(new Query("2023S1")), List.of(new Token(TokenType.EnrolDate, "2023S1")));
     testAllTokens(
