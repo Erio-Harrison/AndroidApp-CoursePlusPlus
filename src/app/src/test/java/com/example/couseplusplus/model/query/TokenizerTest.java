@@ -21,6 +21,11 @@ public class TokenizerTest {
         new Tokenizer(new Query("&|")),
         List.of(new Token(TokenType.And, null), new Token(TokenType.Or, null)));
     testAllTokens(
+        new Tokenizer(new Query("()")),
+        List.of(
+            new Token(TokenType.LeftParenthesis, null),
+            new Token(TokenType.RightParenthesis, null)));
+    testAllTokens(
         new Tokenizer(new Query("<><=>==")),
         List.of(
             new Token(TokenType.LessThan, null),
