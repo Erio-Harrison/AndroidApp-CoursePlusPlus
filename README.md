@@ -1,10 +1,13 @@
 # Setup
 1. clone this repo
 2. run `./gradlew installGitHooks` at project root
+   - for Windows, run `gradlew.bat installGitHooks` instead
 
 # Format Your Code 
 - run `src/gradlew -p src spotlessApply` at project root
+   - for Windows, run `src\gradlew.bat -p src spotlessApply` instead
 - or, run `./gradlew spotlessApply` at `src` directory
+   - for Windows, run `gradlew.bat spotlessApply` instead
 
 ---
 # Instructions
