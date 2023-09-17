@@ -121,6 +121,14 @@ public class CommentFinderTest {
     ParseTree parseTree6 = parse("helpful > 10 | text ~ \"hell\"");
     List<Comment> result6 = uut.walk(parseTree6);
     assertEquals(6, result6.size());
+
+    ParseTree parseTree7 = parse("enrol > 2023S1 & helpful > 10 & text ~ \"hell\"");
+    List<Comment> result7 = uut.walk(parseTree7);
+    assertEquals(1, result7.size());
+
+    ParseTree parseTree8 = parse("enrol > 2023S1 | (helpful > 10 & text ~ \"hell\")");
+    List<Comment> result8 = uut.walk(parseTree8);
+    assertEquals(3, result8.size());
   }
 
   ParseTree parse(String queryString) {
