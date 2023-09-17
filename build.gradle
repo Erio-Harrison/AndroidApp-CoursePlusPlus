@@ -1,7 +1,17 @@
-task installGitHooks(type: Exec) {
-    commandLine 'cp', 'githooks/prepare-commit-msg', '.git/hooks/prepare-commit-msg'
-    commandLine 'cp', 'githooks/pre-push', '.git/hooks/pre-push'
-    workingDir project.rootDir
-    onlyIf { !file('.git/hooks/prepare-commit-msg').exists() || !file('.git/hooks/pre-push').exists() }
-}
+task installGitHooks {
+    doLast {
+        ['prepare-commit-msg', 'pre-push'].each { hook ->
+            def sourceFile = file("githooks/${hook}")
+            def targetFile = file(".git/hooks/${hook}")
 
+            if (!targetFile.exists() || sourceFile.lastModified() > targetFile.lastModified()) {
+                copy {
+                    from sourceFile
+                    into '.git/hooks'
+                    includeEmptyDirs = false
+                }
+                println "Installed ${hook} (@.@)b"
+            }
+        }
+    }
+}
