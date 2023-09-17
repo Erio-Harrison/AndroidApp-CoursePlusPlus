@@ -1,9 +1,9 @@
 package com.example.couseplusplus.model.query;
 
 /**
- * Parses the following grammar <statement> ::= <expression> | <expression> <condition> <statement>
+ * Parses the following grammar <query> ::= <expression> | <expression> <condition> <query>
  * <expression> ::= helpful <operator> <number> | enrol <operator> <enroldate> | posted <operator>
- * <date> | text <fuzzy> <string> | ( <statement> )
+ * <date> | text <fuzzy> <string> | ( <query> )
  */
 public class Parser {
   Tokenizer tokenizer;
@@ -38,14 +38,14 @@ public class Parser {
     return tokenType == TokenType.And || tokenType == TokenType.Or;
   }
 
-  public Node statement() {
+  public Node query() {
     Node expression = expression();
     if (!tokenizer.hasNext() || !isCondition(currentToken)) return expression;
 
     Token token = currentToken;
     takeCondition();
-    Node statement = statement();
-    return new BinaryOperationNode(expression, token, statement);
+    Node query = query();
+    return new ConditionalNode(expression, token, query);
   }
 
   public Node expression() {
@@ -54,28 +54,28 @@ public class Parser {
       Node helpful = id();
       Token token = currentToken;
       takeComparable();
-      return new BinaryOperationNode(helpful, token, number());
+      return new ComparisonNode(helpful, token, number());
     }
     if (tokenType == TokenType.Enrol) {
       Node enrol = id();
       Token token = currentToken;
       takeComparable();
-      return new BinaryOperationNode(enrol, token, enrolDate());
+      return new ComparisonNode(enrol, token, enrolDate());
     }
     if (tokenType == TokenType.Posted) {
       Node posted = id();
       Token token = currentToken;
       takeComparable();
-      return new BinaryOperationNode(posted, token, date());
+      return new ComparisonNode(posted, token, date());
     }
     if (tokenType == TokenType.Text) {
       Node text = id();
       Token token = currentToken;
       take(TokenType.Like);
-      return new BinaryOperationNode(text, token, textString());
+      return new ComparisonNode(text, token, textString());
     }
     take(TokenType.LeftParenthesis);
-    Node statement = statement();
+    Node statement = query();
     take(TokenType.RightParenthesis);
     return statement;
   }
@@ -115,6 +115,6 @@ public class Parser {
   }
 
   public ParseTree parse() {
-    return new ParseTree(statement());
+    return new ParseTree(query());
   }
 }
