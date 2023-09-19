@@ -1,6 +1,6 @@
 task installGitHooks {
     doLast {
-        ['prepare-commit-msg', 'pre-push'].each { hook ->
+        ['pre-push'].each { hook ->
             def sourceFile = file("githooks/${hook}")
             def targetFile = file(".git/hooks/${hook}")
 
