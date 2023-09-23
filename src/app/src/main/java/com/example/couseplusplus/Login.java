@@ -8,14 +8,11 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.couseplusplus.model.user.User;
+import com.example.couseplusplus.service.user.UserService;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
   TextInputEditText editTextEmail, editTextPassword;
@@ -24,11 +21,13 @@ public class Login extends AppCompatActivity {
   ProgressBar progressBar;
   TextView textView;
 
+  UserService userService;
+
   @Override
   public void onStart() {
     super.onStart();
-    FirebaseUser currentUser = mAuth.getCurrentUser();
-    if (currentUser != null) {
+    User user = userService.getCurrentUser();
+    if (user != null) {
       Intent intent = new Intent(getApplicationContext(), MainActivity.class);
       startActivity(intent);
       finish();
@@ -38,6 +37,9 @@ public class Login extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    userService = IoCContainer.userService;
+
     setContentView(R.layout.activity_login);
     mAuth = FirebaseAuth.getInstance();
     editTextEmail = findViewById(R.id.email);
@@ -75,24 +77,20 @@ public class Login extends AppCompatActivity {
               return;
             }
 
-            mAuth
-                .signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(
-                    new OnCompleteListener<AuthResult>() {
-                      @Override
-                      public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.GONE);
-                        if (task.isSuccessful()) {
-                          Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                          Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                          startActivity(intent);
-                          finish();
-                        } else {
-                          Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT)
-                              .show();
-                        }
-                      }
-                    });
+            User user = new User(email, password);
+            userService.login(
+                user,
+                task -> {
+                  progressBar.setVisibility(View.GONE);
+                  if (task.isSuccessful()) {
+                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                  } else {
+                    Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                  }
+                });
           }
         });
   }
