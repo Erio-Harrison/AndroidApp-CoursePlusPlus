@@ -1,3 +1,17 @@
 package com.example.couseplusplus.model.query;
 
-public class Node {}
+public abstract class Node {
+  Token token;
+
+  public Node(Token token) {
+    this.token = token;
+  }
+
+  public Token token() {
+    return token;
+  }
+
+  public Object value() {
+    return token.value();
+  }
+}
