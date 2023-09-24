@@ -76,9 +76,9 @@ public class Register extends AppCompatActivity {
             User user = new User(email, password);
             userService.register(
                 user,
-                task -> {
+                result -> {
                   progressBar.setVisibility(View.GONE);
-                  if (task.isSuccessful()) {
+                  if (result.isSuccessful()) {
                     Toast.makeText(Register.this, "Account created.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), Login.class);
                     startActivity(intent);

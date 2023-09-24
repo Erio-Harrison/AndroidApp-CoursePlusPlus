@@ -1,14 +1,13 @@
 package com.example.couseplusplus.model.user;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.auth.AuthResult;
+import java.util.function.Consumer;
 
 public interface UserRepository {
-  void login(User user, OnCompleteListener<AuthResult> onCompleteListener);
+  void login(User user, Consumer<AuthenticationResult> onCompleteListener);
 
-  void logout(User user);
+  void logout();
 
-  void register(User user, OnCompleteListener<AuthResult> onCompleteListener);
+  void register(User user, Consumer<AuthenticationResult> onCompleteListener);
 
   User getCurrentUser();
 }

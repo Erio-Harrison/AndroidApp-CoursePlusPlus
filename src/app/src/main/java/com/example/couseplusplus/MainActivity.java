@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            FirebaseAuth.getInstance().signOut();
+            userService.logout();
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();

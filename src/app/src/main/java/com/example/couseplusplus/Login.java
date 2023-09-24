@@ -80,9 +80,9 @@ public class Login extends AppCompatActivity {
             User user = new User(email, password);
             userService.login(
                 user,
-                task -> {
+                result -> {
                   progressBar.setVisibility(View.GONE);
-                  if (task.isSuccessful()) {
+                  if (result.isSuccessful()) {
                     Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);

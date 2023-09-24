@@ -1,10 +1,10 @@
 package com.example.couseplusplus.service.user;
 
+import com.example.couseplusplus.model.user.AuthenticationResult;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.model.user.UserRepository;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.auth.AuthResult;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class UserService {
   UserRepository userRepository;
@@ -13,7 +13,7 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-  public void login(User user, OnCompleteListener<AuthResult> onCompleteListener) {
+  public void login(User user, Consumer<AuthenticationResult> onCompleteListener) {
     if (Objects.isNull(user.userName()) || user.userName().isBlank()) {
       throw new IllegalArgumentException();
     }
@@ -24,11 +24,11 @@ public class UserService {
     userRepository.login(user, onCompleteListener);
   }
 
-  public void logout(User user) {
-    userRepository.logout(user);
+  public void logout() {
+    userRepository.logout();
   }
 
-  public void register(User user, OnCompleteListener<AuthResult> onCompleteListener) {
+  public void register(User user, Consumer<AuthenticationResult> onCompleteListener) {
     if (Objects.isNull(user.userName()) || user.userName().isBlank()) {
       throw new IllegalArgumentException();
     }
