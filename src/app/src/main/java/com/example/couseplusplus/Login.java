@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    userService = IoCContainer.userService;
+    userService = IoCContainer.userService();
 
     setContentView(R.layout.activity_login);
     mAuth = FirebaseAuth.getInstance();

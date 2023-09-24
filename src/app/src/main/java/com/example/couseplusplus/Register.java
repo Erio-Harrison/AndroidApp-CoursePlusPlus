@@ -37,7 +37,7 @@ public class Register extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_register);
 
-    userService = IoCContainer.userService;
+    userService = IoCContainer.userService();
     editTextEmail = findViewById(R.id.email);
     editTextPassword = findViewById(R.id.password);
     buttonRegister = findViewById(R.id.btn_register);

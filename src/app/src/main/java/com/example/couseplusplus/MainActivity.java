@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    userService = IoCContainer.userService;
+    userService = IoCContainer.userService();
     logoutButton = findViewById(R.id.logout);
     textView = findViewById(R.id.user_details);
     user = userService.getCurrentUser();
