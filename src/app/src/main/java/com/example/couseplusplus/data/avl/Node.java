@@ -1,111 +1,116 @@
 package com.example.couseplusplus.data.avl;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Node<T> {
-  T value;
-  Node<T> left;
-  Node<T> right;
+public class Node<K extends Comparable<K>, V> {
+  K key;
+  Node<K, V> left;
+  Node<K, V> right;
+  List<V> values;
 
-  public Node(T value) {
-    this.value = value;
+  public Node(K key, V value) {
+    this.key = key;
     left = null;
     right = null;
+    values = new ArrayList<>();
+    values.add(value);
   }
 
-  public Node(T value, Node<T> left, Node<T> right) {
-    this.value = value;
+  public Node(K key, Node<K, V> left, Node<K, V> right, List<V> values) {
+    this.key = key;
     this.left = left;
     this.right = right;
+    this.values = values;
   }
 
-  public Node<T> insert(T value, Comparator<T> comparator) {
-    requireNonNull(value, comparator);
+  public Node<K, V> insert(K key, V value) {
+    requireNonNull(key, value);
 
-    int difference = comparator.compare(value, this.value);
-    if (difference == 0) return new Node<>(this.value, left, right);
-    Node<T> node;
+    int difference = key.compareTo(this.key);
+    if (difference == 0) {
+      values.add(value);
+      return new Node<>(this.key, left, right, values);
+    }
+    Node<K, V> node;
     if (difference < 0) {
-      Node<T> newLeft = Objects.isNull(left) ? new Node<>(value) : left.insert(value, comparator);
-      node = new Node<>(this.value, newLeft, right);
+      Node<K, V> newLeft = Objects.isNull(left) ? new Node<>(key, value) : left.insert(key, value);
+      node = new Node<>(this.key, newLeft, right, values);
     } else {
-      Node<T> newRight =
-          Objects.isNull(right) ? new Node<>(value) : right.insert(value, comparator);
-      node = new Node<>(this.value, left, newRight);
+      Node<K, V> newRight =
+          Objects.isNull(right) ? new Node<>(key, value) : right.insert(key, value);
+      node = new Node<>(this.key, left, newRight, values);
     }
 
     int balancingFactor = node.getBalancingFactor();
     if (balancingFactor > 1) {
-      if (comparator.compare(value, node.left.value) > 0) {
+      if (key.compareTo(node.left.key) > 0) {
         node.left = node.left.rotateLeft();
         return node.rotateRight();
       }
-      if (comparator.compare(value, node.left.value) < 0) {
+      if (key.compareTo(node.left.key) < 0) {
         return node.rotateRight();
       }
     }
     if (balancingFactor < -1) {
-      if (comparator.compare(value, node.right.value) < 0) {
+      if (key.compareTo(node.right.key) < 0) {
         node.right = node.right.rotateRight();
         return node.rotateLeft();
       }
-      if (comparator.compare(value, node.right.value) > 0) {
+      if (key.compareTo(node.right.key) > 0) {
         return node.rotateLeft();
       }
     }
     return node;
   }
 
-  public Optional<Node<T>> find(T value, Comparator<T> comparator) {
-    requireNonNull(value, comparator);
+  public Optional<Node<K, V>> find(K key) {
+    requireNonNull(key);
 
-    if (comparator.compare(value, this.value) < 0) {
+    if (key.compareTo(this.key) < 0) {
       if (Objects.isNull(left)) return Optional.empty();
-      return left.find(value, comparator);
+      return left.find(key);
     }
-    if (comparator.compare(value, this.value) > 0) {
+    if (key.compareTo(this.key) > 0) {
       if (Objects.isNull(right)) return Optional.empty();
-      return right.find(value, comparator);
+      return right.find(key);
     }
     return Optional.of(this);
   }
 
-  public void collectMoreThan(
-      T value, Comparator<T> comparator, List<T> list, boolean includesEqual) {
-    requireNonNull(value, comparator, list);
+  public void collectMoreThan(K key, List<V> list, boolean includesEqual) {
+    requireNonNull(key, list);
 
-    if (comparator.compare(value, this.value) < 0) {
-      list.add(this.value);
-      if (Objects.nonNull(left)) left.collectMoreThan(value, comparator, list, includesEqual);
-      if (Objects.nonNull(right)) right.collectMoreThan(value, comparator, list, includesEqual);
+    if (key.compareTo(this.key) < 0) {
+      list.addAll(values);
+      if (Objects.nonNull(left)) left.collectMoreThan(key, list, includesEqual);
+      if (Objects.nonNull(right)) right.collectMoreThan(key, list, includesEqual);
     }
-    if (comparator.compare(value, this.value) > 0 && Objects.nonNull(right)) {
-      right.collectMoreThan(value, comparator, list, includesEqual);
+    if (key.compareTo(this.key) > 0 && Objects.nonNull(right)) {
+      right.collectMoreThan(key, list, includesEqual);
     }
-    if (comparator.compare(value, this.value) == 0) {
-      if (includesEqual) list.add(this.value);
-      if (Objects.nonNull(right)) right.collectMoreThan(value, comparator, list, includesEqual);
+    if (key.compareTo(this.key) == 0) {
+      if (includesEqual) list.addAll(values);
+      if (Objects.nonNull(right)) right.collectMoreThan(key, list, includesEqual);
     }
   }
 
-  public void collectLessThan(
-      T value, Comparator<T> comparator, List<T> list, boolean includesEqual) {
-    requireNonNull(value, comparator, list);
+  public void collectLessThan(K key, List<V> list, boolean includesEqual) {
+    requireNonNull(key, list);
 
-    if (comparator.compare(value, this.value) > 0) {
-      list.add(this.value);
-      if (Objects.nonNull(left)) left.collectLessThan(value, comparator, list, includesEqual);
-      if (Objects.nonNull(right)) right.collectLessThan(value, comparator, list, includesEqual);
+    if (key.compareTo(this.key) > 0) {
+      list.addAll(values);
+      if (Objects.nonNull(left)) left.collectLessThan(key, list, includesEqual);
+      if (Objects.nonNull(right)) right.collectLessThan(key, list, includesEqual);
     }
-    if (comparator.compare(value, this.value) < 0 && Objects.nonNull(left)) {
-      left.collectLessThan(value, comparator, list, includesEqual);
+    if (key.compareTo(this.key) < 0 && Objects.nonNull(left)) {
+      left.collectLessThan(key, list, includesEqual);
     }
-    if (comparator.compare(value, this.value) == 0) {
-      if (includesEqual) list.add(this.value);
-      if (Objects.nonNull(left)) left.collectLessThan(value, comparator, list, includesEqual);
+    if (key.compareTo(this.key) == 0) {
+      if (includesEqual) list.addAll(values);
+      if (Objects.nonNull(left)) left.collectLessThan(key, list, includesEqual);
     }
   }
 
@@ -116,8 +121,8 @@ public class Node<T> {
     }
   }
 
-  public T value() {
-    return value;
+  public V value() {
+    return values.get(0);
   }
 
   int getHeight() {
@@ -131,24 +136,24 @@ public class Node<T> {
         - (Objects.isNull(right) ? 0 : right.getHeight());
   }
 
-  Node<T> rotateLeft() {
-    Node<T> newRoot = right;
-    Node<T> newLeftRight = newRoot.left;
-    newRoot.left = new Node<>(value, left, right);
+  Node<K, V> rotateLeft() {
+    Node<K, V> newRoot = right;
+    Node<K, V> newLeftRight = newRoot.left;
+    newRoot.left = new Node<>(key, left, right, values);
     newRoot.left.right = newLeftRight;
     return newRoot;
   }
 
-  Node<T> rotateRight() {
-    Node<T> newRoot = left;
-    Node<T> newRightLeft = newRoot.right;
-    newRoot.right = new Node<>(value, left, right);
+  Node<K, V> rotateRight() {
+    Node<K, V> newRoot = left;
+    Node<K, V> newRightLeft = newRoot.right;
+    newRoot.right = new Node<>(key, left, right, values);
     newRoot.right.left = newRightLeft;
     return newRoot;
   }
 
   @Override
   public String toString() {
-    return String.format("Node{ value=%s, left=%s, right=%s }", value, left, right);
+    return String.format("Node{ value=%s, left=%s, right=%s }", key, left, right);
   }
 }

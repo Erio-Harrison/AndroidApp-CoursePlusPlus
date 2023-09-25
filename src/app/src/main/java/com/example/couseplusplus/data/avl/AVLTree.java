@@ -1,59 +1,56 @@
 package com.example.couseplusplus.data.avl;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class AVLTree<T> {
-  Node<T> root;
-  Comparator<T> comparator;
+public class AVLTree<K extends Comparable<K>, V> {
+  Node<K, V> root;
 
-  public AVLTree(Comparator<T> comparator) {
+  public AVLTree() {
     root = null;
-    this.comparator = comparator;
   }
 
-  public void insert(T value) {
+  public void insert(K key, V value) {
     if (Objects.isNull(root)) {
-      root = new Node<>(value);
+      root = new Node<>(key, value);
       return;
     }
-    root = root.insert(value, comparator);
+    root = root.insert(key, value);
   }
 
-  public Optional<T> find(T value) {
+  public Optional<V> find(K key) {
     if (Objects.isNull(root)) return Optional.empty();
-    Optional<Node<T>> optionalNode = root.find(value, comparator);
+    Optional<Node<K, V>> optionalNode = root.find(key);
     return optionalNode.map(Node::value);
   }
 
-  public List<T> collectMoreThan(T value) {
+  public List<V> collectMoreThan(K key) {
     if (Objects.isNull(root)) return List.of();
-    ArrayList<T> result = new ArrayList<>();
-    root.collectMoreThan(value, comparator, result, false);
+    ArrayList<V> result = new ArrayList<>();
+    root.collectMoreThan(key, result, false);
     return result;
   }
 
-  public List<T> collectEqualOrMoreThan(T value) {
+  public List<V> collectEqualOrMoreThan(K value) {
     if (Objects.isNull(root)) return List.of();
-    ArrayList<T> result = new ArrayList<>();
-    root.collectMoreThan(value, comparator, result, true);
+    ArrayList<V> result = new ArrayList<>();
+    root.collectMoreThan(value, result, true);
     return result;
   }
 
-  public List<T> collectLessThan(T value) {
+  public List<V> collectLessThan(K key) {
     if (Objects.isNull(root)) return List.of();
-    ArrayList<T> result = new ArrayList<>();
-    root.collectLessThan(value, comparator, result, false);
+    ArrayList<V> result = new ArrayList<>();
+    root.collectLessThan(key, result, false);
     return result;
   }
 
-  public List<T> collectEqualOrLessThan(T value) {
+  public List<V> collectEqualOrLessThan(K key) {
     if (Objects.isNull(root)) return List.of();
-    ArrayList<T> result = new ArrayList<>();
-    root.collectLessThan(value, comparator, result, true);
+    ArrayList<V> result = new ArrayList<>();
+    root.collectLessThan(key, result, true);
     return result;
   }
 

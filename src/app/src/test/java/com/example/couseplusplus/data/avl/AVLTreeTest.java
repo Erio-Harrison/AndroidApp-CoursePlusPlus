@@ -2,7 +2,6 @@ package com.example.couseplusplus.data.avl;
 
 import static org.junit.Assert.*;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -12,10 +11,10 @@ import org.junit.Test;
 public class AVLTreeTest {
   @Test
   public void testInsert() {
-    AVLTree<Integer> uut = new AVLTree<>(Comparator.comparingInt(i -> i));
-    uut.insert(1);
-    uut.insert(5);
-    uut.insert(10);
+    AVLTree<Integer, Integer> uut = new AVLTree<>();
+    uut.insert(1, 1);
+    uut.insert(5, 5);
+    uut.insert(10, 10);
     assertEquals(
         "AVLTree{ root=Node{ value=5, left=Node{ value=1, left=null, right=null }, right=Node{ value=10, left=null, right=null } } }",
         uut.toString());
@@ -23,8 +22,8 @@ public class AVLTreeTest {
 
   @Test
   public void testFind() {
-    AVLTree<Integer> uut = new AVLTree<>(Comparator.comparingInt(i -> i));
-    uut.insert(1);
+    AVLTree<Integer, Integer> uut = new AVLTree<>();
+    uut.insert(1, 1);
 
     Optional<Integer> result = uut.find(1);
     assertTrue(result.isPresent());
@@ -33,10 +32,10 @@ public class AVLTreeTest {
 
   @Test
   public void testFindMoreThan() {
-    AVLTree<Integer> uut = new AVLTree<>(Comparator.comparingInt(i -> i));
-    uut.insert(1);
-    uut.insert(2);
-    uut.insert(3);
+    AVLTree<Integer, Integer> uut = new AVLTree<>();
+    uut.insert(1, 1);
+    uut.insert(2, 2);
+    uut.insert(3, 3);
 
     List<Integer> result = uut.collectMoreThan(1);
     assertEquals(2, result.size());
@@ -45,10 +44,10 @@ public class AVLTreeTest {
 
   @Test
   public void testFindEqualOrMoreThan() {
-    AVLTree<Integer> uut = new AVLTree<>(Comparator.comparingInt(i -> i));
-    uut.insert(1);
-    uut.insert(2);
-    uut.insert(3);
+    AVLTree<Integer, Integer> uut = new AVLTree<>();
+    uut.insert(1, 1);
+    uut.insert(2, 2);
+    uut.insert(3, 3);
 
     List<Integer> result = uut.collectEqualOrMoreThan(1);
     assertEquals(3, result.size());
@@ -57,10 +56,10 @@ public class AVLTreeTest {
 
   @Test
   public void testFindLessThan() {
-    AVLTree<Integer> uut = new AVLTree<>(Comparator.comparingInt(i -> i));
-    uut.insert(1);
-    uut.insert(2);
-    uut.insert(3);
+    AVLTree<Integer, Integer> uut = new AVLTree<>();
+    uut.insert(1, 1);
+    uut.insert(2, 2);
+    uut.insert(3, 3);
 
     List<Integer> result = uut.collectLessThan(3);
     assertEquals(2, result.size());
@@ -69,10 +68,10 @@ public class AVLTreeTest {
 
   @Test
   public void testFindEqualOrLessThan() {
-    AVLTree<Integer> uut = new AVLTree<>(Comparator.comparingInt(i -> i));
-    uut.insert(1);
-    uut.insert(2);
-    uut.insert(3);
+    AVLTree<Integer, Integer> uut = new AVLTree<>();
+    uut.insert(1, 1);
+    uut.insert(2, 2);
+    uut.insert(3, 3);
 
     List<Integer> result = uut.collectEqualOrLessThan(3);
     assertEquals(3, result.size());
@@ -96,20 +95,25 @@ public class AVLTreeTest {
 
   @Test
   public void testPojoAVLTree() {
-    AVLTree<Data> uut = new AVLTree<>(Comparator.comparingInt(a -> a.integerValue));
-    uut.insert(new Data(1, "one"));
-    uut.insert(new Data(2, "two"));
-    uut.insert(new Data(3, "three"));
+    AVLTree<Integer, Data> uut = new AVLTree<>();
+    uut.insert(1, new Data(1, "one"));
+    uut.insert(2, new Data(2, "two"));
+    uut.insert(3, new Data(3, "three"));
     assertEquals(
-        "AVLTree{ root=Node{ value=[2, 'two'], left=Node{ value=[1, 'one'], left=null, right=null }, right=Node{ value=[3, 'three'], left=null, right=null } } }",
+        "AVLTree{ root=Node{ value=2, left=Node{ value=1, left=null, right=null }, right=Node{ value=3, left=null, right=null } } }",
         uut.toString());
 
-    AVLTree<Data> uut2 = new AVLTree<>(Comparator.comparing(a -> a.stringValue));
-    uut2.insert(new Data(1, "one"));
-    uut2.insert(new Data(2, "two"));
-    uut2.insert(new Data(3, "three"));
+    AVLTree<Integer, Data> uut2 = new AVLTree<>();
+    uut2.insert(1, new Data(1, "one"));
+    uut2.insert(2, new Data(2, "two"));
+    uut2.insert(3, new Data(3, "three"));
     assertEquals(
-        "AVLTree{ root=Node{ value=[3, 'three'], left=Node{ value=[1, 'one'], left=null, right=null }, right=Node{ value=[2, 'two'], left=null, right=null } } }",
+        "AVLTree{ root=Node{ value=2, left=Node{ value=1, left=null, right=null }, right=Node{ value=3, left=null, right=null } } }",
         uut2.toString());
+
+    AVLTree<Integer, Data> uut3 = new AVLTree<>();
+    uut3.insert(1, new Data(1, "one"));
+    uut3.insert(1, new Data(1, "another one"));
+    assertEquals(2, uut3.root.values.size());
   }
 }
