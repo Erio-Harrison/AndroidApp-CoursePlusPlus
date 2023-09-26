@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CommentFinder implements PostorderParseTreeWalker<List<Comment>> {
-  List<Comment> comments;
   CommentCache commentCache;
 
   public CommentFinder(CommentCache commentCache) {
