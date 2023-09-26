@@ -1,6 +1,7 @@
 package com.example.couseplusplus.data.avl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,10 +27,24 @@ public class AVLTree<K extends Comparable<K>, V> {
     return optionalNode.map(Node::value);
   }
 
+  public List<V> findAll(K key) {
+    if (Objects.isNull(root)) return List.of();
+    Optional<Node<K, V>> optionalNode = root.find(key);
+    if (optionalNode.isEmpty()) return List.of();
+    return optionalNode.get().values();
+  }
+
   public List<V> collectMoreThan(K key) {
     if (Objects.isNull(root)) return List.of();
     ArrayList<V> result = new ArrayList<>();
     root.collectMoreThan(key, result, false);
+    return result;
+  }
+
+  public List<V> collectEqualOrMoreThan(K key, Comparator<K> comparator) {
+    if (Objects.isNull(root)) return List.of();
+    ArrayList<V> result = new ArrayList<>();
+    root.collectMoreThan(key, result, true, comparator);
     return result;
   }
 

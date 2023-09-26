@@ -46,7 +46,7 @@ public class Comment {
   }
 
   public String enrolKey() {
-    return String.format("%s %s", year, semester);
+    return String.format("%sS%s", year, semester);
   }
 
   public String text() {

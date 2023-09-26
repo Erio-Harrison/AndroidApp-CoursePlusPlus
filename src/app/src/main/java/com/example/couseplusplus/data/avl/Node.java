@@ -1,6 +1,7 @@
 package com.example.couseplusplus.data.avl;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -114,6 +115,24 @@ public class Node<K extends Comparable<K>, V> {
     }
   }
 
+  public void collectMoreThan(
+      K key, List<V> list, boolean includesEqual, Comparator<K> comparator) {
+    requireNonNull(key, list, comparator);
+
+    if (comparator.compare(key, this.key) < 0) {
+      list.addAll(values);
+      if (Objects.nonNull(left)) left.collectMoreThan(key, list, includesEqual, comparator);
+      if (Objects.nonNull(right)) right.collectMoreThan(key, list, includesEqual, comparator);
+    }
+    if (comparator.compare(key, this.key) > 0 && Objects.nonNull(right)) {
+      right.collectMoreThan(key, list, includesEqual, comparator);
+    }
+    if (comparator.compare(key, this.key) == 0) {
+      if (includesEqual) list.addAll(values);
+      if (Objects.nonNull(right)) right.collectMoreThan(key, list, includesEqual, comparator);
+    }
+  }
+
   void requireNonNull(Object... objects) {
     for (Object object : objects) {
       if (Objects.nonNull(object)) continue;
@@ -123,6 +142,10 @@ public class Node<K extends Comparable<K>, V> {
 
   public V value() {
     return values.get(0);
+  }
+
+  public List<V> values() {
+    return values;
   }
 
   int getHeight() {

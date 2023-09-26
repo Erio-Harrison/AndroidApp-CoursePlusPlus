@@ -14,89 +14,30 @@ import org.junit.Test;
 public class CommentFinderTest {
   @Test
   public void walks() {
-    CommentFinder uut =
-        new CommentFinder(
-            List.of(
-                new Comment(
-                    "1",
-                    "COMP6442",
-                    2021,
-                    1,
-                    "hello",
-                    0,
-                    LocalDateTime.parse("2021-03-10T11:11:11")),
-                new Comment(
-                    "2",
-                    "COMP6442",
-                    2021,
-                    1,
-                    "world",
-                    1,
-                    LocalDateTime.parse("2021-03-10T11:11:11")),
-                new Comment(
-                    "3",
-                    "COMP6442",
-                    2021,
-                    2,
-                    "hello",
-                    11,
-                    LocalDateTime.parse("2021-09-10T11:11:11")),
-                new Comment(
-                    "4",
-                    "COMP6442",
-                    2022,
-                    1,
-                    "world",
-                    0,
-                    LocalDateTime.parse("2022-03-10T11:11:11")),
-                new Comment(
-                    "5",
-                    "COMP6442",
-                    2022,
-                    1,
-                    "hello",
-                    1,
-                    LocalDateTime.parse("2022-03-10T11:11:11")),
-                new Comment(
-                    "6",
-                    "COMP6442",
-                    2022,
-                    2,
-                    "world",
-                    11,
-                    LocalDateTime.parse("2022-09-10T11:11:11")),
-                new Comment(
-                    "7",
-                    "COMP6442",
-                    2023,
-                    1,
-                    "hello",
-                    0,
-                    LocalDateTime.parse("2023-03-10T11:11:11")),
-                new Comment(
-                    "8",
-                    "COMP6442",
-                    2023,
-                    1,
-                    "world",
-                    1,
-                    LocalDateTime.parse("2023-03-10T11:11:11")),
-                new Comment(
-                    "9",
-                    "COMP6442",
-                    2023,
-                    2,
-                    "hello",
-                    11,
-                    LocalDateTime.parse("2023-09-10T11:11:11")),
-                new Comment(
-                    "0",
-                    "COMP6442",
-                    2023,
-                    2,
-                    "world",
-                    -1,
-                    LocalDateTime.parse("2023-09-10T11:11:11"))));
+    List<Comment> comments =
+        List.of(
+            new Comment(
+                "1", "COMP6442", 2021, 1, "hello", 0, LocalDateTime.parse("2021-03-10T11:11:11")),
+            new Comment(
+                "2", "COMP6442", 2021, 1, "world", 1, LocalDateTime.parse("2021-03-10T11:11:11")),
+            new Comment(
+                "3", "COMP6442", 2021, 2, "hello", 11, LocalDateTime.parse("2021-09-10T11:11:11")),
+            new Comment(
+                "4", "COMP6442", 2022, 1, "world", 0, LocalDateTime.parse("2022-03-10T11:11:11")),
+            new Comment(
+                "5", "COMP6442", 2022, 1, "hello", 1, LocalDateTime.parse("2022-03-10T11:11:11")),
+            new Comment(
+                "6", "COMP6442", 2022, 2, "world", 11, LocalDateTime.parse("2022-09-10T11:11:11")),
+            new Comment(
+                "7", "COMP6442", 2023, 1, "hello", 0, LocalDateTime.parse("2023-03-10T11:11:11")),
+            new Comment(
+                "8", "COMP6442", 2023, 1, "world", 1, LocalDateTime.parse("2023-03-10T11:11:11")),
+            new Comment(
+                "9", "COMP6442", 2023, 2, "hello", 11, LocalDateTime.parse("2023-09-10T11:11:11")),
+            new Comment(
+                "0", "COMP6442", 2023, 2, "world", -1, LocalDateTime.parse("2023-09-10T11:11:11")));
+    CommentCache commentCache = new CommentCache(comments);
+    CommentFinder uut = new CommentFinder(commentCache);
 
     ParseTree parseTree1 = parse("helpful > 10");
     List<Comment> result1 = uut.walk(parseTree1);

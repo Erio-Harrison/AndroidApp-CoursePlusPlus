@@ -17,9 +17,10 @@ import java.util.stream.Stream;
 
 public class CommentFinder implements PostorderParseTreeWalker<List<Comment>> {
   List<Comment> comments;
+  CommentCache commentCache;
 
-  public CommentFinder(List<Comment> comments) {
-    this.comments = comments;
+  public CommentFinder(CommentCache commentCache) {
+    this.commentCache = commentCache;
   }
 
   @Override
@@ -27,24 +28,54 @@ public class CommentFinder implements PostorderParseTreeWalker<List<Comment>> {
     TokenType idTokenType = left.token().tokenType();
     TokenType operatorType = operator.tokenType();
     if (idTokenType == TokenType.Helpful) {
-      return comments.stream()
-          .filter(comment -> compareHelpful(comment, operatorType, right))
-          .collect(Collectors.toList());
+      NumberNode numberNode = (NumberNode) right;
+      if (operatorType == TokenType.MoreThan)
+        return commentCache.helpfulTree.collectMoreThan(numberNode.integer());
+      if (operatorType == TokenType.EqualOrMoreThan)
+        return commentCache.helpfulTree.collectEqualOrMoreThan(numberNode.integer());
+      if (operatorType == TokenType.LessThan)
+        return commentCache.helpfulTree.collectLessThan(numberNode.integer());
+      if (operatorType == TokenType.EqualOrLessThan)
+        return commentCache.helpfulTree.collectEqualOrLessThan(numberNode.integer());
+      if (operatorType == TokenType.Equal)
+        return commentCache.helpfulTree.findAll(numberNode.integer());
+      throw new IllegalStateException(String.format("%s is not supported", operatorType));
     }
     if (idTokenType == TokenType.Enrol) {
-      return comments.stream()
-          .filter(comment -> compareEnrol(comment, operatorType, right))
-          .collect(Collectors.toList());
+      EnrolDateNode enrolDateNode = (EnrolDateNode) right;
+      String key = enrolDateNode.value().toString();
+      if (operatorType == TokenType.MoreThan) return commentCache.enrolTree.collectMoreThan(key);
+      if (operatorType == TokenType.EqualOrMoreThan)
+        return commentCache.enrolTree.collectEqualOrMoreThan(key);
+      if (operatorType == TokenType.LessThan) return commentCache.enrolTree.collectLessThan(key);
+      if (operatorType == TokenType.EqualOrLessThan)
+        return commentCache.enrolTree.collectEqualOrLessThan(key);
+      if (operatorType == TokenType.Equal) return commentCache.enrolTree.findAll(key);
+      throw new IllegalStateException(String.format("%s is not supported", operatorType));
     }
     if (idTokenType == TokenType.Posted) {
-      return comments.stream()
-          .filter(comment -> comparePosted(comment, operatorType, right))
-          .collect(Collectors.toList());
+      DateNode dateNode = (DateNode) right;
+      String key = dateNode.localDate().toString();
+      if (operatorType == TokenType.MoreThan) return commentCache.postedTree.collectMoreThan(key);
+      if (operatorType == TokenType.EqualOrMoreThan)
+        return commentCache.postedTree.collectEqualOrMoreThan(key);
+      if (operatorType == TokenType.LessThan) return commentCache.postedTree.collectLessThan(key);
+      if (operatorType == TokenType.EqualOrLessThan)
+        return commentCache.postedTree.collectEqualOrLessThan(key);
+      if (operatorType == TokenType.Equal) return commentCache.postedTree.findAll(key);
+      throw new IllegalStateException(String.format("%s is not supported", operatorType));
     }
     if (idTokenType == TokenType.Text) {
-      return comments.stream()
-          .filter(comment -> compareText(comment, operatorType, right))
-          .collect(Collectors.toList());
+      TextNode textNode = (TextNode) right;
+      String key = textNode.text();
+      if (operatorType == TokenType.Like)
+        return commentCache.textTree.collectEqualOrMoreThan(
+            key,
+            (key1, key2) -> {
+              if (key1.equals(key2)) return 0;
+              return key2.contains(key1) ? -1 : 1;
+            });
+      throw new IllegalStateException(String.format("%s is not supported", operatorType));
     }
     throw new IllegalArgumentException(String.format("IdToken(%s) not supported", left));
   }
