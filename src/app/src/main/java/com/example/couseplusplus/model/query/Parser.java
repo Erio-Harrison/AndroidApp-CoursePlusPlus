@@ -66,7 +66,7 @@ public class Parser {
       Node posted = id();
       Token token = currentToken;
       takeComparable();
-      return new ComparisonNode(posted, token, date());
+      return new ComparisonNode(posted, token, datetime());
     }
     if (tokenType == TokenType.Text) {
       Node text = id();
@@ -102,10 +102,10 @@ public class Parser {
     return new EnrolDateNode(token);
   }
 
-  public Node date() {
+  public Node datetime() {
     Token token = currentToken;
-    take(TokenType.Date);
-    return new DateNode(token);
+    take(TokenType.DateTime);
+    return new DateTimeNode(token);
   }
 
   public Node textString() {

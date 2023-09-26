@@ -16,7 +16,7 @@ public enum TokenType {
   Like,
   // operand
   Integer,
-  Date,
+  DateTime,
   EnrolDate,
   TextString,
   // parenthesis

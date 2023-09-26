@@ -31,7 +31,7 @@ public class Tokenizer {
             int dayStart = index;
             while (query.isDigit(index)) index++;
             if (index - dayStart == 2)
-              return new Token(TokenType.Date, query.getDate(start, index));
+              return new Token(TokenType.DateTime, query.getDateTime(start, index));
             throw new IllegalTokenException();
           }
           throw new IllegalTokenException();
