@@ -49,49 +49,43 @@ public class Login extends AppCompatActivity {
     textView = findViewById(R.id.RegisterNow);
 
     textView.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            Intent intent = new Intent(getApplicationContext(), Register.class);
-            startActivity(intent);
-            finish();
-          }
-        });
+            view -> {
+              Intent intent = new Intent(getApplicationContext(), Register.class);
+              startActivity(intent);
+              finish();
+            });
 
     buttonLogin.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            progressBar.setVisibility(View.VISIBLE);
-            String email, password;
-            email = String.valueOf(editTextEmail.getText());
-            password = String.valueOf(editTextPassword.getText());
+            view -> {
+              progressBar.setVisibility(View.VISIBLE);
+              String email, password;
+              email = String.valueOf(editTextEmail.getText());
+              password = String.valueOf(editTextPassword.getText());
 
-            if (TextUtils.isEmpty(email)) {
-              Toast.makeText(Login.this, "Enter Email", Toast.LENGTH_SHORT).show();
-              return;
-            }
+              if (TextUtils.isEmpty(email)) {
+                Toast.makeText(Login.this, "Enter Email", Toast.LENGTH_SHORT).show();
+                return;
+              }
 
-            if (TextUtils.isEmpty(password)) {
-              Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
-              return;
-            }
+              if (TextUtils.isEmpty(password)) {
+                Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
+                return;
+              }
 
-            User user = new User(email, password);
-            userService.login(
-                user,
-                result -> {
-                  progressBar.setVisibility(View.GONE);
-                  if (result.isSuccessful()) {
-                    Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                  } else {
-                    Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                  }
-                });
-          }
-        });
+              User user = new User(email, password);
+              userService.login(
+                  user,
+                  result -> {
+                    progressBar.setVisibility(View.GONE);
+                    if (result.isSuccessful()) {
+                      Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                      Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                      startActivity(intent);
+                      finish();
+                    } else {
+                      Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                    }
+                  });
+            });
   }
 }
