@@ -6,6 +6,9 @@ import com.example.couseplusplus.model.query.TerminalNode;
 import com.example.couseplusplus.model.query.TokenType;
 import java.util.List;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class PostedBased implements CommentFindingStrategy {
   @Override
   public List<Comment> find(

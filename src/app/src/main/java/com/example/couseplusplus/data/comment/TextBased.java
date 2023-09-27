@@ -6,6 +6,9 @@ import com.example.couseplusplus.model.query.TextNode;
 import com.example.couseplusplus.model.query.TokenType;
 import java.util.List;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class TextBased implements CommentFindingStrategy {
   @Override
   public List<Comment> find(

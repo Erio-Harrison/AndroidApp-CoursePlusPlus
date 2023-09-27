@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class Query {
   String value;
   int length;

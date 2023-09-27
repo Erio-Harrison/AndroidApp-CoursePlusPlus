@@ -11,6 +11,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CommentFinder implements PostorderParseTreeWalker<List<Comment>> {
   static final Map<TokenType, CommentFindingStrategy> strategyMap =
       Map.of(

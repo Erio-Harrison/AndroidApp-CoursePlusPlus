@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ * @param <K> key
+ * @param <V> value
+ */
 public class Node<K extends Comparable<K>, V> {
   K key;
   Node<K, V> left;

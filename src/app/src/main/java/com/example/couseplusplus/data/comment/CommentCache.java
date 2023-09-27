@@ -4,6 +4,9 @@ import com.example.couseplusplus.data.avl.AVLTree;
 import com.example.couseplusplus.model.comment.Comment;
 import java.util.List;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CommentCache {
   List<Comment> comments;
   AVLTree<Integer, Comment> helpfulTree;

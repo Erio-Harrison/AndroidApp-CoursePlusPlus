@@ -1,5 +1,8 @@
 package com.example.couseplusplus.model.query;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public interface PostorderParseTreeWalker<T> {
   default T walk(ParseTree parseTree) {
     return traverse(parseTree.root());

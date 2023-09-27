@@ -4,6 +4,9 @@ import com.example.couseplusplus.data.avl.AVLTree;
 import com.example.couseplusplus.model.course.Course;
 import java.util.List;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CourseCache {
   List<Course> courses;
   AVLTree<String, Course> codeTree;

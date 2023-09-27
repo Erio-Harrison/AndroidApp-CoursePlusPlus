@@ -1,9 +1,9 @@
 package com.example.couseplusplus.model.query;
 
 /**
- * Parses the following grammar <query> ::= <expression> | <expression> <condition> <query>
- * <expression> ::= helpful <operator> <number> | enrol <operator> <enroldate> | posted <operator>
- * <date> | text <fuzzy> <string> | ( <query> )
+ * @author Yuki Misumi (u7582380) Parses the following grammar <query> ::= <expression> |
+ *     <expression> <condition> <query> <expression> ::= helpful <operator> <number> | enrol
+ *     <operator> <enroldate> | posted <operator> <date> | text <fuzzy> <string> | ( <query> )
  */
 public class Parser {
   Tokenizer tokenizer;

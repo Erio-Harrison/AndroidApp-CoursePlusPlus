@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ * @param <K> key
+ * @param <V> value
+ */
 public class AVLTree<K extends Comparable<K>, V> {
   Node<K, V> root;
 
