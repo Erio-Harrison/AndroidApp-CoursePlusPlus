@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "116021744269",
+    "project_id": "login-register-authent",
+    "storage_bucket": "login-register-authent.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116021744269:android:6e2b3046b64d2bcbe708c4",
+        "android_client_info": {
+          "package_name": "com.example.couseplusplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI9ohLiHENFCwvFs3Q3A3KnAQVMWSuXsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

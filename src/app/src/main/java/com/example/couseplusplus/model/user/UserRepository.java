@@ -1,5 +1,13 @@
 package com.example.couseplusplus.model.user;
 
+import java.util.function.Consumer;
+
 public interface UserRepository {
-  User get(String username);
+  void login(User user, Consumer<AuthenticationResult> onCompleteListener);
+
+  void logout();
+
+  void register(User user, Consumer<AuthenticationResult> onCompleteListener);
+
+  User getCurrentUser();
 }
