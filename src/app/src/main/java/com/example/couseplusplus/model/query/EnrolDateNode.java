@@ -1,5 +1,8 @@
 package com.example.couseplusplus.model.query;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class EnrolDateNode extends TerminalNode {
   Integer year;
   Integer semester;

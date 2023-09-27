@@ -1,5 +1,8 @@
 package com.example.couseplusplus.model.query;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public enum TokenType {
   // keyword
   Helpful,
@@ -16,7 +19,7 @@ public enum TokenType {
   Like,
   // operand
   Integer,
-  Date,
+  DateTime,
   EnrolDate,
   TextString,
   // parenthesis

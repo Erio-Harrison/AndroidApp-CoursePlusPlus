@@ -1,8 +1,13 @@
 package com.example.couseplusplus.model.query;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class Query {
   String value;
   int length;
@@ -47,8 +52,13 @@ public class Query {
     return Integer.parseInt(value.substring(start, end));
   }
 
-  public LocalDate getDate(int start, int end) {
-    return LocalDate.parse(value.substring(start, end));
+  public LocalDateTime getDateTime(int start, int end) {
+    String datetimeString = value.substring(start, end);
+    try {
+      return LocalDateTime.parse(datetimeString);
+    } catch (DateTimeParseException e) {
+      return LocalDate.parse(datetimeString).atStartOfDay();
+    }
   }
 
   public String getSubstring(int start, int end) {
