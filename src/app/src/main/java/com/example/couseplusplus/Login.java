@@ -12,12 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
   TextInputEditText editTextEmail, editTextPassword;
   Button buttonLogin;
-  FirebaseAuth mAuth;
   ProgressBar progressBar;
   TextView textView;
 
@@ -41,7 +39,6 @@ public class Login extends AppCompatActivity {
     userService = IoCContainer.userService();
 
     setContentView(R.layout.activity_login);
-    mAuth = FirebaseAuth.getInstance();
     editTextEmail = findViewById(R.id.email);
     editTextPassword = findViewById(R.id.password);
     buttonLogin = findViewById(R.id.btn_login);

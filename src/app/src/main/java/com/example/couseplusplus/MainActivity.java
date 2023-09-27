@@ -8,12 +8,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
-import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-  FirebaseAuth auth;
   Button logoutButton;
   TextView textView;
   User user;
