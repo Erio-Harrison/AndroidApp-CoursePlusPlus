@@ -33,6 +33,7 @@ public class Tokenizer {
             index++;
             int dayStart = index;
             while (query.isDigit(index)) index++;
+            // FIXME enable time
             if (index - dayStart == 2)
               return new Token(TokenType.DateTime, query.getDateTime(start, index));
             throw new IllegalTokenException();
@@ -104,13 +105,6 @@ public class Tokenizer {
           index++;
         }
         return new Token(TokenType.Enrol, null);
-      }
-      if (query.is(index, 'p')) {
-        for (char ch : "posted".toCharArray()) {
-          if (!query.is(index, ch)) throw new IllegalTokenException();
-          index++;
-        }
-        return new Token(TokenType.Posted, null);
       }
       if (query.is(index, 'p')) {
         for (char ch : "posted".toCharArray()) {
