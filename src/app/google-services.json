@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "116021744269",
-    "project_id": "login-register-authent",
-    "storage_bucket": "login-register-authent.appspot.com"
+    "project_number": "675365070418",
+    "firebase_url": "https://courses-and-comments-default-rtdb.firebaseio.com",
+    "project_id": "courses-and-comments",
+    "storage_bucket": "courses-and-comments.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:116021744269:android:6e2b3046b64d2bcbe708c4",
+        "mobilesdk_app_id": "1:675365070418:android:b380b32c8707a9a6c5e18b",
         "android_client_info": {
           "package_name": "com.example.couseplusplus"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAI9ohLiHENFCwvFs3Q3A3KnAQVMWSuXsQ"
+          "current_key": "AIzaSyDYTDcnO2LqsB1V58ezNig-V9JAjQ7AQn0"
         }
       ],
       "services": {
