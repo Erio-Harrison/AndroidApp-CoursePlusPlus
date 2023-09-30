@@ -112,7 +112,7 @@ public class Parser {
 
   public Node textString() {
     Token token = currentToken;
-    take(TokenType.TextString);
+    take(TokenType.TextValue);
     return new TextNode(token);
   }
 

@@ -58,7 +58,7 @@ public class Tokenizer {
           index++;
         }
         index++;
-        return new Token(TokenType.TextString, query.getSubstring(start, index));
+        return new Token(TokenType.TextValue, query.getSubstring(start, index));
       }
       if (query.is(index, '&')) {
         index++;

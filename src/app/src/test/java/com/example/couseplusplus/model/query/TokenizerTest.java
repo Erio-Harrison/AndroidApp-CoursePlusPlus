@@ -49,8 +49,8 @@ public class TokenizerTest {
     testAllTokens(
         new Tokenizer(new Query("\"hello world\" \"1\"")),
         List.of(
-            new Token(TokenType.TextString, "\"hello world\""),
-            new Token(TokenType.TextString, "\"1\"")));
+            new Token(TokenType.TextValue, "\"hello world\""),
+            new Token(TokenType.TextValue, "\"1\"")));
   }
 
   void testAllTokens(Tokenizer tokenizer, List<Token> expectedTokens) {

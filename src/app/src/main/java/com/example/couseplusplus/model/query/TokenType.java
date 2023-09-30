@@ -21,7 +21,7 @@ public enum TokenType {
   Integer,
   DateTime,
   EnrolDate,
-  TextString,
+  TextValue,
   // parenthesis
   LeftParenthesis,
   RightParenthesis,

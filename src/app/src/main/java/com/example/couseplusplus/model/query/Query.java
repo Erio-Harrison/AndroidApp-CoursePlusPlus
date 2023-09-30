@@ -26,6 +26,10 @@ public class Query {
     return !isOutOfRange(index) && value.charAt(index) == ' ';
   }
 
+  public boolean isDoubleQuote(int index) {
+    return !isOutOfRange(index) && value.charAt(index) == '"';
+  }
+
   public boolean isOutOfRange(int index) {
     return index > length - 1 || index < 0;
   }
