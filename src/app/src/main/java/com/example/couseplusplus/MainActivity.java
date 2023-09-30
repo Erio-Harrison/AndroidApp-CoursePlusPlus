@@ -80,11 +80,8 @@ public class MainActivity extends AppCompatActivity {
             int i = 0;
             for (DataSnapshot courseSnapshot : snapshot.getChildren()) {
               if (i < 5) {
-//                String courseCode = courseSnapshot.getKey();
-                Map<String, String> courseData = (Map<String, String>) courseSnapshot.getValue();
-                String courseCode = courseData.get("courseCode");
-                String courseName = courseData.get("courseName");
-                courseList.add(new Course(courseCode, courseName));
+                Course courseData = courseSnapshot.getValue(Course.class);
+                courseList.add(courseData);
               }
               i++;
             }
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(View view, int position) {
           Intent intent = new Intent(MainActivity.this, CommentsActivity.class);
-          intent.putExtra("courseCode", courseList.get(position).code());
+          intent.putExtra("courseCode", courseList.get(position).getCourseCode());
           startActivity(intent);
         }
 
