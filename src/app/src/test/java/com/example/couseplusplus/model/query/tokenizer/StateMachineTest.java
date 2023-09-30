@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class StateMachineTest {
   @Test
   public void testProcess() {

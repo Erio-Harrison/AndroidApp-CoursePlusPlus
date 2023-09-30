@@ -26,6 +26,9 @@ import com.example.couseplusplus.model.query.tokenizer.state.YearOrNumberState;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class StateMachine {
   static Map<Class<? extends State>, Map<Class<? extends State>, Transition>> map;
 

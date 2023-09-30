@@ -3,6 +3,9 @@ package com.example.couseplusplus.model.query.tokenizer.state;
 import com.example.couseplusplus.model.query.tokenizer.Token;
 import java.util.Objects;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class ProcessResult {
   int index;
   Token token;

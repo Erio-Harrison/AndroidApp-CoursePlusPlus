@@ -1,5 +1,8 @@
 package com.example.couseplusplus.model.query.tokenizer.state;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class StateFactory {
   public static State create(Class<? extends State> clazz) {
     if (clazz == WhitespaceState.class) return new WhitespaceState();

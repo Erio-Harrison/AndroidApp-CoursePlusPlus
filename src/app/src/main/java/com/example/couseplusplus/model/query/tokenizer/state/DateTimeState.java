@@ -4,6 +4,9 @@ import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.model.query.tokenizer.Token;
 import com.example.couseplusplus.model.query.tokenizer.TokenType;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class DateTimeState implements State {
 
   @Override
