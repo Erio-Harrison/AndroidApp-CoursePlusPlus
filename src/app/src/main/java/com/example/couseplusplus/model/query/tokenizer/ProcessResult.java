@@ -1,6 +1,5 @@
-package com.example.couseplusplus.model.query.tokenizer.state;
+package com.example.couseplusplus.model.query.tokenizer;
 
-import com.example.couseplusplus.model.query.tokenizer.Token;
 import java.util.Objects;
 
 /**

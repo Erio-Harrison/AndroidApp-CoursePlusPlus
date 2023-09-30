@@ -1,7 +1,6 @@
 package com.example.couseplusplus.model.query.tokenizer;
 
 import com.example.couseplusplus.model.query.Query;
-import com.example.couseplusplus.model.query.tokenizer.state.ProcessResult;
 
 /**
  * @author Yuki Misumi (u7582380)

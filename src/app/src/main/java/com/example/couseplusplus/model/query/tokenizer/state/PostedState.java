@@ -1,6 +1,7 @@
 package com.example.couseplusplus.model.query.tokenizer.state;
 
 import com.example.couseplusplus.model.query.Query;
+import com.example.couseplusplus.model.query.tokenizer.ProcessResult;
 import com.example.couseplusplus.model.query.tokenizer.Token;
 import com.example.couseplusplus.model.query.tokenizer.TokenType;
 

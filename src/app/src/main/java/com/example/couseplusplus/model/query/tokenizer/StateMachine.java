@@ -12,7 +12,6 @@ import com.example.couseplusplus.model.query.tokenizer.state.LikeState;
 import com.example.couseplusplus.model.query.tokenizer.state.MoreThanState;
 import com.example.couseplusplus.model.query.tokenizer.state.OrState;
 import com.example.couseplusplus.model.query.tokenizer.state.PostedState;
-import com.example.couseplusplus.model.query.tokenizer.state.ProcessResult;
 import com.example.couseplusplus.model.query.tokenizer.state.RightParenthesisState;
 import com.example.couseplusplus.model.query.tokenizer.state.SemesterState;
 import com.example.couseplusplus.model.query.tokenizer.state.StartState;

@@ -4,7 +4,6 @@ import static com.example.couseplusplus.model.query.tokenizer.TokenType.*;
 import static org.junit.Assert.*;
 
 import com.example.couseplusplus.model.query.Query;
-import com.example.couseplusplus.model.query.tokenizer.state.ProcessResult;
 import com.example.couseplusplus.model.query.tokenizer.state.YearOrNumberState;
 import java.util.ArrayList;
 import java.util.List;
