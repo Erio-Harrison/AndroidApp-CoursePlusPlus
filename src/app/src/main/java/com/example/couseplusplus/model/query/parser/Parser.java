@@ -1,4 +1,8 @@
-package com.example.couseplusplus.model.query;
+package com.example.couseplusplus.model.query.parser;
+
+import com.example.couseplusplus.model.query.tokenizer.Token;
+import com.example.couseplusplus.model.query.tokenizer.TokenType;
+import com.example.couseplusplus.model.query.tokenizer.Tokenizer;
 
 /**
  * Parses the following grammar <query> ::= <expression> | <expression> <condition> <query>
@@ -27,7 +31,7 @@ public class Parser {
   }
 
   void takeCondition() {
-    TokenType tokenType = currentToken.tokenType;
+    TokenType tokenType = currentToken.tokenType();
     if (tokenType == TokenType.And) {
       take(TokenType.And);
       return;

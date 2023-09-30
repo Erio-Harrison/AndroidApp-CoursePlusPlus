@@ -3,10 +3,10 @@ package com.example.couseplusplus.data.comment;
 import static org.junit.Assert.*;
 
 import com.example.couseplusplus.model.comment.Comment;
-import com.example.couseplusplus.model.query.ParseTree;
-import com.example.couseplusplus.model.query.Parser;
 import com.example.couseplusplus.model.query.Query;
-import com.example.couseplusplus.model.query.Tokenizer;
+import com.example.couseplusplus.model.query.parser.ParseTree;
+import com.example.couseplusplus.model.query.parser.Parser;
+import com.example.couseplusplus.model.query.tokenizer.Tokenizer;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Test;

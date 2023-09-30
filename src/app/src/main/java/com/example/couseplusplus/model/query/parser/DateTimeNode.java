@@ -1,5 +1,6 @@
-package com.example.couseplusplus.model.query;
+package com.example.couseplusplus.model.query.parser;
 
+import com.example.couseplusplus.model.query.tokenizer.Token;
 import java.time.LocalDateTime;
 
 /**

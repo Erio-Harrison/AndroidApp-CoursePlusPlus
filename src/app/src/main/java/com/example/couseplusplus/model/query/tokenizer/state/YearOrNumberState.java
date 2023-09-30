@@ -1,8 +1,8 @@
 package com.example.couseplusplus.model.query.tokenizer.state;
 
 import com.example.couseplusplus.model.query.Query;
-import com.example.couseplusplus.model.query.Token;
-import com.example.couseplusplus.model.query.TokenType;
+import com.example.couseplusplus.model.query.tokenizer.Token;
+import com.example.couseplusplus.model.query.tokenizer.TokenType;
 
 public class YearOrNumberState implements State {
   @Override
@@ -10,7 +10,9 @@ public class YearOrNumberState implements State {
     int start = index;
     while (query.isDigit(index)) index++;
 
-    if (index - start == 4) return new ProcessResult(index, null);
+    // FIXME knows a lot about other states
+    if (index - start == 4 && (query.isHyphen(index) || query.isS(index)))
+      return new ProcessResult(index, null);
 
     Integer integer = query.getInteger(start, index);
     Token token = new Token(TokenType.Integer, integer);

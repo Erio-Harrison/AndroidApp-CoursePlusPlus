@@ -1,7 +1,9 @@
-package com.example.couseplusplus.model.query;
+package com.example.couseplusplus.model.query.parser;
 
 import static org.junit.Assert.*;
 
+import com.example.couseplusplus.model.query.Query;
+import com.example.couseplusplus.model.query.tokenizer.Tokenizer;
 import org.junit.Test;
 
 public class ParserTest {

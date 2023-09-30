@@ -1,7 +1,8 @@
-package com.example.couseplusplus.model.query;
+package com.example.couseplusplus.model.query.tokenizer;
 
 import static org.junit.Assert.*;
 
+import com.example.couseplusplus.model.query.Query;
 import java.time.LocalDate;
 import java.util.List;
 import org.junit.Test;

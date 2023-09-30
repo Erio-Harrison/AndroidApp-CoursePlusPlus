@@ -1,6 +1,6 @@
 package com.example.couseplusplus.model.query.tokenizer.state;
 
-import com.example.couseplusplus.model.query.Token;
+import com.example.couseplusplus.model.query.tokenizer.Token;
 import java.util.Objects;
 
 public class ProcessResult {

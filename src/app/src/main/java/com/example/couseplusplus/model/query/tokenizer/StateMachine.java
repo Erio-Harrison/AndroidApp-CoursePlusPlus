@@ -1,11 +1,19 @@
 package com.example.couseplusplus.model.query.tokenizer;
 
 import com.example.couseplusplus.model.query.Query;
+import com.example.couseplusplus.model.query.tokenizer.state.AndState;
 import com.example.couseplusplus.model.query.tokenizer.state.DateTimeState;
 import com.example.couseplusplus.model.query.tokenizer.state.EnrolState;
+import com.example.couseplusplus.model.query.tokenizer.state.EqualState;
 import com.example.couseplusplus.model.query.tokenizer.state.HelpfulState;
+import com.example.couseplusplus.model.query.tokenizer.state.LeftParenthesisState;
+import com.example.couseplusplus.model.query.tokenizer.state.LessThanState;
+import com.example.couseplusplus.model.query.tokenizer.state.LikeState;
+import com.example.couseplusplus.model.query.tokenizer.state.MoreThanState;
+import com.example.couseplusplus.model.query.tokenizer.state.OrState;
 import com.example.couseplusplus.model.query.tokenizer.state.PostedState;
 import com.example.couseplusplus.model.query.tokenizer.state.ProcessResult;
+import com.example.couseplusplus.model.query.tokenizer.state.RightParenthesisState;
 import com.example.couseplusplus.model.query.tokenizer.state.SemesterState;
 import com.example.couseplusplus.model.query.tokenizer.state.StartState;
 import com.example.couseplusplus.model.query.tokenizer.state.State;
@@ -25,13 +33,26 @@ public class StateMachine {
     map = new HashMap<>();
 
     Map<Class<? extends State>, Transition> startTo = new HashMap<>();
-    startTo.put(YearOrNumberState.class, Query::isDigit);
     startTo.put(WhitespaceState.class, Query::isSpace);
-    startTo.put(TextValueState.class, Query::isDoubleQuote);
+
     startTo.put(HelpfulState.class, (query, index) -> query.is(index, 'h'));
     startTo.put(EnrolState.class, (query, index) -> query.is(index, 'e'));
     startTo.put(PostedState.class, (query, index) -> query.is(index, 'p'));
     startTo.put(TextState.class, (query, index) -> query.is(index, 't'));
+
+    startTo.put(YearOrNumberState.class, Query::isDigit);
+    startTo.put(TextValueState.class, Query::isDoubleQuote);
+
+    startTo.put(EqualState.class, (query, index) -> query.is(index, '='));
+    startTo.put(LessThanState.class, (query, index) -> query.is(index, '<'));
+    startTo.put(MoreThanState.class, (query, index) -> query.is(index, '>'));
+    startTo.put(LikeState.class, (query, index) -> query.is(index, '~'));
+
+    startTo.put(AndState.class, (query, index) -> query.is(index, '&'));
+    startTo.put(OrState.class, (query, index) -> query.is(index, '|'));
+
+    startTo.put(LeftParenthesisState.class, ((query, index) -> query.is(index, '(')));
+    startTo.put(RightParenthesisState.class, ((query, index) -> query.is(index, ')')));
     map.put(StartState.class, startTo);
 
     map.put(
