@@ -17,8 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.couseplusplus.model.course.Course;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -82,9 +80,11 @@ public class MainActivity extends AppCompatActivity {
             int i = 0;
             for (DataSnapshot courseSnapshot : snapshot.getChildren()) {
               if (i < 5) {
-                String courseCode = courseSnapshot.getKey();
-                Map<String, Object> courseName = (Map<String, Object>) courseSnapshot.getValue();
-                courseList.add(new Course(courseCode, courseName.toString()));
+//                String courseCode = courseSnapshot.getKey();
+                Map<String, String> courseData = (Map<String, String>) courseSnapshot.getValue();
+                String courseCode = courseData.get("courseCode");
+                String courseName = courseData.get("courseName");
+                courseList.add(new Course(courseCode, courseName));
               }
               i++;
             }
@@ -99,6 +99,22 @@ public class MainActivity extends AppCompatActivity {
         Log.w(TAG, "Failed to read value.", error.toException());
       }
     });
+
+    // Set an OnClickListener for the RecyclerView items
+    courseRecycleView.addOnItemTouchListener(
+      new RecyclerViewClickListener(this, courseRecycleView, new RecyclerViewClickListener.OnItemClickListener() {
+        @Override
+        public void onItemClick(View view, int position) {
+          Intent intent = new Intent(MainActivity.this, CommentsActivity.class);
+          intent.putExtra("courseCode", courseList.get(position).code());
+          startActivity(intent);
+        }
+
+        @Override
+        public void onLongItemClick(View view, int position) {
+        }
+      })
+    );
     // LOAD SHOW DATA END
 
   }
