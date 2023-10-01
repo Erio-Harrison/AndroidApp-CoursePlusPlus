@@ -24,6 +24,7 @@ import com.example.couseplusplus.model.query.tokenizer.state.WhitespaceState;
 import com.example.couseplusplus.model.query.tokenizer.state.YearOrNumberState;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Yuki Misumi (u7582380)
@@ -68,24 +69,32 @@ public class StateMachine {
     this.state = StartState.getInstance();
   }
 
-  public ProcessResult process(Query query, Integer index) {
+  public ProcessResult process(Query query, int index) {
     ProcessResult result = state.process(query, index);
-    state = changeState(query, result.index());
+    state = getNextState(query, result.index());
     return result;
   }
 
-  State changeState(Query query, Integer index) {
-    if (query.isOutOfRange(index) || !map.containsKey(state.getClass()))
-      return StateFactory.create(StartState.class);
+  State getNextState(Query query, Integer index) {
+    if (query.isOutOfRange(index)) return StateFactory.create(StartState.class);
 
-    var entries = map.get(state.getClass()).entrySet();
+    return findStateToTransition(query, index, state.getClass())
+        .orElseGet(
+            () ->
+                findStateToTransition(query, index, StartState.class)
+                    .orElseThrow(NoTransitionException::new));
+  }
+
+  Optional<State> findStateToTransition(Query query, int index, Class<? extends State> stateClass) {
+    if (!map.containsKey(stateClass)) return Optional.empty();
+
+    var entries = map.get(stateClass).entrySet();
     for (var entry : entries) {
       Transition transition = entry.getValue();
       if (!transition.canTransition(query, index)) continue;
       Class<? extends State> stateClazz = entry.getKey();
-      return StateFactory.create(stateClazz);
+      return Optional.of(StateFactory.create(stateClazz));
     }
-    if (state instanceof StartState) throw new IllegalStateException("nowhere to go");
-    return StateFactory.create(StartState.class);
+    return Optional.empty();
   }
 }

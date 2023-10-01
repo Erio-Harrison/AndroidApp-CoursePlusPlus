@@ -17,7 +17,7 @@ public class DateTimeState implements State {
         || !query.isDigit(index + 2)
         || !query.isHyphen(index + 3)
         || !query.isDigit(index + 4)
-        || !query.isDigit(index + 5)) throw new IllegalStateException();
+        || !query.isDigit(index + 5)) throw new IllegalTokenException();
 
     int nextIndex = index + 6;
 

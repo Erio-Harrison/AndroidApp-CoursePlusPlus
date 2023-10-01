@@ -15,7 +15,7 @@ public class EnrolState implements State {
         || !query.is(index + 1, 'n')
         || !query.is(index + 2, 'r')
         || !query.is(index + 3, 'o')
-        || !query.is(index + 4, 'l')) throw new IllegalStateException();
+        || !query.is(index + 4, 'l')) throw new IllegalTokenException();
 
     int nextIndex = index + 5;
     return new ProcessResult(nextIndex, new Token(TokenType.Enrol, null));

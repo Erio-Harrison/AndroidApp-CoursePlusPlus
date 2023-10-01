@@ -16,7 +16,7 @@ public class PostedState implements State {
         || !query.is(index + 2, 's')
         || !query.is(index + 3, 't')
         || !query.is(index + 4, 'e')
-        || !query.is(index + 5, 'd')) throw new IllegalStateException();
+        || !query.is(index + 5, 'd')) throw new IllegalTokenException();
 
     int nextIndex = index + 6;
     return new ProcessResult(nextIndex, new Token(TokenType.Posted, null));

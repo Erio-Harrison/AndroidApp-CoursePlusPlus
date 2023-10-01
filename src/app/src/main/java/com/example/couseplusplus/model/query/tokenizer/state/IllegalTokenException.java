@@ -1,4 +1,4 @@
-package com.example.couseplusplus.model.query.tokenizer;
+package com.example.couseplusplus.model.query.tokenizer.state;
 
 /**
  * @author Yuki Misumi (u7582380)

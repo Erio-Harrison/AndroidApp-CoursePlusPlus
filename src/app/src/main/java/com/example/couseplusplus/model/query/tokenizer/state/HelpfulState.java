@@ -17,7 +17,7 @@ public class HelpfulState implements State {
         || !query.is(index + 3, 'p')
         || !query.is(index + 4, 'f')
         || !query.is(index + 5, 'u')
-        || !query.is(index + 6, 'l')) throw new IllegalStateException();
+        || !query.is(index + 6, 'l')) throw new IllegalTokenException();
 
     int nextIndex = index + 7;
     return new ProcessResult(nextIndex, new Token(TokenType.Helpful, null));
