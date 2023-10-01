@@ -52,6 +52,10 @@ public class TokenizerTest {
         List.of(
             new Token(TokenType.TextValue, "\"hello world\""),
             new Token(TokenType.TextValue, "\"1\"")));
+    testAllTokens(new Tokenizer(new Query("")), List.of());
+    testAllTokens(new Tokenizer(new Query(" ")), List.of());
+    assertThrows(
+        NoTransitionException.class, () -> testAllTokens(new Tokenizer(new Query("+")), List.of()));
   }
 
   void testAllTokens(Tokenizer tokenizer, List<Token> expectedTokens) {
