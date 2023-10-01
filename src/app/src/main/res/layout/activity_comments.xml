@@ -11,10 +11,10 @@
         android:id="@+id/course_code_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="COMP0000" />
+        android:text="TEST0000" />
 
-    <ListView
-        android:id="@+id/commentsListView"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comment_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
