@@ -26,10 +26,11 @@ public class DateTimeState implements State {
         && query.isDigit(index + 8)
         && query.is(index + 9, ':')
         && query.isDigit(index + 10)
-        && query.isDigit(index + 11)) nextIndex = index + 12;
-
-    if (query.is(index + 12, ':') && query.isDigit(index + 13) && query.isDigit(index + 14))
-      nextIndex = index + 15;
+        && query.isDigit(index + 11)) {
+      if (query.is(index + 12, ':') && query.isDigit(index + 13) && query.isDigit(index + 14))
+        nextIndex = index + 15;
+      else nextIndex = index + 12;
+    }
 
     int yearStartIndex = index - 4;
     Token token = new Token(TokenType.DateTime, query.getDateTime(yearStartIndex, nextIndex));
