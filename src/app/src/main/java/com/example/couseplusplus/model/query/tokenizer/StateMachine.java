@@ -3,6 +3,7 @@ package com.example.couseplusplus.model.query.tokenizer;
 import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.model.query.tokenizer.state.AndState;
 import com.example.couseplusplus.model.query.tokenizer.state.DateTimeState;
+import com.example.couseplusplus.model.query.tokenizer.state.EndState;
 import com.example.couseplusplus.model.query.tokenizer.state.EnrolState;
 import com.example.couseplusplus.model.query.tokenizer.state.EqualState;
 import com.example.couseplusplus.model.query.tokenizer.state.HelpfulState;
@@ -76,7 +77,7 @@ public class StateMachine {
   }
 
   State getNextState(Query query, Integer index) {
-    if (query.isOutOfRange(index)) return StateFactory.create(StartState.class);
+    if (isNotRunning() || query.isOutOfRange(index)) return StateFactory.create(EndState.class);
 
     return findStateToTransition(query, index, state.getClass())
         .orElseGet(
@@ -96,5 +97,13 @@ public class StateMachine {
       return Optional.of(StateFactory.create(stateClazz));
     }
     return Optional.empty();
+  }
+
+  public boolean isRunning() {
+    return !isNotRunning();
+  }
+
+  public boolean isNotRunning() {
+    return state instanceof EndState;
   }
 }

@@ -23,6 +23,7 @@ public class StateFactory {
     if (clazz == TextState.class) return new TextState();
     if (clazz == LeftParenthesisState.class) return new LeftParenthesisState();
     if (clazz == RightParenthesisState.class) return new RightParenthesisState();
+    if (clazz == EndState.class) return EndState.getInstance();
     throw new IllegalArgumentException(String.format("%s is not supported", clazz));
   }
 }

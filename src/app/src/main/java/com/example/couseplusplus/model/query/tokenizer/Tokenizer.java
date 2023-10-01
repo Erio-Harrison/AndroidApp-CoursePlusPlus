@@ -21,7 +21,7 @@ public class Tokenizer {
   }
 
   public Token getNextToken() {
-    while (!query.isOutOfRange(index)) {
+    while (stateMachine.isRunning()) {
       ProcessResult result = stateMachine.process(query, index);
       index = result.index();
       if (result.hasToken()) return result.token();
