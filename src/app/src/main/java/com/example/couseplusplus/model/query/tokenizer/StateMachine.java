@@ -31,7 +31,7 @@ import java.util.Optional;
  * @author Yuki Misumi (u7582380)
  */
 public class StateMachine {
-  private static Map<Class<? extends State>, Map<Class<? extends State>, Transition>> map;
+  private static final Map<Class<? extends State>, Map<Class<? extends State>, Transition>> map;
 
   static {
     map = new HashMap<>();
