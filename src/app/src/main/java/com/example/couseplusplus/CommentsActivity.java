@@ -35,6 +35,8 @@ public class CommentsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String courseCodeInfo = intent.getStringExtra("courseCode");
 
+        // TODO: Show all necessary data in comments
+        // TODO: Show course name
         TextView courseCodeInfoTextView = findViewById(R.id.course_code_info);
         courseCodeInfoTextView.setText(courseCodeInfo);
         commentRecycleView = (RecyclerView) findViewById(R.id.comment_rv);

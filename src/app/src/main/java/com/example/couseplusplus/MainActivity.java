@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     // LOAD SHOW DATA
+    // TODO: Make the load time shorter
+    // TODO: Show #comments
+    // TODO: Organize files
     courseRecycleView = (RecyclerView) findViewById(R.id.course_rv);
     courseRecycleView.setLayoutManager(new LinearLayoutManager(this));
     mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
           if (snapshot.getKey().equals("course")) {
             int i = 0;
             for (DataSnapshot courseSnapshot : snapshot.getChildren()) {
-              if (i < 5) {
+              if (i < 20) {
                 Course courseData = courseSnapshot.getValue(Course.class);
                 courseList.add(courseData);
               }
