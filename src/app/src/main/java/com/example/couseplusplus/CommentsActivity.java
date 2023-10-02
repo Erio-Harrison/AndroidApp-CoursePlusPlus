@@ -34,11 +34,13 @@ public class CommentsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_comments);
         Intent intent = getIntent();
         String courseCodeInfo = intent.getStringExtra("courseCode");
+        String courseNameInfo = intent.getStringExtra("courseName");
 
-        // TODO: Show all necessary data in comments
-        // TODO: Show course name
+        // TODO: Make helpfulness clickable
         TextView courseCodeInfoTextView = findViewById(R.id.course_code_info);
+        TextView courseNameInfoTextView = findViewById(R.id.course_name_info);
         courseCodeInfoTextView.setText(courseCodeInfo);
+        courseNameInfoTextView.setText(courseNameInfo);
         commentRecycleView = (RecyclerView) findViewById(R.id.comment_rv);
         commentRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -46,6 +48,7 @@ public class CommentsActivity extends AppCompatActivity {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                commentList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if (snapshot.getKey().equals("comment")) {
                         for (DataSnapshot courseSnapshot : snapshot.getChildren()) {
@@ -67,5 +70,33 @@ public class CommentsActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+        // TODO: attach a listener at comments object - not successful, cannot access data yet
+//        // load and show just comment data
+//        System.out.println("access firebase");
+//        DatabaseReference parentRef = FirebaseDatabase.getInstance().getReference().child("Courses AND Comments").child("comment");
+//        parentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                System.out.println("data change");
+//                commentList.clear();
+//                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+//                    System.out.println("key" + childSnapshot.getKey());
+//                    if (childSnapshot.getKey().equals(courseCodeInfo)) {
+//                        for (DataSnapshot commentSnapshot : childSnapshot.getChildren()) {
+//                            Comment comment = commentSnapshot.getValue(Comment.class);
+//                            commentList.add(comment);
+//                        }
+//                    }
+//                }
+//                commentAdapter = new CommentAdapter(commentList);
+//                commentRecycleView.setAdapter(commentAdapter);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {  // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+
     }
 }

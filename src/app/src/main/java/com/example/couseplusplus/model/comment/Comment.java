@@ -2,6 +2,7 @@ package com.example.couseplusplus.model.comment;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Objects;
 import com.google.firebase.database.Exclude;
 
@@ -13,7 +14,7 @@ public class Comment {
   String text;
   int helpfulness;
   String postedDateTime;
-  String pattern = "yyyy-MM-dd'T'HH:mm:ss";
+  String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 
 
@@ -67,6 +68,13 @@ public class Comment {
 
   public String enrolKey() {
     return String.format("%sS%s", year, semester);
+  }
+  public String date() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
+
+    // Format the LocalDateTime instance to a String
+    String formattedString = getPostedDateTime().format(formatter);
+    return formattedString;
   }
 
   @Override

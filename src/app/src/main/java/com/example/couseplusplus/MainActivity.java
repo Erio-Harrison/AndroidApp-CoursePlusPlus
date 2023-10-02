@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     // LOAD SHOW DATA
-    // TODO: Make the load time shorter
+    // TODO: Make the load time shorter - not successful
     // TODO: Show #comments
     // TODO: Organize files
     courseRecycleView = (RecyclerView) findViewById(R.id.course_rv);
@@ -78,14 +78,14 @@ public class MainActivity extends AppCompatActivity {
     mDatabase.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {  // Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+        courseList.clear();
         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
           if (snapshot.getKey().equals("course")) {
             int i = 0;
             for (DataSnapshot courseSnapshot : snapshot.getChildren()) {
-              if (i < 20) {
-                Course courseData = courseSnapshot.getValue(Course.class);
-                courseList.add(courseData);
-              }
+              Course courseData = courseSnapshot.getValue(Course.class);
+              courseList.add(courseData);
+              if (i > 50) break;
               i++;
             }
           }
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         public void onItemClick(View view, int position) {
           Intent intent = new Intent(MainActivity.this, CommentsActivity.class);
           intent.putExtra("courseCode", courseList.get(position).getCourseCode());
+          intent.putExtra("courseName", courseList.get(position).getCourseName());
           startActivity(intent);
         }
 

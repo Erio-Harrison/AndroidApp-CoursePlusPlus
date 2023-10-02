@@ -5,17 +5,29 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".CommentsActivity">
 
     <TextView
         android:id="@+id/course_code_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TEST0000" />
+        android:textSize="24sp"
+        android:paddingLeft="8dp"
+        android:text="Course Code" />
+
+    <TextView
+        android:id="@+id/course_name_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:paddingHorizontal="8dp"
+        android:text="Course Name" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comment_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="8dp" />
 
 </LinearLayout>

@@ -30,6 +30,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         Comment commentItem = commentList.get(position);
         holder.commentCodeTextView.setText(commentItem.enrolKey());
         holder.commentNameTextView.setText(commentItem.getText());
+        holder.commentHelpfulnessTextView.setText(Integer.toString(commentItem.getHelpfulness()));
+        holder.commentDateTextView.setText(commentItem.date());
     }
 
     @Override
@@ -40,11 +42,15 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView commentCodeTextView;
         TextView commentNameTextView;
+        TextView commentHelpfulnessTextView;
+        TextView commentDateTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             commentCodeTextView = itemView.findViewById(R.id.sem);
             commentNameTextView = itemView.findViewById(R.id.text);
+            commentHelpfulnessTextView = itemView.findViewById(R.id.helpfulness);
+            commentDateTextView = itemView.findViewById(R.id.date);
         }
     }
 }
