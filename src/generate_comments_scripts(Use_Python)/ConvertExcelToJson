@@ -1,0 +1,28 @@
+import pandas as pd
+import json
+
+# For reading Excel, we need to install openpyxl
+# “File” → “Settings” → "Project: <Project Name>" → "Python Interpreter" → "click on the '+' icon"
+# → Select the openpyxl package from the list and click on “Install Package” at the bottom.
+
+# 1. Load the Excel file into a DataFrame
+file_path = 'D:\\store\\courses.xlsx'
+df = pd.read_excel(file_path)
+
+# 2. Clean the DataFrame (e.g. remove rows with NaN values)
+df_cleaned = df.dropna()
+
+# 3. Convert the DataFrame to a nested dictionary structure
+courses_dict = {}
+for index, row in df_cleaned.iterrows():
+    course_id = row['CODE']  # Adjust column name if different
+    course_name = row['TITLE']  # Adjust column name if different
+    courses_dict[course_id] = {"courseCode": course_id, "courseName": course_name}
+
+# Wrap the courses_dict in another dictionary under the "courses" key
+final_dict = {"courses": courses_dict}
+
+# 4. Convert the dictionary to a JSON string and optionally save it to a file
+json_str = json.dumps(final_dict, indent=2)
+with open('D:\\store\\course.json', 'w') as f:
+    f.write(json_str)
