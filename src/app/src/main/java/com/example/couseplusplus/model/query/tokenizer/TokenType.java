@@ -1,4 +1,4 @@
-package com.example.couseplusplus.model.query;
+package com.example.couseplusplus.model.query.tokenizer;
 
 /**
  * @author Yuki Misumi (u7582380)
@@ -21,7 +21,7 @@ public enum TokenType {
   Integer,
   DateTime,
   EnrolDate,
-  TextString,
+  TextValue,
   // parenthesis
   LeftParenthesis,
   RightParenthesis,

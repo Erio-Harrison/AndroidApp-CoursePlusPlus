@@ -1,7 +1,8 @@
-package com.example.couseplusplus.model.query;
+package com.example.couseplusplus.model.query.tokenizer;
 
 import static org.junit.Assert.*;
 
+import com.example.couseplusplus.model.query.Query;
 import java.time.LocalDate;
 import java.util.List;
 import org.junit.Test;
@@ -49,8 +50,12 @@ public class TokenizerTest {
     testAllTokens(
         new Tokenizer(new Query("\"hello world\" \"1\"")),
         List.of(
-            new Token(TokenType.TextString, "\"hello world\""),
-            new Token(TokenType.TextString, "\"1\"")));
+            new Token(TokenType.TextValue, "\"hello world\""),
+            new Token(TokenType.TextValue, "\"1\"")));
+    testAllTokens(new Tokenizer(new Query("")), List.of());
+    testAllTokens(new Tokenizer(new Query(" ")), List.of());
+    assertThrows(
+        NoTransitionException.class, () -> testAllTokens(new Tokenizer(new Query("+")), List.of()));
   }
 
   void testAllTokens(Tokenizer tokenizer, List<Token> expectedTokens) {
