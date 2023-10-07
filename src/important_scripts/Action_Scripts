@@ -1,0 +1,13 @@
+1.
+In the initial login interface, the user needs to enter the account and password to log in to the APP.
+If the account and password are correct, the login is successful. Otherwise, the login failure is displayed.
+
+2.
+After successful login, users can see part of the course code and full name of the course.
+Users can click on the corresponding course to see the review content of the course.
+There is a "log out" button at the top of the login interface.
+By clicking it, the user can log out and return to the initial login interface.
+
+3.
+Users can search for the corresponding course code and then click on the instance to see the comments.
+After entering the corresponding course comment area, users can also filter comments by searching for keywords or time.
