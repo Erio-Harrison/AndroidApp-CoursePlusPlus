@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     // TODO: Make the load time shorter - not successful
     // TODO: Show #comments
     // TODO: Organize files
+    // TODO: Make a Course class for Firebase
     courseRecycleView = (RecyclerView) findViewById(R.id.course_rv);
     courseRecycleView.setLayoutManager(new LinearLayoutManager(this));
     mDatabase = FirebaseDatabase.getInstance().getReference();

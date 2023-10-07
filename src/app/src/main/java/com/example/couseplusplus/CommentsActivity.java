@@ -37,6 +37,7 @@ public class CommentsActivity extends AppCompatActivity {
         String courseNameInfo = intent.getStringExtra("courseName");
 
         // TODO: Make helpfulness clickable
+        // TODO: Make a Comment class for Firebase
         TextView courseCodeInfoTextView = findViewById(R.id.course_code_info);
         TextView courseNameInfoTextView = findViewById(R.id.course_name_info);
         courseCodeInfoTextView.setText(courseCodeInfo);
