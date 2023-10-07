@@ -3,26 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:padding="8dp"
+    tools:context=".CommentsActivity">
 
     <TextView
-        android:id="@+id/user_details"
+        android:id="@+id/course_code_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"  />
+        android:textSize="24sp"
+        android:paddingLeft="8dp"
+        android:text="Course Code" />
 
-    <Button
-        android:id="@+id/logout"
-        android:text="@string/log_out"
+    <TextView
+        android:id="@+id/course_name_info"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:paddingHorizontal="8dp"
+        android:text="Course Name" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/course_rv"
+        android:id="@+id/comment_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="8dp" />
 
 </LinearLayout>
