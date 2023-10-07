@@ -1,11 +1,11 @@
 package com.example.couseplusplus.data.comment;
 
 import com.example.couseplusplus.model.comment.Comment;
-import com.example.couseplusplus.model.query.IdNode;
 import com.example.couseplusplus.model.query.PostorderParseTreeWalker;
-import com.example.couseplusplus.model.query.TerminalNode;
-import com.example.couseplusplus.model.query.Token;
-import com.example.couseplusplus.model.query.TokenType;
+import com.example.couseplusplus.model.query.parser.IdNode;
+import com.example.couseplusplus.model.query.parser.TerminalNode;
+import com.example.couseplusplus.model.query.tokenizer.Token;
+import com.example.couseplusplus.model.query.tokenizer.TokenType;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  * @author Yuki Misumi (u7582380)
  */
 public class CommentFinder implements PostorderParseTreeWalker<List<Comment>> {
-  static final Map<TokenType, CommentFindingStrategy> strategyMap =
+  private static final Map<TokenType, CommentFindingStrategy> strategyMap =
       Map.of(
           TokenType.Helpful, new HelpfulnessBased(),
           TokenType.Enrol, new EnrolBased(),

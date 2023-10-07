@@ -1,19 +1,30 @@
 package com.example.couseplusplus.model.course;
 
 public class Course {
-  String code;
-  String name;
+  private String courseCode;
+  private String courseName;
 
-  public Course(String code, String name) {
-    this.code = code;
-    this.name = name;
+  public Course() {
   }
 
-  public String code() {
-    return code;
+  public Course(String courseCode, String courseName) {
+    this.courseCode = courseCode;
+    this.courseName = courseName;
   }
 
-  public String name() {
-    return name;
+  public String getCourseCode() {
+    return courseCode;
+  }
+
+  public void setCourseCode(String courseCode) {
+    this.courseCode = courseCode;
+  }
+
+  public String getCourseName() {
+    return courseName;
+  }
+
+  public void setCourseName(String courseName) {
+    this.courseName = courseName;
   }
 }

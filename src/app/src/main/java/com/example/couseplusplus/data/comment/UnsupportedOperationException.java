@@ -1,6 +1,6 @@
 package com.example.couseplusplus.data.comment;
 
-import com.example.couseplusplus.model.query.TokenType;
+import com.example.couseplusplus.model.query.tokenizer.TokenType;
 
 /**
  * @author Yuki Misumi (u7582380)

@@ -19,8 +19,8 @@ public class CourseCache {
 
     courses.forEach(
         course -> {
-          codeTree.insert(course.code(), course);
-          nameTree.insert(course.name(), course);
+          codeTree.insert(course.getCourseCode(), course);
+          nameTree.insert(course.getCourseName(), course);
         });
   }
 }

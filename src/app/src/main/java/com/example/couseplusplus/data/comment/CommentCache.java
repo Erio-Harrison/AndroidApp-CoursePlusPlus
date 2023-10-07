@@ -23,10 +23,10 @@ public class CommentCache {
 
     comments.forEach(
         comment -> {
-          helpfulTree.insert(comment.helpfulness(), comment);
+          helpfulTree.insert(comment.getHelpfulness(), comment);
           enrolTree.insert(comment.enrolKey(), comment);
-          postedTree.insert(comment.postedDateTime().toString(), comment);
-          textTree.insert(comment.text(), comment);
+          postedTree.insert(comment.getPostedDateTime().toString(), comment);
+          textTree.insert(comment.getText(), comment);
         });
   }
 }
