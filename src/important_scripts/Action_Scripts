@@ -1,13 +1,70 @@
-1.
-In the initial login interface, the user needs to enter the account and password to log in to the APP.
-If the account and password are correct, the login is successful. Otherwise, the login failure is displayed.
+Actual Data Stream:
+The Firebase SDK creates a data stream between the app and Firebase's servers.
+Any operation we perform using the SDK, like reading or updating data, will send requirement to Firebase in real-time.
+Similarly, when data changes on Firebase, the app can listen to those changes in real-time.
 
-2.
-After successful login, users can see part of the course code and full name of the course.
-Users can click on the corresponding course to see the review content of the course.
-There is a "log out" button at the top of the login interface.
-By clicking it, the user can log out and return to the initial login interface.
+Simulation Code:
+Action1:
+Read comments of a course:
+1.Fetching Course Data from Firebase:
 
-3.
-Users can search for the corresponding course code and then click on the instance to see the comments.
-After entering the corresponding course comment area, users can also filter comments by searching for keywords or time.
+  A connection to Firebase is initiated and a ValueEventListener is attached to listen for data changes:
+  mDatabase = FirebaseDatabase.getInstance().getReference();
+  mDatabase.addValueEventListener(new ValueEventListener() { ... });
+
+  Inside this listener:
+  The code checks for the node labeled "course".
+  For each course under this node, the course details are fetched and stored in the courseList.
+  After retrieving the data,
+  a new instance of CourseAdapter is created with the course list,
+  updating the RecyclerView to display the courses.
+
+2.Handling Course Selection:
+
+  An item touch listener (RecyclerViewClickListener) is set on the courseRecycleView.
+  courseRecycleView.addOnItemTouchListener(...);
+
+  Within this listener:
+
+  If a course is tapped (onItemClick), the CommentsActivity is launched,
+  and the selected course's details (course code and name) are passed along using an Intent.
+
+  //Todo add long press
+
+3.Extracting Course Details:
+
+  As soon as CommentsActivity is launched, it extracts the course details packed within the intent.
+  String courseCodeInfo = intent.getStringExtra("courseCode");
+
+  Firebase Connection:
+  A direct connection to the Firebase Realtime Database is established through the FirebaseDatabase class.
+  mDatabase = FirebaseDatabase.getInstance().getReference();
+
+4.Setting Up ValueEventListener:
+  A ValueEventListener is attached to the appropriate node in the Firebase database,
+  specifically where the comments for the given course code (courseCodeInfo) are located.
+
+5.Data Fetching and Processing:
+
+  When Firebase responds with the requested data, the listener's onDataChange method is triggered.
+  This callback contains the raw data in the form of a DataSnapshot.
+  Inside this method, the application:
+
+  Navigates through the database hierarchy, confirming it's accessing the "comment" node.
+  Proceeds further down to find the comments specifically associated with the provided course code.
+  For each identified comment, constructs a Comment object using the snapshot's data.
+
+  Then this Comment object is added to the commentList, which acts as a local storage for all the fetched comments:
+   Comment comment = commentSnapshot.getValue(Comment.class);
+   commentList.add(comment);
+
+6.Data Presentation:
+  With the commentList now populated:
+
+  An instance of CommentAdapter is created, which serves as the bridge between the data (commentList) and the RecyclerView.
+  This adapter processes each Comment object in the list, ensuring it's displayed as a distinct item within the RecyclerView.
+
+  Finally, the adapter is linked to the RecyclerView.
+  commentAdapter = new CommentAdapter(commentList);
+  commentRecycleView.setAdapter(commentAdapter);
+  As a result, the user is presented with a structured list of comments associated with the chosen course in the app.
