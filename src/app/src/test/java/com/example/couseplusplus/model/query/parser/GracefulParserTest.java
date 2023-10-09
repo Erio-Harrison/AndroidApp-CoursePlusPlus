@@ -3,6 +3,7 @@ package com.example.couseplusplus.model.query.parser;
 import static org.junit.Assert.*;
 
 import com.example.couseplusplus.model.query.Query;
+import com.example.couseplusplus.model.query.tokenizer.GracefulTokenizer;
 import com.example.couseplusplus.model.query.tokenizer.Tokenizer;
 import org.junit.Test;
 
@@ -13,6 +14,9 @@ public class GracefulParserTest {
   @Test
   public void parsesWithoutException() {
     testParse(
+        "helpfulness",
+        "ParseTree{root=ErrorNode{exception=IllegalSyntaxException, token=Token{tokenType=Error, value=com.example.couseplusplus.model.query.tokenizer.NoTransitionException: No state can be transitioned.}}}");
+    testParse(
         "<",
         "ParseTree{root=ErrorNode{exception=IllegalSyntaxException, token=Token{tokenType=LessThan, value=null}}}");
     testParse(
@@ -20,7 +24,7 @@ public class GracefulParserTest {
         "ParseTree{root=ErrorNode{exception=IllegalSyntaxException, token=Token{tokenType=End, value=null}}}");
     testParse(
         "posted > 2023:09:20",
-        "ParseTree{root=ErrorNode{exception=NoTransitionException, token=Token{tokenType=MoreThan, value=null}}}");
+        "ParseTree{root=ErrorNode{exception=IllegalSyntaxException, token=Token{tokenType=Error, value=com.example.couseplusplus.model.query.tokenizer.NoTransitionException: No state can be transitioned.}}}");
     testParse(
         "helpful > 0 & 2023-09-20",
         "ParseTree{root=ConditionalNode{left=ComparisonNode{left=IdNode{token=Token{tokenType=Helpful, value=null}}, right=NumberNode{token=Token{tokenType=Integer, value=0}}, token=Token{tokenType=MoreThan, value=null}}, right=ErrorNode{exception=IllegalSyntaxException, token=Token{tokenType=DateTime, value=2023-09-20T00:00}}, token=Token{tokenType=And, value=null}}}");
@@ -33,7 +37,7 @@ public class GracefulParserTest {
   }
 
   void testParse(String queryString, String expected) {
-    Tokenizer tokenizer = new Tokenizer(new Query(queryString));
+    Tokenizer tokenizer = new GracefulTokenizer(new Query(queryString));
     Parser uut = new GracefulParser(tokenizer);
     ParseTree result = uut.parse();
     assertNotNull(result);

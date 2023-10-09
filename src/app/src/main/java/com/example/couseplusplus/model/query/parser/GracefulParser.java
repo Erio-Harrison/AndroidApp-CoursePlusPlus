@@ -1,8 +1,6 @@
 package com.example.couseplusplus.model.query.parser;
 
-import com.example.couseplusplus.model.query.tokenizer.NoTransitionException;
 import com.example.couseplusplus.model.query.tokenizer.Tokenizer;
-import com.example.couseplusplus.model.query.tokenizer.state.IllegalTokenException;
 import java.util.function.Supplier;
 
 /**
@@ -29,7 +27,7 @@ public class GracefulParser extends Parser {
   Node runOrGetErrorNode(Supplier<Node> runner) {
     try {
       return runner.get();
-    } catch (IllegalTokenException | NoTransitionException | IllegalSyntaxException e) {
+    } catch (IllegalSyntaxException e) {
       return new ErrorNode(currentToken, e);
     }
   }

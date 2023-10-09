@@ -7,6 +7,7 @@ import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.model.query.QueryParseTreeCreator;
 import com.example.couseplusplus.model.query.parser.ParseTree;
 import com.example.couseplusplus.model.query.parser.Parser;
+import com.example.couseplusplus.model.query.tokenizer.Tokenizer;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Test;
@@ -76,7 +77,8 @@ public class CommentFinderTest {
   }
 
   ParseTree parse(String queryString) {
-    QueryParseTreeCreator queryParseTreeCreator = new QueryParseTreeCreator(Parser::new);
+    QueryParseTreeCreator queryParseTreeCreator =
+        new QueryParseTreeCreator(Tokenizer::new, Parser::new);
     return queryParseTreeCreator.create(new Query(queryString));
   }
 }

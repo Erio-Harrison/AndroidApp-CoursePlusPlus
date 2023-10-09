@@ -6,7 +6,8 @@ import com.example.couseplusplus.data.user.UserDatasource;
 import com.example.couseplusplus.model.comment.CommentRepository;
 import com.example.couseplusplus.model.course.CourseRepository;
 import com.example.couseplusplus.model.query.QueryParseTreeCreator;
-import com.example.couseplusplus.model.query.parser.Parser;
+import com.example.couseplusplus.model.query.parser.GracefulParser;
+import com.example.couseplusplus.model.query.tokenizer.GracefulTokenizer;
 import com.example.couseplusplus.model.user.UserRepository;
 import com.example.couseplusplus.service.comment.CommentService;
 import com.example.couseplusplus.service.course.CourseService;
@@ -24,7 +25,7 @@ public class IoCContainer {
 
   private static final CommentRepository commentRepository = CommentDatasource.getInstance();
   private static final QueryParseTreeCreator queryParserTreeCreator =
-      new QueryParseTreeCreator(Parser::new);
+      new QueryParseTreeCreator(GracefulTokenizer::new, GracefulParser::new);
   private static final CommentService commentService =
       new CommentService(commentRepository, queryParserTreeCreator);
 

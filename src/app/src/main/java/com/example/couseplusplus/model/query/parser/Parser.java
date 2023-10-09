@@ -17,7 +17,6 @@ public class Parser {
 
   public Parser(Tokenizer tokenizer) {
     this.tokenizer = tokenizer;
-    currentToken = tokenizer.getNextToken();
   }
 
   void take(TokenType tokenType) {
@@ -121,6 +120,7 @@ public class Parser {
   }
 
   public ParseTree parse() {
+    currentToken = tokenizer.getNextToken();
     return new ParseTree(query());
   }
 }
