@@ -4,6 +4,9 @@ import com.example.couseplusplus.model.course.NewCourse;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CourseFinder {
   CourseCache courseCache;
 

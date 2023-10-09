@@ -8,6 +8,9 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CourseService {
   CourseRepository courseRepository;
 

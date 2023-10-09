@@ -5,6 +5,9 @@ import com.google.firebase.database.DataSnapshot;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CommentCreator {
   public static NewComment create(DataSnapshot snapshot) {
     FirebaseComment value =

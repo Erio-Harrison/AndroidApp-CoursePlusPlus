@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CommentDatasource implements CommentRepository {
   private static CommentDatasource instance;
 

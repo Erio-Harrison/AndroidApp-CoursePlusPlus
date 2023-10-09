@@ -6,6 +6,9 @@ import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.model.query.tokenizer.Tokenizer;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class ParserTest {
   @Test
   public void parsesWithoutException() {

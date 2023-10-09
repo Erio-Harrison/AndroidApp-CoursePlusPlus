@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class TokenizerTest {
 
   @Test(timeout = 1000)

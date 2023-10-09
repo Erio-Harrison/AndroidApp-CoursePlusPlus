@@ -1,5 +1,8 @@
 package com.example.couseplusplus.data.course;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class FirebaseCourse {
   String courseCode;
 

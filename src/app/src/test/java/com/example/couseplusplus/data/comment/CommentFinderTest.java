@@ -10,6 +10,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CommentFinderTest {
   @Test
   public void walks() {

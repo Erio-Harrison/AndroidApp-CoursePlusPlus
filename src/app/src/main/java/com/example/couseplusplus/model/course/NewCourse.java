@@ -2,6 +2,9 @@ package com.example.couseplusplus.model.course;
 
 import java.util.Objects;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class NewCourse {
   private String courseCode;
   private String courseName;

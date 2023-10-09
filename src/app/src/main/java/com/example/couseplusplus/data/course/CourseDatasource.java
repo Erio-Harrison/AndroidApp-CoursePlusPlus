@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CourseDatasource implements CourseRepository {
   private static CourseDatasource instance;
 

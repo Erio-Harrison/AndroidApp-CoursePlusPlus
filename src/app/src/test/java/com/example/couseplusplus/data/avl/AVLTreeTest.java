@@ -8,6 +8,9 @@ import java.util.Optional;
 import java.util.Set;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class AVLTreeTest {
   @Test
   public void testInsert() {

@@ -3,6 +3,9 @@ package com.example.couseplusplus.model.comment;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class NewComment {
   String id;
   String courseCode;

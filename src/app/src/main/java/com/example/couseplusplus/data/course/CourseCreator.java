@@ -4,6 +4,9 @@ import com.example.couseplusplus.model.course.NewCourse;
 import com.google.firebase.database.DataSnapshot;
 import java.util.Objects;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CourseCreator {
   public static NewCourse create(DataSnapshot snapshot) {
     FirebaseCourse value =

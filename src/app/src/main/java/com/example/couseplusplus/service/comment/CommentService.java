@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CommentService {
   CommentRepository commentRepository;
 
