@@ -1,5 +1,11 @@
 package com.example.couseplusplus.data.comment;
 
+import com.example.couseplusplus.data.comment.findingstrategy.CommentFindingStrategy;
+import com.example.couseplusplus.data.comment.findingstrategy.EnrolBased;
+import com.example.couseplusplus.data.comment.findingstrategy.HelpfulnessBased;
+import com.example.couseplusplus.data.comment.findingstrategy.PostedBased;
+import com.example.couseplusplus.data.comment.findingstrategy.TextBased;
+import com.example.couseplusplus.data.comment.findingstrategy.UnsupportedOperationException;
 import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.PostorderParseTreeWalker;
 import com.example.couseplusplus.model.query.parser.IdNode;

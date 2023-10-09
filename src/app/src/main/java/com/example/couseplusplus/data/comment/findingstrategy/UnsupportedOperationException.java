@@ -1,4 +1,4 @@
-package com.example.couseplusplus.data.comment;
+package com.example.couseplusplus.data.comment.findingstrategy;
 
 import com.example.couseplusplus.model.query.tokenizer.TokenType;
 

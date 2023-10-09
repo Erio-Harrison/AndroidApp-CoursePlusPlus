@@ -1,5 +1,6 @@
-package com.example.couseplusplus.data.comment;
+package com.example.couseplusplus.data.comment.findingstrategy;
 
+import com.example.couseplusplus.data.comment.CommentCache;
 import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.parser.EnrolDateNode;
 import com.example.couseplusplus.model.query.parser.TerminalNode;
@@ -15,13 +16,13 @@ public class EnrolBased implements CommentFindingStrategy {
       TokenType operatorType, TerminalNode terminalNode, CommentCache commentCache) {
     EnrolDateNode enrolDateNode = (EnrolDateNode) terminalNode;
     String key = enrolDateNode.value().toString();
-    if (operatorType == TokenType.MoreThan) return commentCache.enrolTree.collectMoreThan(key);
+    if (operatorType == TokenType.MoreThan) return commentCache.enrolTree().collectMoreThan(key);
     if (operatorType == TokenType.EqualOrMoreThan)
-      return commentCache.enrolTree.collectEqualOrMoreThan(key);
-    if (operatorType == TokenType.LessThan) return commentCache.enrolTree.collectLessThan(key);
+      return commentCache.enrolTree().collectEqualOrMoreThan(key);
+    if (operatorType == TokenType.LessThan) return commentCache.enrolTree().collectLessThan(key);
     if (operatorType == TokenType.EqualOrLessThan)
-      return commentCache.enrolTree.collectEqualOrLessThan(key);
-    if (operatorType == TokenType.Equal) return commentCache.enrolTree.findAll(key);
+      return commentCache.enrolTree().collectEqualOrLessThan(key);
+    if (operatorType == TokenType.Equal) return commentCache.enrolTree().findAll(key);
     throw new UnsupportedOperationException(operatorType);
   }
 }
