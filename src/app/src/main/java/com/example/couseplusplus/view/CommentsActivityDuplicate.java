@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// FIXME always sort by something
 public class CommentsActivityDuplicate extends AppCompatActivity {
   RecyclerView commentRecycleView;
   CommentAdapter commentAdapter;
