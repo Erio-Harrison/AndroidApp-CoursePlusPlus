@@ -1,8 +1,8 @@
 package com.example.couseplusplus.data.course;
 
 import com.example.couseplusplus.model.course.NewCourse;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CourseFinder {
   CourseCache courseCache;
@@ -12,17 +12,14 @@ public class CourseFinder {
   }
 
   public List<NewCourse> findByCourseCode(String hint) {
-    return courseCache.codeTree().collectEqualOrMoreThan(hint, stringComparator());
+    return courseCache.courses().stream()
+        .filter(c -> c.courseCode().contains(hint))
+        .collect(Collectors.toList());
   }
 
   public List<NewCourse> findByCourseName(String hint) {
-    return courseCache.nameTree().collectEqualOrMoreThan(hint, stringComparator());
-  }
-
-  Comparator<String> stringComparator() {
-    return (key1, key2) -> {
-      if (key1.equals(key2)) return 0;
-      return key2.contains(key1) ? -1 : 1;
-    };
+    return courseCache.courses().stream()
+        .filter(c -> c.courseName().contains(hint))
+        .collect(Collectors.toList());
   }
 }

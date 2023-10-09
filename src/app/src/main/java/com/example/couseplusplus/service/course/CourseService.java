@@ -26,4 +26,8 @@ public class CourseService {
         .distinct()
         .collect(Collectors.toList());
   }
+
+  public List<NewCourse> getAll() {
+    return courseRepository.getAll();
+  }
 }

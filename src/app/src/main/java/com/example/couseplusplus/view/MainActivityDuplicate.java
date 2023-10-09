@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.example.couseplusplus.service.course.CourseService;
 import com.example.couseplusplus.service.user.UserService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MainActivityDuplicate extends AppCompatActivity {
@@ -27,8 +29,9 @@ public class MainActivityDuplicate extends AppCompatActivity {
   RecyclerView courseRecycleView;
   CourseAdapter courseAdapter;
   List<Course> courseList = new ArrayList<>();
-
   CourseService courseService;
+  EditText searchInput;
+  Button searchButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class MainActivityDuplicate extends AppCompatActivity {
     courseService = IoCContainer.courseService();
     logoutButton = findViewById(R.id.logout);
     textView = findViewById(R.id.user_details);
+    searchInput = findViewById(R.id.course_search_input);
+    searchButton = findViewById(R.id.course_search_button);
 
     userService
         .findCurrentUser()
@@ -58,6 +63,21 @@ public class MainActivityDuplicate extends AppCompatActivity {
           finish();
         });
 
+    searchButton.setOnClickListener(
+        view -> {
+          String input = searchInput.getText().toString();
+          courseList =
+              input.isBlank()
+                  ? courseService.getAll().stream()
+                      .map(c -> new Course(c.courseCode(), c.courseName()))
+                      .collect(Collectors.toList())
+                  : courseService.findAll(input).stream()
+                      .map(c -> new Course(c.courseCode(), c.courseName()))
+                      .collect(Collectors.toList());
+          courseAdapter = new CourseAdapter(courseList);
+          courseRecycleView.setAdapter(courseAdapter);
+        });
+
     courseRecycleView = (RecyclerView) findViewById(R.id.course_rv);
     courseRecycleView.setLayoutManager(new LinearLayoutManager(this));
     courseService.listenChange(
@@ -66,6 +86,7 @@ public class MainActivityDuplicate extends AppCompatActivity {
               courses.stream()
                   .map(c -> new Course(c.courseCode(), c.courseName()))
                   .collect(Collectors.toList());
+          if (Objects.nonNull(courseAdapter)) return;
           courseAdapter = new CourseAdapter(courseList);
           courseRecycleView.setAdapter(courseAdapter);
         });

@@ -47,6 +47,12 @@ public class CourseDatasource implements CourseRepository {
   }
 
   @Override
+  public List<NewCourse> getAll() {
+    if (Objects.isNull(cache)) return List.of();
+    return cache.courses();
+  }
+
+  @Override
   public List<NewCourse> findByCourseCode(String hint) {
     if (Objects.isNull(cache)) return List.of();
     return courseFinder.findByCourseCode(hint);
