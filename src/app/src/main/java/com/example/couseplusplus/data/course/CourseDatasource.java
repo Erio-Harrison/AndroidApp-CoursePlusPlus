@@ -17,6 +17,13 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class CourseDatasource implements CourseRepository {
+  private static CourseDatasource instance;
+
+  public static CourseDatasource getInstance() {
+    if (Objects.isNull(instance)) return new CourseDatasource();
+    return instance;
+  }
+
   CourseCache cache;
   CourseFinder courseFinder;
 

@@ -20,6 +20,12 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class CommentDatasource implements CommentRepository {
+  private static CommentDatasource instance;
+
+  public static CommentDatasource getInstance() {
+    if (Objects.isNull(instance)) return new CommentDatasource();
+    return instance;
+  }
 
   String code;
   CommentCache cache;

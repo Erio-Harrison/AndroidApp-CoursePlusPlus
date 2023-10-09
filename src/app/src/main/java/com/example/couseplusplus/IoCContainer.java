@@ -14,13 +14,13 @@ import com.example.couseplusplus.service.user.UserService;
  * @author Yuki Misumi (u7582380)
  */
 public class IoCContainer {
-  private static final UserRepository userRepository = new UserDatasource();
+  private static final UserRepository userRepository = UserDatasource.getInstance();
   private static final UserService userService = new UserService(userRepository);
 
-  private static final CourseRepository courseRepository = new CourseDatasource();
+  private static final CourseRepository courseRepository = CourseDatasource.getInstance();
   private static final CourseService courseService = new CourseService(courseRepository);
 
-  private static final CommentRepository commentRepository = new CommentDatasource();
+  private static final CommentRepository commentRepository = CommentDatasource.getInstance();
   private static final CommentService commentService = new CommentService(commentRepository);
 
   public static UserService userService() {

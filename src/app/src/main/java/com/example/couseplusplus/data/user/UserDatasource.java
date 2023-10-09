@@ -9,6 +9,12 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class UserDatasource implements UserRepository {
+  private static UserDatasource instance;
+
+  public static UserDatasource getInstance() {
+    if (Objects.isNull(instance)) return new UserDatasource();
+    return instance;
+  }
 
   @Override
   public void login(User user, Consumer<AuthenticationResult> onCompleteListener) {

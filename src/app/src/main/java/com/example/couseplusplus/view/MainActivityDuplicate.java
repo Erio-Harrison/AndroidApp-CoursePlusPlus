@@ -110,7 +110,5 @@ public class MainActivityDuplicate extends AppCompatActivity {
               @Override
               public void onLongItemClick(View view, int position) {}
             }));
-    // LOAD SHOW DATA END
-
   }
 }
