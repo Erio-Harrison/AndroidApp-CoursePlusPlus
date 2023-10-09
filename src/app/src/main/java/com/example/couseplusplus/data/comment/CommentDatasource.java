@@ -6,8 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import com.example.couseplusplus.model.comment.CommentRepository;
 import com.example.couseplusplus.model.comment.NewComment;
-import com.example.couseplusplus.model.query.Query;
-import com.example.couseplusplus.model.query.QueryParseTreeCreator;
 import com.example.couseplusplus.model.query.parser.ParseTree;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,10 +68,9 @@ public class CommentDatasource implements CommentRepository {
   }
 
   @Override
-  public List<NewComment> findAll(String courseCode, Query query) {
+  public List<NewComment> findAll(String courseCode, ParseTree parseTree) {
     if (isNotReady()) return List.of();
     validate(courseCode);
-    ParseTree parseTree = QueryParseTreeCreator.create(query);
     return commentFinder.walk(parseTree);
   }
 

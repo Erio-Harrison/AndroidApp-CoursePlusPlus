@@ -1,6 +1,6 @@
 package com.example.couseplusplus.model.comment;
 
-import com.example.couseplusplus.model.query.Query;
+import com.example.couseplusplus.model.query.parser.ParseTree;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -10,5 +10,5 @@ public interface CommentRepository {
 
   List<NewComment> getAll(String courseCode);
 
-  List<NewComment> findAll(String courseCode, Query query);
+  List<NewComment> findAll(String courseCode, ParseTree parseTree);
 }

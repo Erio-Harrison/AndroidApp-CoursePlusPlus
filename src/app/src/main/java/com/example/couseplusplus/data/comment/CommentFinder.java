@@ -14,6 +14,7 @@ import com.example.couseplusplus.model.query.tokenizer.Token;
 import com.example.couseplusplus.model.query.tokenizer.TokenType;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,6 +46,9 @@ public class CommentFinder implements PostorderParseTreeWalker<List<NewComment>>
   @Override
   public List<NewComment> processConditional(
       List<NewComment> left, Token operator, List<NewComment> right) {
+    if (Objects.isNull(left)) return right;
+    if (Objects.isNull(right)) return left;
+
     TokenType operatorType = operator.tokenType();
     if (operatorType == TokenType.Or)
       return Stream.concat(left.stream(), right.stream()).distinct().collect(Collectors.toList());

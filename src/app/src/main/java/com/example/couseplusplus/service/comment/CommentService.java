@@ -3,6 +3,8 @@ package com.example.couseplusplus.service.comment;
 import com.example.couseplusplus.model.comment.CommentRepository;
 import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.Query;
+import com.example.couseplusplus.model.query.QueryParseTreeCreator;
+import com.example.couseplusplus.model.query.parser.ParseTree;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -14,9 +16,12 @@ import java.util.stream.Collectors;
  */
 public class CommentService {
   CommentRepository commentRepository;
+  QueryParseTreeCreator queryParseTreeCreator;
 
-  public CommentService(CommentRepository commentRepository) {
+  public CommentService(
+      CommentRepository commentRepository, QueryParseTreeCreator queryParseTreeCreator) {
     this.commentRepository = commentRepository;
+    this.queryParseTreeCreator = queryParseTreeCreator;
   }
 
   public void listenChange(String courseCode, Consumer<List<NewComment>> listener) {
@@ -28,7 +33,8 @@ public class CommentService {
   }
 
   public List<NewComment> findAll(String courseCode, Query query) {
-    return commentRepository.findAll(courseCode, query);
+    ParseTree parseTree = queryParseTreeCreator.create(query);
+    return commentRepository.findAll(courseCode, parseTree);
   }
 
   public List<NewComment> sort(List<NewComment> comments, boolean ascending, SortingAspect aspect) {
