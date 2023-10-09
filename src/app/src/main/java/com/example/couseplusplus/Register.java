@@ -17,8 +17,8 @@ import java.util.Objects;
 /**
  * Author: Min su Park
  *
- * Register adds users into the Authentification database in firebase.
- * Once registered, user will be taken to MainActivity
+ * <p>Register adds users into the Authentification database in firebase. Once registered, user will
+ * be taken to MainActivity
  */
 public class Register extends AppCompatActivity {
   TextInputEditText editTextEmail, editTextPassword;

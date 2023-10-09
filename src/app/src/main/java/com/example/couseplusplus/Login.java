@@ -16,8 +16,8 @@ import com.google.android.material.textfield.TextInputEditText;
 /**
  * Author: Min su Park
  *
- * Login is the first activity users will need authentification.
- * Can branch into Register, MainActivity
+ * <p>Login is the first activity users will need authentification. Can branch into Register,
+ * MainActivity
  */
 public class Login extends AppCompatActivity {
   TextInputEditText editTextEmail, editTextPassword;

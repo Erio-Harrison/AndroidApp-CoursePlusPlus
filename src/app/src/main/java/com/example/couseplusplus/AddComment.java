@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Author: Min su Park
  *
- * AddComment is used as the main Comment-adding activity. This class supersedes CommentsActivity
+ * <p>AddComment is used as the main Comment-adding activity. This class supersedes CommentsActivity
  */
 public class AddComment extends AppCompatActivity {
   public DatabaseReference mDatabase;
@@ -33,17 +33,16 @@ public class AddComment extends AppCompatActivity {
     commentSpace = findViewById(R.id.comment_space);
     postButton = findViewById(R.id.post_comment);
 
-
     postButton.setOnClickListener(
         view -> {
-            LocalDateTime currentTime = LocalDateTime.now();
+          LocalDateTime currentTime = LocalDateTime.now();
           String userComment = commentSpace.getText().toString();
           Intent intent = getIntent();
           courseCodeInfo = intent.getStringExtra("courseCode");
           String postedDateTime =
-                    currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS"));
-          int year = Integer.parseInt(postedDateTime.substring(0,4));
-          int month = Integer.parseInt(postedDateTime.substring(5,7));
+              currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS"));
+          int year = Integer.parseInt(postedDateTime.substring(0, 4));
+          int month = Integer.parseInt(postedDateTime.substring(5, 7));
           int helpfulness = 0;
           int semester = (month > 7) ? 2 : 1;
 
