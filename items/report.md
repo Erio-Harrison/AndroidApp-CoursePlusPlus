@@ -38,7 +38,7 @@ The key area(s) of responsibilities for each member
 | u7541840 | Haoren Hu | database design, data generation, action simulation |
 | u7565753 | Min Su Park | authentication, posting comment, android activity design |
 | u7618313 | Porntipa Poonpolsub | data load, android activity design |
-| u7582380 | Yuki Misumi | architecture design, refactoring, search functionality |
+| u7582380 | Yuki Misumi | architecture design, refactoring, search functionality, noisy code-formatting police |
 
 
 ## Summary of Individual Contributions
