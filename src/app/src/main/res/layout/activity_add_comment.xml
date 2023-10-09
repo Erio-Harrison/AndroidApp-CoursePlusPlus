@@ -6,46 +6,40 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".Login">
+    tools:context=".AddComment">
+
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:text="Add a comment for @course name@"
-        android:fontFamily= "sans-serif-condensed"
+        android:text="@string/please_write_a_comment_for_this_course"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:layout_marginHorizontal="20dp"
 
         />
 
-
-
-
-
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
+    <EditText
+        android:id="@+id/comment_space"
+        android:layout_width="350dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/share_your_thoughts"
+        android:gravity="center"
+        />
 
     <Button
-        android:id="@+id/btn_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login" />
-
-    <TextView
-        android:id="@+id/RegisterNow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:id="@+id/post_comment"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Click to Register"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="Post Comment"
+        />
 
 
 </LinearLayout>

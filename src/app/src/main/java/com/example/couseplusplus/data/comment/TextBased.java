@@ -1,9 +1,9 @@
 package com.example.couseplusplus.data.comment;
 
 import com.example.couseplusplus.model.comment.Comment;
-import com.example.couseplusplus.model.query.TerminalNode;
-import com.example.couseplusplus.model.query.TextNode;
-import com.example.couseplusplus.model.query.TokenType;
+import com.example.couseplusplus.model.query.parser.TerminalNode;
+import com.example.couseplusplus.model.query.parser.TextNode;
+import com.example.couseplusplus.model.query.tokenizer.TokenType;
 import java.util.List;
 
 /**

@@ -6,4 +6,8 @@
     <string name="register">Register</string>
     <string name="click_to_login">Click to Login</string>
     <string name="log_out">Log out</string>
+    <string name="please_write_a_comment_for_this_course">Please write a comment for this course</string>
+    <string name="share_your_throughts">Share your throughts!</string>
+    <string name="share_your_thoughts">Share your thoughts</string>
+    <string name="add_comment">Add Comment</string>
 </resources>
