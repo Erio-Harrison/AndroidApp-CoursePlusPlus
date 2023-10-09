@@ -89,7 +89,6 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
     commentService.listenChange(
         courseCodeInfo,
         comments -> {
-          // FIXME consolidate NewComment and Comment later
           newCommentList = comments;
           newCommentsToComments();
           commentAdapter = new CommentAdapter(commentList);
@@ -97,6 +96,7 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
         });
   }
 
+  // FIXME consolidate NewComment and Comment later
   void newCommentsToComments() {
     commentList =
         newCommentList.stream()
