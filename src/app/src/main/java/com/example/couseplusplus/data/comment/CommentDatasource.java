@@ -71,7 +71,7 @@ public class CommentDatasource implements CommentRepository {
   public List<NewComment> findAll(String courseCode, ParseTree parseTree) {
     if (isNotReady()) return List.of();
     validate(courseCode);
-    return commentFinder.walk(parseTree);
+    return Objects.requireNonNullElse(commentFinder.walk(parseTree), List.of());
   }
 
   boolean isNotReady() {
