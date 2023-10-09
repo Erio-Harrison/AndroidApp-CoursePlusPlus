@@ -65,12 +65,18 @@ public class NewComment {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    NewComment comment = (NewComment) o;
-    return Objects.equals(id, comment.id);
+    NewComment that = (NewComment) o;
+    return year == that.year
+        && semester == that.semester
+        && helpfulness == that.helpfulness
+        && Objects.equals(id, that.id)
+        && Objects.equals(courseCode, that.courseCode)
+        && Objects.equals(text, that.text)
+        && Objects.equals(postedDateTime, that.postedDateTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(id, courseCode, year, semester, text, helpfulness, postedDateTime);
   }
 }

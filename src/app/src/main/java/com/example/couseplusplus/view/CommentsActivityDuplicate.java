@@ -2,6 +2,8 @@ package com.example.couseplusplus.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import com.example.couseplusplus.CommentAdapter;
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.model.comment.Comment;
+import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.service.comment.CommentService;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,7 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_comments);
+    setContentView(R.layout.activity_comments_duplicate);
     Intent intent = getIntent();
     String courseCodeInfo = intent.getStringExtra("courseCode");
     String courseNameInfo = intent.getStringExtra("courseName");
@@ -36,6 +39,42 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
     courseNameInfoTextView.setText(courseNameInfo);
     commentRecycleView = findViewById(R.id.comment_rv);
     commentRecycleView.setLayoutManager(new LinearLayoutManager(this));
+
+    EditText searchInput = findViewById(R.id.comment_search_input);
+    Button searchButton = findViewById(R.id.comment_search_button);
+    searchButton.setOnClickListener(
+        view -> {
+          String searchInputString = searchInput.getText().toString();
+          Query query = new Query(searchInputString);
+          commentList =
+              query.isBlank()
+                  ? commentService.getAll(courseCodeInfo).stream()
+                      .map(
+                          c ->
+                              new Comment(
+                                  c.id(),
+                                  c.courseCode(),
+                                  c.year(),
+                                  c.semester(),
+                                  c.text(),
+                                  c.helpfulness(),
+                                  c.postedDateTime().toString()))
+                      .collect(Collectors.toList())
+                  : commentService.findAll(courseCodeInfo, query).stream()
+                      .map(
+                          c ->
+                              new Comment(
+                                  c.id(),
+                                  c.courseCode(),
+                                  c.year(),
+                                  c.semester(),
+                                  c.text(),
+                                  c.helpfulness(),
+                                  c.postedDateTime().toString()))
+                      .collect(Collectors.toList());
+          commentAdapter = new CommentAdapter(commentList);
+          commentRecycleView.setAdapter(commentAdapter);
+        });
 
     commentService.listenChange(
         courseCodeInfo,

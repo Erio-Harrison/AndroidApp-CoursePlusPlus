@@ -3,6 +3,7 @@ package com.example.couseplusplus.model.query;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -67,5 +68,9 @@ public class Query {
 
   public String getSubstring(int start, int end) {
     return value.substring(start, end);
+  }
+
+  public boolean isBlank() {
+    return Objects.isNull(value) || value.isBlank();
   }
 }

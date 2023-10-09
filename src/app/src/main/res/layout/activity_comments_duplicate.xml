@@ -24,6 +24,20 @@
         android:paddingHorizontal="8dp"
         android:text="Course Name" />
 
+    <EditText
+        android:id="@+id/comment_search_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="e.g. helpful > 1"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/comment_search_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comment_rv"
         android:layout_width="match_parent"
