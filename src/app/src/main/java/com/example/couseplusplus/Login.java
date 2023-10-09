@@ -13,6 +13,12 @@ import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
 import com.google.android.material.textfield.TextInputEditText;
 
+/**
+ * Author: Min su Park
+ *
+ * Login is the first activity users will need authentification.
+ * Can branch into Register, MainActivity
+ */
 public class Login extends AppCompatActivity {
   TextInputEditText editTextEmail, editTextPassword;
   Button buttonLogin;
