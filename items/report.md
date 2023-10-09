@@ -1,4 +1,4 @@
-# [G0 - Team Name] Report
+# [G01 - Course++] Report
 
 The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
 
@@ -28,21 +28,17 @@ Note that you should have removed ALL TEMPLATE/INSTRUCTION textes in your submis
 10. [Conflict Resolution Protocol](#conflict-resolution-protocol)
 
 ## Administrative
-- Firebase Repository Link: <insert-link-to-firebase-repository>
-   - Confirm: I have already added comp21006442@gmail.com as a Developer to the Firebase project prior to due date.
-- Two user accounts for markers' access are usable on the app's APK (do not change the username and password unless there are exceptional circumstances. Note that they are not real e-mail addresses in use):
-   - Username: comp2100@anu.edu.au	Password: comp2100
-   - Username: comp6442@anu.edu.au	Password: comp6442
+- Firebase Repository Link: https://console.firebase.google.com/project/courses-and-comments/overview
 
 ## Team Members and Roles
 The key area(s) of responsibilities for each member
 
 | UID   |  Name  |   Role |
 |:------|:------:|-------:|
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
-| [uid] | [name] | [role] |
+| u7541840 | Haoren Hu | database design, data generation, action simulation |
+| u7565753 | Min Su Park | authentication, posting comment, android activity design |
+| u7618313 | Porntipa Poonpolsub | data load, android activity design |
+| u7582380 | Yuki Misumi | architecture design, refactoring, search functionality |
 
 
 ## Summary of Individual Contributions
@@ -62,7 +58,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *Here is an example: (Note that you should remove the entire section (e.g. "others") if it is not applicable)*
 
-1. **UID1, Name1**  I have 30% contribution, as follows: <br>
+0. **UID1, Name1**  I have 30% contribution, as follows: <br>
   - **Code Contribution in the final App**
     - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
     - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
@@ -76,10 +72,26 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - [Report Writing?] [Slides preparation?]*
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
-2. **UID2, Name2**  I have xx% contribution, as follows: <br>
-  - ...
+1. **u7541840, Haoren Hu**  I have 25% contribution, as follows: <br>
+  - **Code Contribution in the final App**
+  - **Code and App Design** 
+  - **Others**: (only if significant and significantly different from an "average contribution") 
 
+2. **u7565753, Min Su Park**  I have 25% contribution, as follows: <br>
+  - **Code Contribution in the final App**
+  - **Code and App Design** 
+  - **Others**: (only if significant and significantly different from an "average contribution") 
 
+3. **u7618313, Porntipa Poonpolsub**  I have 25% contribution, as follows: <br>
+  - **Code Contribution in the final App**
+  - **Code and App Design** 
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+
+4. **u7582380, Yuki Misumi**  I have 25% contribution, as follows: <br>
+  - **Code Contribution in the final App**
+  - **Code and App Design** 
+  - **Others**: (only if significant and significantly different from an "average contribution") 
+    - Designed the overall architecture
 
 ## Application Description
 
@@ -121,8 +133,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 ### Application UML
 
-![ClassDiagramExample](media/_examples/ClassDiagramExample.png) <br>
-*[Replace the above with a class diagram. You can look at how we have linked an image here as an example of how you can do it too.]*
+![ClassDiagram](media/architecture.png)
 
 <hr>
 
@@ -156,20 +167,44 @@ Here is a partial (short) example for the subsection `Data Structures`:*
       * *We don't need to access the item by index for xxx feature because...*
       * For the (part), the data ... (characteristics) ...
 
-2. ...
-
-3. ...
+1. *AVLTree*
+   * *Objective: used for storing various keys of comments for [Search], [Search-Filter] feature and caching comments fetched from Firebase Realtime Database (hereafter FirebaseDB).*
+   * *Code Locations: defined in [AVLTree](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/avl/AVLTree.java) and [Node](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/avl/Node.java); processed using [CommentFindingStrategy#find](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentFindingStrategy.java#L12) and the implementation classes. 
+   * *Reasons:*
+      * *It is more efficient than arrays for searching with a time complexity O(log N)*
+   * *Other outstandings:*
+      * For the comment filter, it supports finding comments in a given range.
 
 <hr>
 
 ### Design Patterns
 *[What design patterns did your team utilise? Where and why?]*
 
-1. *xxx Pattern*
-   * *Objective: used for storing xxxx for xxx feature.*
-   * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+1. *Singleton Pattern*
+   * *Objective: used for ensuring a class object is created only once.*
+   * *Code Locations: defined in [CommentDatasource](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentDatasource.java) and all the other classes implementing a repository interface at `data` package.
    * *Reasons:*
-      * ...
+      * to prevent from data fetching by multiple instances which may result in unwanted behaviours, including reading an incorrect state of the cache.
+
+2. *Factory Pattern*
+   * *Objective: used for providing a state object creation capability out of the box.*
+   * *Code Locations: defined in [StateFactory](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/query/tokenizer/state/StateFactory.java); processed using [StateMachine#getNextState](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/query/tokenizer/StateMachine.java#L80) and [StateMachine#findStateToTransition](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/query/tokenizer/StateMachine.java#L89)
+   * *Reasons:*
+      * It encapsulates nitty gritty details of [State](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/query/tokenizer/state/State.java) class, so that the responsibility of other classes no longer is polluted by them.
+
+3. *DAO Pattern*
+   * *Objective: used for segregating a concern of data layer out of domain and service layer.*
+   * *Code Locations: defined in [CommentRepository](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/comment/CommentRepository.java) and [CommentDatasource](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentDatasource.java); processed using [CommentService](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/service/comment/CommentService.java). In addition, all the other repository interfaces defined at `domain` layer and the corresponding implementations and service classes.
+   * *Reasons:*
+      * It encapsulates nitty gritty details of [State](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/query/tokenizer/state/State.java) class, so that the responsibility of other classes no longer is polluted by them.
+
+4. *Strategy Pattern*
+   * *Objective: used for addomg extensibility of the branching at the comment finder.* 
+   * *Code Locations: defined in [CommentFindingStrategy](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentFindingStrategy.java) and the implementations; processed using [CommentFinder#processComparison](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentFinder.java#L36).
+   * *Reasons:*
+      * It encapsulates nitty gritty details of each comment finding logic per token type.
+      * It gives us a modularity to add/remove/update any of the logics without touching anything on CommentFinder. This minimises the area of change and the associated risk to a bug.
+
 
 <hr>
 
@@ -180,14 +215,27 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 *If there are several grammars, list them all under this section and what they relate to.*
 
 Production Rules:
-
-    <Non-Terminal> ::= <some output>
-    <Non-Terminal> ::= <some output>
-
+    <query> ::= <expression> | <expression> <condition> <query>
+    <expression> ::= helpful <operator> <number> | enrol <operator> <enroldate> | posted <operator> <date> | text <fuzzy> <string> | ( <query> )
+    <condition> ::= & | |
+    <operator> ::= < | > | = | <= | >=
+    <fuzzy> ::= ~
+    <number> ::= <digit\0> <number> | <digit> | -<digit\0> <number> | -<digit>
+    <digit> ::= [0-9]
+    <string> ::= "<characters>"
+    <characters> ::= <character> <characters> | <character>
+    <character> ::= // anything except "
+    <date> ::= <digit><digit><digit><digit>-<digit><digit>-<digit><digit>
+    <enroldate> ::= <digit><digit><digit><digit><semester>
+    <semester> ::= S1 | S2
 
 ### <u>Tokenizers and Parsers</u>
 
 *[Where do you use tokenisers and parsers? How are they built? What are the advantages of the designs?]*
+- [Tokenizer]() and [Parser]() are used at [QueryParseTreeCreator#create]() to parse [Query]() to find the matching [Comment]()s later.
+- Tokenizer is build using [StateMachine]() based on the state diagram below. The main advantage is its modularity - we can add/remove/update any states by only changing the very state class without polluting the actual tokenizer class.
+![state-diagram](media/state-diagram.png)
+- We also added the graceful variants [GracefulTokenizer](), [GracefulParser]() to allow the user type an incomplete query to still search the matching comments at its best effort.
 
 <hr>
 
@@ -212,17 +260,19 @@ Production Rules:
    * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
    * Link to the Firebase repo: ...
 
-3. ...
+3. [LoadShowData].
+4. [Search].
+
    <br>
 
 ### Custom Features
-Feature Category: Privacy <br>
-1. [Privacy-Request]. Description of the feature  (easy)
+Feature Category: Search-related features <br>
+1. [Search-Invalid]. Description of the feature  (easy)
    * Code: [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
    * Description of your implementation: ... <br>
      <br>
 
-2. [Privacy-Block]. Description ... ... (medium)
+2. [Search-Filter]. Description ... ... (medium)
    ... ...
    <br><br>
 
@@ -232,12 +282,16 @@ Feature Category: Firebase Integration <br>
    * [Class B](../src/path/to/class/file.java#L30-85): methods A, B, C, lines of code: 30 to 85
    * Description of your implementation: ... <br>
 
+4. [FB-Persist].
+
 <hr>
 
 ### Surprised Features
 
 - If implemented, explain how your solution addresses the task (any detail requirements will be released with the surprised feature specifications).
 - State that "Suprised feature is not implemented" otherwise.
+
+Suprised feature is not implemented
 
 <br> <hr>
 
@@ -271,7 +325,13 @@ Feature Category: Firebase Integration <br>
    - *Code coverage: ...*
    - *Types of tests created and descriptions: ...*
 
-2. xxx
+2. Tests for AVL Tree
+   - Code: [AVLTreeTest](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/test/java/com/example/couseplusplus/data/avl/AVLTreeTest.java) for [AVLTree]()
+   - *Number of test cases: ...*
+   - *Code coverage: ...*
+   - *Types of tests created and descriptions: ...*
+
+...
 
 ...
 
