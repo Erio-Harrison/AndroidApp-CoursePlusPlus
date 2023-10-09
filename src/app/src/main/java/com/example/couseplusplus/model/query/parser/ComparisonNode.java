@@ -22,4 +22,9 @@ public class ComparisonNode extends Node {
   public Node right() {
     return right;
   }
+
+  @Override
+  public String toString() {
+    return String.format("ComparisonNode{left=%s, right=%s, token=%s}", left, right, token);
+  }
 }

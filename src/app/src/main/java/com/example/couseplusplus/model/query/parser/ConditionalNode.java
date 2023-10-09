@@ -22,4 +22,9 @@ public class ConditionalNode extends Node {
   public Node right() {
     return right;
   }
+
+  @Override
+  public String toString() {
+    return String.format("ConditionalNode{left=%s, right=%s, token=%s}", left, right, token);
+  }
 }

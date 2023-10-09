@@ -19,4 +19,9 @@ public abstract class Node {
   public Object value() {
     return token.value();
   }
+
+  @Override
+  public String toString() {
+    return String.format("%s{token=%s}", this.getClass().getSimpleName(), token);
+  }
 }
