@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class CourseCreator {
   public static NewCourse create(DataSnapshot snapshot) {
-    FirebaseCourse firebaseCourse =
+    FirebaseCourse value =
         Objects.requireNonNull(
             snapshot.getValue(FirebaseCourse.class), "Failed to get course data");
-    return new NewCourse(firebaseCourse.courseCode, firebaseCourse.courseName);
+    return new NewCourse(value.courseCode, value.courseName);
   }
 
   private static class FirebaseCourse {

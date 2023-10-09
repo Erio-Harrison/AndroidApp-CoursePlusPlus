@@ -29,4 +29,24 @@ public class CommentCache {
           textTree.insert(comment.text(), comment);
         });
   }
+
+  public List<NewComment> comments() {
+    return comments;
+  }
+
+  public AVLTree<Integer, NewComment> helpfulTree() {
+    return helpfulTree;
+  }
+
+  public AVLTree<String, NewComment> enrolTree() {
+    return enrolTree;
+  }
+
+  public AVLTree<String, NewComment> postedTree() {
+    return postedTree;
+  }
+
+  public AVLTree<String, NewComment> textTree() {
+    return textTree;
+  }
 }
