@@ -21,6 +21,7 @@ import java.util.function.Consumer;
 
 public class CommentDatasource implements CommentRepository {
 
+  String code;
   CommentCache cache;
   CommentFinder commentFinder;
 
@@ -41,6 +42,7 @@ public class CommentDatasource implements CommentRepository {
                         commentSnapshot -> comments.add(CommentCreator.create(commentSnapshot)));
                 cache = new CommentCache(comments);
                 commentFinder = new CommentFinder(cache);
+                code = courseCode;
                 listener.accept(comments);
               }
 
@@ -53,14 +55,26 @@ public class CommentDatasource implements CommentRepository {
 
   @Override
   public List<NewComment> getAll(String courseCode) {
-    if (Objects.isNull(cache)) return List.of();
+    if (isNotReady()) return List.of();
+    validate(courseCode);
     return cache.comments();
   }
 
   @Override
   public List<NewComment> findAll(String courseCode, Query query) {
-    if (Objects.isNull(cache)) return List.of();
+    if (isNotReady()) return List.of();
+    validate(courseCode);
     ParseTree parseTree = QueryParseTreeCreator.create(query);
     return commentFinder.walk(parseTree);
+  }
+
+  boolean isNotReady() {
+    return Objects.isNull(cache);
+  }
+
+  void validate(String courseCode) {
+    if (courseCode.equals(code)) return;
+    throw new IllegalArgumentException(
+        String.format("courseCode(%s) does not match with %s", courseCode, code));
   }
 }
