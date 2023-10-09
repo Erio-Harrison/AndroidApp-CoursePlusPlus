@@ -1,6 +1,6 @@
 package com.example.couseplusplus.data.comment;
 
-import com.example.couseplusplus.model.comment.Comment;
+import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.parser.DateTimeNode;
 import com.example.couseplusplus.model.query.parser.TerminalNode;
 import com.example.couseplusplus.model.query.tokenizer.TokenType;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class PostedBased implements CommentFindingStrategy {
   @Override
-  public List<Comment> find(
+  public List<NewComment> find(
       TokenType operatorType, TerminalNode terminalNode, CommentCache commentCache) {
     DateTimeNode dateTimeNode = (DateTimeNode) terminalNode;
     String key = dateTimeNode.localDateTime().toString();

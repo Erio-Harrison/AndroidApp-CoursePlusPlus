@@ -1,6 +1,6 @@
 package com.example.couseplusplus.data.comment;
 
-import com.example.couseplusplus.model.comment.Comment;
+import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.PostorderParseTreeWalker;
 import com.example.couseplusplus.model.query.parser.IdNode;
 import com.example.couseplusplus.model.query.parser.TerminalNode;
@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 /**
  * @author Yuki Misumi (u7582380)
  */
-public class CommentFinder implements PostorderParseTreeWalker<List<Comment>> {
+public class CommentFinder implements PostorderParseTreeWalker<List<NewComment>> {
   private static final Map<TokenType, CommentFindingStrategy> strategyMap =
       Map.of(
           TokenType.Helpful, new HelpfulnessBased(),
@@ -28,7 +28,7 @@ public class CommentFinder implements PostorderParseTreeWalker<List<Comment>> {
   }
 
   @Override
-  public List<Comment> processComparison(IdNode left, Token operator, TerminalNode right) {
+  public List<NewComment> processComparison(IdNode left, Token operator, TerminalNode right) {
     TokenType idTokenType = left.token().tokenType();
     TokenType operatorType = operator.tokenType();
     if (!strategyMap.containsKey(idTokenType))
@@ -37,7 +37,8 @@ public class CommentFinder implements PostorderParseTreeWalker<List<Comment>> {
   }
 
   @Override
-  public List<Comment> processConditional(List<Comment> left, Token operator, List<Comment> right) {
+  public List<NewComment> processConditional(
+      List<NewComment> left, Token operator, List<NewComment> right) {
     TokenType operatorType = operator.tokenType();
     if (operatorType == TokenType.Or)
       return Stream.concat(left.stream(), right.stream()).distinct().collect(Collectors.toList());
