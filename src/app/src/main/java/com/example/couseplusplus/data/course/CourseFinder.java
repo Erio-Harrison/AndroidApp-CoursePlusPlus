@@ -11,6 +11,7 @@ public class CourseFinder {
     this.courseCache = courseCache;
   }
 
+  // FIXME avl tree didn't work quite well here
   public List<NewCourse> findByCourseCode(String hint) {
     return courseCache.courses().stream()
         .filter(c -> c.courseCode().contains(hint))

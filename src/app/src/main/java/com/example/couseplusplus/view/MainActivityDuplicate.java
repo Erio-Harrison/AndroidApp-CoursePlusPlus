@@ -66,6 +66,7 @@ public class MainActivityDuplicate extends AppCompatActivity {
     searchButton.setOnClickListener(
         view -> {
           String input = searchInput.getText().toString();
+          // FIXME consolidate NewCourse and Course later
           courseList =
               input.isBlank()
                   ? courseService.getAll().stream()
