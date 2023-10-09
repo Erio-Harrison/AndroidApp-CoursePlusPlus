@@ -4,6 +4,7 @@ import com.example.couseplusplus.model.user.AuthenticationResult;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.model.user.UserRepository;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class UserService {
@@ -41,5 +42,9 @@ public class UserService {
 
   public User getCurrentUser() {
     return userRepository.getCurrentUser();
+  }
+
+  public Optional<User> findCurrentUser() {
+    return Optional.ofNullable(userRepository.getCurrentUser());
   }
 }

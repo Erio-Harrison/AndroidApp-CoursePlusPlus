@@ -13,22 +13,17 @@ import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.RecyclerViewClickListener;
 import com.example.couseplusplus.model.course.Course;
-import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.course.CourseService;
 import com.example.couseplusplus.service.user.UserService;
-import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class MainActivityDuplicate extends AppCompatActivity {
 
   Button logoutButton;
   TextView textView;
-  User user;
   UserService userService;
-  DatabaseReference mDatabase;
   RecyclerView courseRecycleView;
   CourseAdapter courseAdapter;
   List<Course> courseList = new ArrayList<>();
@@ -44,14 +39,16 @@ public class MainActivityDuplicate extends AppCompatActivity {
     courseService = IoCContainer.courseService();
     logoutButton = findViewById(R.id.logout);
     textView = findViewById(R.id.user_details);
-    user = userService.getCurrentUser();
-    if (Objects.isNull(user)) {
-      Intent intent = new Intent(getApplicationContext(), LoginDuplicate.class);
-      startActivity(intent);
-      finish();
-    } else {
-      textView.setText(user.userName());
-    }
+
+    userService
+        .findCurrentUser()
+        .ifPresentOrElse(
+            user -> textView.setText(user.userName()),
+            () -> {
+              Intent intent = new Intent(getApplicationContext(), LoginDuplicate.class);
+              startActivity(intent);
+              finish();
+            });
 
     logoutButton.setOnClickListener(
         view -> {
