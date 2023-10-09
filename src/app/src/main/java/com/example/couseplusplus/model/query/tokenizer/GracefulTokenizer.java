@@ -4,6 +4,9 @@ import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.model.query.tokenizer.state.IllegalTokenException;
 import java.util.function.Supplier;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class GracefulTokenizer extends Tokenizer {
   public GracefulTokenizer(Query query) {
     super(query);

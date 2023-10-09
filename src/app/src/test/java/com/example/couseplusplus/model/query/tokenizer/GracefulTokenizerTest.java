@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import com.example.couseplusplus.model.query.Query;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class GracefulTokenizerTest {
   @Test
   public void testGetNextToken() {
