@@ -1,10 +1,10 @@
 package com.example.couseplusplus.model.comment;
 
+import com.google.firebase.database.Exclude;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
-import com.google.firebase.database.Exclude;
 
 public class Comment {
   String id;
@@ -17,12 +17,18 @@ public class Comment {
   String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
 
-
   public Comment() {
     // Default constructor required for Firebase
   }
 
-  public Comment(String id, String courseCode, int year, int semester, String text, int helpfulness, String postedDateTime) {
+  public Comment(
+      String id,
+      String courseCode,
+      int year,
+      int semester,
+      String text,
+      int helpfulness,
+      String postedDateTime) {
     this.id = id;
     this.courseCode = courseCode;
     this.year = year;
@@ -69,6 +75,7 @@ public class Comment {
   public String enrolKey() {
     return String.format("%sS%s", year, semester);
   }
+
   public String date() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
 
