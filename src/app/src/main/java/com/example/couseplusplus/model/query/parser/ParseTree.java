@@ -13,4 +13,9 @@ public class ParseTree {
   public Node root() {
     return root;
   }
+
+  @Override
+  public String toString() {
+    return String.format("ParseTree{root=%s}", root);
+  }
 }
