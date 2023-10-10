@@ -179,6 +179,7 @@ Here is a partial (short) example for the subsection `Data Structures`:*
       * *We don't need to access the item by index for xxx feature because...*
       * For the (part), the data ... (characteristics) ...
 
+,<!-- addtach relative path to the local file -->
 1. *AVLTree*
    * *Objective: used for storing various keys of comments for [Search], [Search-Filter] feature and caching comments fetched from Firebase Realtime Database (hereafter FirebaseDB).*
    * *Code Locations: defined in [AVLTree](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/avl/AVLTree.java) and [Node](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/avl/Node.java); processed using [CommentFindingStrategy#find](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentFindingStrategy.java#L12) and the implementation classes. 
@@ -399,7 +400,7 @@ Surprised feature is not implemented
 
 *Here is an example:*
 
-1. Tests for Search
+1. Tests for Searc
    - Code: [TokenizerTest Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java) for the [Tokenizer Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43)
    - *Number of test cases: ...*
    - *Code coverage: ...*
