@@ -194,20 +194,20 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 
 3. *DAO Pattern*
    * *Objective: used for segregating a concern of data layer out of domain and service layer.*
-   * *Code Locations: defined in [CommentRepository](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/comment/CommentRepository.java) and [CommentDatasource](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentDatasource.java); processed using [CommentService](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/service/comment/CommentService.java). In addition, all the other repository interfaces defined at `domain` layer and the corresponding implementations and service classes.
+   * *Code Locations: defined in [CommentRepository](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/comment/CommentRepository.java) and [CommentDatasource](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentDatasource.java); processed using [CommentService](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/service/comment/CommentService.java). In addition, all the other repository interfaces defined at `domain` layer and the corresponding implementations and service classes.*
    * *Reasons:*
       * It encapsulates nitty gritty details of [State](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/model/query/tokenizer/state/State.java) class, so that the responsibility of other classes no longer is polluted by them.
 
 4. *Strategy Pattern*
    * *Objective: used for addomg extensibility of the branching at the comment finder.* 
-   * *Code Locations: defined in [CommentFindingStrategy](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentFindingStrategy.java) and the implementations; processed using [CommentFinder#processComparison](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentFinder.java#L36).
+   * *Code Locations: defined in [CommentFindingStrategy](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentFindingStrategy.java) and the implementations; processed using [CommentFinder#processComparison](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/data/comment/CommentFinder.java#L36).*
    * *Reasons:*
       * It encapsulates nitty gritty details of each comment finding logic per token type.
       * It gives us a modularity to add/remove/update any of the logics without touching anything on CommentFinder. This minimises the area of change and the associated risk to a bug.
 
 5. *Strategy Pattern (leaning towards Inversion of Control)*
-   * *Objective: used for injecting class dependencies from outside.* 
-   * *Code Locations: defined in [IoCContainer](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/IoCContainer.java); processed using each Activity classes defined at `view` package.
+   * *Objective: used for injecting class dependencies from outside.*
+   * *Code Locations: defined in [IoCContainer](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/IoCContainer.java); processed using each Activity classes defined at `view` package.*
    * *Reasons:*
       * It encapsulates how to instantiate a dependency object.
       * It allows us to modify a behaviour of our app by only changing the object to inject.
