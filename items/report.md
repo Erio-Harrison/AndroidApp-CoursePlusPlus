@@ -205,6 +205,12 @@ Here is a partial (short) example for the subsection `Data Structures`:*
       * It encapsulates nitty gritty details of each comment finding logic per token type.
       * It gives us a modularity to add/remove/update any of the logics without touching anything on CommentFinder. This minimises the area of change and the associated risk to a bug.
 
+5. *Strategy Pattern (leaning towards Inversion of Control)*
+   * *Objective: used for injecting class dependencies from outside.* 
+   * *Code Locations: defined in [IoCContainer](https://gitlab.cecs.anu.edu.au/u7582380/ga-23s2/-/blob/main/src/app/src/main/java/com/example/couseplusplus/IoCContainer.java); processed using each Activity classes defined at `view` package.
+   * *Reasons:*
+      * It encapsulates how to instantiate a dependency object.
+      * It allows us to modify a behaviour of our app by only changing the object to inject.
 
 <hr>
 
@@ -215,26 +221,30 @@ Here is a partial (short) example for the subsection `Data Structures`:*
 *If there are several grammars, list them all under this section and what they relate to.*
 
 Production Rules:
-    <query> ::= <expression> | <expression> <condition> <query>
-    <expression> ::= helpful <operator> <number> | enrol <operator> <enroldate> | posted <operator> <date> | text <fuzzy> <string> | ( <query> )
-    <condition> ::= & | |
-    <operator> ::= < | > | = | <= | >=
-    <fuzzy> ::= ~
-    <number> ::= <digit\0> <number> | <digit> | -<digit\0> <number> | -<digit>
-    <digit> ::= [0-9]
-    <string> ::= "<characters>"
-    <characters> ::= <character> <characters> | <character>
-    <character> ::= // anything except "
-    <date> ::= <digit><digit><digit><digit>-<digit><digit>-<digit><digit>
-    <enroldate> ::= <digit><digit><digit><digit><semester>
-    <semester> ::= S1 | S2
+```
+<query> ::= <expression> | <expression> <condition> <query>
+<expression> ::= helpful <operator> <number> | enrol <operator> <enroldate> | posted <operator> <date> | text <fuzzy> <string> | ( <query> )
+<condition> ::= & | \|
+<operator> ::= < | > | = | <= | >=
+<fuzzy> ::= ~
+<number> ::= <digit\0> <numbercont> | <digit>
+<numbercont> ::= <digit> <numbercont> | <digit>
+<digit\0> ::= [1-9]
+<digit> ::= [0-9]
+<string> ::= "<characters>"
+<characters> ::= <character> <characters> | <character>
+<character> ::= <a set of all characters - ">
+<date> ::= <digit><digit><digit><digit>-<digit><digit>-<digit><digit>
+<enroldate> ::= <digit><digit><digit><digit><semester>
+<semester> ::= S1 | S2
+```
 
 ### <u>Tokenizers and Parsers</u>
 
 *[Where do you use tokenisers and parsers? How are they built? What are the advantages of the designs?]*
 - [Tokenizer]() and [Parser]() are used at [QueryParseTreeCreator#create]() to parse [Query]() to find the matching [Comment]()s later.
-- Tokenizer is build using [StateMachine]() based on the state diagram below. The main advantage is its modularity - we can add/remove/update any states by only changing the very state class without polluting the actual tokenizer class.
-![state-diagram](media/state-diagram.png)
+- Tokenizer is built using [StateMachine]() based on the state diagram below. The main advantage is its modularity - we can add/remove/update any states by only changing the very state class without polluting the actual tokenizer class.
+![state-diagram](media/tokenizer-state-diagram.png)
 - We also added the graceful variants [GracefulTokenizer](), [GracefulParser]() to allow the user type an incomplete query to still search the matching comments at its best effort.
 
 <hr>
@@ -316,6 +326,7 @@ Suprised feature is not implemented
 
 *[What features have you tested? What is your testing coverage?]*
 *Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
+<!-- TODO ask if attaching a testing report suffices -->
 
 *Here is an example:*
 
@@ -347,9 +358,10 @@ Suprised feature is not implemented
 
 
 - *[Team Meeting 1](meeting1.md)*
-- ...
-- ...
-- [Team Meeting 4](link_to_md_file.md)
+- *[Team Meeting 2](meeting2.md)*
+- *[Team Meeting 3](meeting3.md)*
+- *[Team Meeting 4](meeting4.md)*
+- *[Team Meeting 5](meeting5.md)*
 - ... (Add any descriptions if needed) ...
 
 <hr>
@@ -362,3 +374,5 @@ This shall include an agreed procedure for situations including (but not limited
 - e.g., if a member fails to meet the initial plan and/or deadlines
 - e.g., if your group has issues, how will your group reach consensus or solve the problem?
 - e.g., if a member gets sick, what is the solution? Alternatively, what is your plan to mitigate the impact of unforeseen incidents for this 6-to-8-week project? 
+
+- see our [confliect-resolution-protocol.md](confliect-resolution-protocol.md)
