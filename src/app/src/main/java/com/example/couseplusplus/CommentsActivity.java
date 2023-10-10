@@ -5,6 +5,8 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,7 @@ public class CommentsActivity extends AppCompatActivity {
   RecyclerView commentRecycleView;
   CommentAdapter commentAdapter;
   List<Comment> commentList = new ArrayList<>();
+  Button moveToCommentAct;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class CommentsActivity extends AppCompatActivity {
     Intent intent = getIntent();
     String courseCodeInfo = intent.getStringExtra("courseCode");
     String courseNameInfo = intent.getStringExtra("courseName");
+    moveToCommentAct = findViewById(R.id.moveToCommentAct);
 
     // TODO: Make helpfulness clickable
     // TODO: Make a Comment class for Firebase
@@ -67,6 +71,17 @@ public class CommentsActivity extends AppCompatActivity {
           @Override
           public void onCancelled(@NonNull DatabaseError error) { // Failed to read value
             Log.w(TAG, "Failed to read value.", error.toException());
+          }
+        });
+
+    moveToCommentAct.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Intent intent1 = new Intent(getApplicationContext(), AddComment.class);
+            intent1.putExtra("courseCode", courseCodeInfo);
+            startActivity(intent1);
+            finish();
           }
         });
 

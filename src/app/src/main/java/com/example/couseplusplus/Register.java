@@ -14,6 +14,12 @@ import com.example.couseplusplus.service.user.UserService;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.Objects;
 
+/**
+ * Author: Min su Park
+ *
+ * <p>Register adds users into the Authentification database in firebase. Once registered, user will
+ * be taken to MainActivity
+ */
 public class Register extends AppCompatActivity {
   TextInputEditText editTextEmail, editTextPassword;
   Button buttonRegister;
@@ -84,7 +90,6 @@ public class Register extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                   } else {
-                    // If sign in fails, display a message to the user.
                     Toast.makeText(Register.this, "Account creation failed.", Toast.LENGTH_SHORT)
                         .show();
                   }

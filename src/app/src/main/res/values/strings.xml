@@ -6,4 +6,13 @@
     <string name="register">Register</string>
     <string name="click_to_login">Click to Login</string>
     <string name="log_out">Log out</string>
+    <string name="please_write_a_comment_for_this_course">Please write a comment for this course</string>
+    <string name="share_your_throughts">Share your throughts!</string>
+    <string name="share_your_thoughts">Share your thoughts</string>
+    <string name="add_comment">Add Comment</string>
+    <string name="course_code">Course Code</string>
+    <string name="course_name">Course Name</string>
+    <string name="post_comment">Post Comment</string>
+    <string name="select_a_semester">Select a semester</string>
+    <string name="select_a_year">Select a Year</string>
 </resources>
