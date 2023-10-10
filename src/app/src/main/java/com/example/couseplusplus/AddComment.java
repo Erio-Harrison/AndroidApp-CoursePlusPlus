@@ -3,8 +3,11 @@ package com.example.couseplusplus;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
@@ -20,31 +23,56 @@ import java.util.Map;
  * <p>AddComment is used as the main Comment-adding activity. This class supersedes CommentsActivity
  */
 public class AddComment extends AppCompatActivity {
-  public DatabaseReference mDatabase;
+    public TextView title;
+    public DatabaseReference mDatabase;
   public EditText commentSpace;
   public Button postButton;
   String courseCodeInfo;
+  public Spinner selectYear;
+  public Spinner selectSemester;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_comment);
+    title = findViewById(R.id.addCommentTitle);
     mDatabase = FirebaseDatabase.getInstance().getReference();
     commentSpace = findViewById(R.id.comment_space);
     postButton = findViewById(R.id.post_comment);
+    selectYear = findViewById(R.id.selectYear);
+    selectSemester = findViewById(R.id.selectSemester);
+      Intent intent = getIntent();
+      courseCodeInfo = intent.getStringExtra("courseCode");
 
-    postButton.setOnClickListener(
+    title.setText("Please write a comment for the course: " + courseCodeInfo);
+
+    String[] years = {"2015", "2016", "2017", "2017","2018", "2019", "2020", "2021", "2022", "2023"};
+    String[] semesters = {"Semester 1", "Semester 2"};
+
+    ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
+    yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+    ArrayAdapter<String> semesterAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, semesters);
+    semesterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+    Spinner yearsSpinner = findViewById(R.id.selectYear);
+    yearsSpinner.setAdapter(yearAdapter);
+
+    Spinner semesterSpinner = findViewById(R.id.selectSemester);
+    semesterSpinner.setAdapter(semesterAdapter);
+
+
+
+     postButton.setOnClickListener(
         view -> {
           LocalDateTime currentTime = LocalDateTime.now();
           String userComment = commentSpace.getText().toString();
-          Intent intent = getIntent();
-          courseCodeInfo = intent.getStringExtra("courseCode");
           String postedDateTime =
               currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS"));
-          int year = Integer.parseInt(postedDateTime.substring(0, 4));
-          int month = Integer.parseInt(postedDateTime.substring(5, 7));
+          int year = Integer.parseInt(yearsSpinner.getSelectedItem().toString());
           int helpfulness = 0;
-          int semester = (month > 7) ? 2 : 1;
+          int semester = selectSemester.getSelectedItem().equals("Semester 1") ? 1 : 2;
+
 
           //            Comment newComment = new Comment(
           //                    null,
@@ -61,6 +89,8 @@ public class AddComment extends AppCompatActivity {
           newComment.put("year", year);
           newComment.put("helpfulness", helpfulness);
           newComment.put("postedDateTime", postedDateTime);
+
+          Log.d("FINAL STRING", newComment.toString());
 
           mDatabase
               .child("comment")

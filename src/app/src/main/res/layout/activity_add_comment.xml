@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
@@ -10,27 +11,89 @@
 
 
     <TextView
+        android:id="@+id/addCommentTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:fontFamily="sans-serif-condensed"
-        android:gravity="center"
         android:text="@string/please_write_a_comment_for_this_course"
         android:textSize="25sp"
         android:textStyle="bold"
-
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <EditText
         android:id="@+id/comment_space"
         android:layout_width="350dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:hint="@string/share_your_thoughts"
+        app:layout_constraintTop_toBottomOf="@+id/addCommentTitle"
         android:gravity="center"
         />
+
+    <TextView
+        android:id="@+id/selectYearTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/select_a_year"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/comment_space"
+        app:layout_constraintBottom_toTopOf="@+id/selectYear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
+
+
+    <Spinner
+        android:id="@+id/selectYear"
+        android:layout_width="150dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/selectYearTitle"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/selectSemTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/select_a_semester"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/comment_space"
+        app:layout_constraintBottom_toTopOf="@+id/selectSemester"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <Spinner
+        android:id="@+id/selectSemester"
+        android:layout_width="150dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/selectSemTitle"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
 
     <Button
         android:id="@+id/post_comment"
@@ -38,8 +101,11 @@
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="Post Comment"
+        app:layout_constraintTop_toBottomOf="@id/selectSemester"
+        app:layout_constraintStart_toStartOf="@id/selectYear"
+        app:layout_constraintEnd_toEndOf="@id/selectSemester"
+        android:text="@string/post_comment"
         />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
