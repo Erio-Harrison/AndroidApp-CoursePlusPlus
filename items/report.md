@@ -64,8 +64,11 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 2. **u7565753, Min Su Park**  I have 25% contribution, as follows: <br>
   - **Code Contribution in the final App**
+    - Authentification via Firebase (`Login`, `Register`)
+    - Addition of comments to Firebase Database (`AddComment`)
   - **Code and App Design** 
   - **Others**: (only if significant and significantly different from an "average contribution") 
+    - UI adjustments of each activity
 
 3. **u7618313, Porntipa Poonpolsub**  I have 25% contribution, as follows: <br>
   - **Code Contribution in the final App**
@@ -92,32 +95,38 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *[What is your application, what does it do? Include photos or diagrams if necessary]*
 
-Course++ is a course review application specifically targetting both ANU students and lecturers. It allows them to see the reviews of a particular course, which the fellow students posted before. The search/filter functionality enables them to narrow down the reviews in various factors, including the helpfulness, the posted date, the enrolment date and the text. The app gives them the opportunity to learn how each course is really like, which they could not see in Program and Courses or SELT.
+Course++ is a course review application specifically targeting both ANU students and lecturers. It allows them to see the reviews of a particular course, which the fellow students posted before. The search/filter functionality enables them to narrow down the reviews in various factors, including the helpfulness, the posted date, the enrolment date and the text. The app gives them the opportunity to learn how each course is really like, which they could not see in Program and Courses or SELT.
 
 ### Application Use Cases and or Examples
 
 *[Provide use cases and examples of people using your application. Who are the target users of your application? How do the users use your application?]*
+
+- Prior to enrolment to a semester, students can see how the course was from the *students'* view to make an informed decision for their semester.
+- ANU's Academic committee can use the feedback from this app as a *reference* in future design of curriculum
+- ANU student organizations can extract information that show repeated patterns. For instance, COMP courses using a platform that students find quite awkward across the board. In such a case, student organisation have more weight in their argument to ANU.
 
 #### Target Users
 - *ANU students*
    * *Users can use it to grasp the feel of the course.*
    * *Users can learn how much they should prepare for the course prior the enrolment.*
    * *Users can estimate the amount of work necessary for the course beforehand.*
+   * *Users can know the teaching style of the lecturer and if they are good at teaching*
 
 - *ANU lecturer*
    * *Users can find the brutally honest views of the course that they may not find in SELT as a possible improvement*
+   * *Users can use Course++ as added reference material to talk with course student representatives*
 
 #### Use Cases
 *List all the use cases in text descriptions or create use case diagrams. Please refer to https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ for use case diagram.*
 
-*Alice is an ANU student considering to take OCMP6442 but not sure what it's like from a student's perspective*
+*Alice is an ANU student considering to take COMP6442 but not sure what it's like from a student's perspective*
 1. *Alice noticed COMP6442 is a mandatory course for her degree*
 2. *Alice sees the Program and Courses page, but felt too generic*
 3. *Alice opens Course++ and types "COMP6442" in the search bar*
 4. *Alice sees a list of comments*
 5. *Alice sorted them by the posted date of a comment to see the latest info*
 6. *Alice searches the comments that have the helpfulness score of 5 or more to pinpoint the valuable ones*
-7. *Alice learnes from one of the comments that it requires to code an Android app and decided to learn it beforehand*
+7. *Alice learns from one of the comments that it requires to code an Android app and decided to learn it beforehand*
 8. *Alice presses the helpfulness icon on the comment*
 9. *Alice closes Course++*
 
@@ -361,7 +370,7 @@ Feature Category: Firebase Integration <br>
 - If implemented, explain how your solution addresses the task (any detail requirements will be released with the surprised feature specifications).
 - State that "Suprised feature is not implemented" otherwise.
 
-Suprised feature is not implemented
+Surprised feature is not implemented
 
 <br> <hr>
 
@@ -415,7 +424,7 @@ Suprised feature is not implemented
 
 ### Meetings Records
 * Link to the minutes of your meetings like above. There must be at least 4 team meetings.
-  (each commited within 2 days aftre the meeting)
+  (each committed within 2 days after the meeting)
 * Your meetings should also have a reasonable date spanning across Week 6 to 11.*
 
 
