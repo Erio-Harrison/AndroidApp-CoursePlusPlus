@@ -23,7 +23,7 @@ public class CourseDatasource implements CourseRepository {
   private static CourseDatasource instance;
 
   public static CourseDatasource getInstance() {
-    if (Objects.isNull(instance)) return new CourseDatasource();
+    if (Objects.isNull(instance)) instance = new CourseDatasource();
     return instance;
   }
 

@@ -24,7 +24,7 @@ public class CommentDatasource implements CommentRepository {
   private static CommentDatasource instance;
 
   public static CommentDatasource getInstance() {
-    if (Objects.isNull(instance)) return new CommentDatasource();
+    if (Objects.isNull(instance)) instance = new CommentDatasource();
     return instance;
   }
 

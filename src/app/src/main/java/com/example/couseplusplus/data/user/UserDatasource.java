@@ -12,7 +12,7 @@ public class UserDatasource implements UserRepository {
   private static UserDatasource instance;
 
   public static UserDatasource getInstance() {
-    if (Objects.isNull(instance)) return new UserDatasource();
+    if (Objects.isNull(instance)) instance = new UserDatasource();
     return instance;
   }
 
