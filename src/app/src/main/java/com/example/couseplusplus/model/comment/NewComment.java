@@ -3,7 +3,12 @@ package com.example.couseplusplus.model.comment;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+// FIXME consolidate with Comment in the future.
+//    the sole reason of this class is to avoid merge conflict
+//    with Comment class.
 /**
+ * Represents a comment of a course.
+ *
  * @author Yuki Misumi (u7582380)
  */
 public class NewComment {
