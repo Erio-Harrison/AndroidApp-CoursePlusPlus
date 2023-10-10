@@ -19,8 +19,8 @@ public class SimulationScheduler implements Subject {
   }
 
   public void start() {
-    // TODO we could periodically call each scheduled action int T time or any other factors you can
-    //       think of
+    // TODO we could periodically call each scheduled action in schedules in every T time or any
+    //     other factors you can think of
   }
 
   @Override
