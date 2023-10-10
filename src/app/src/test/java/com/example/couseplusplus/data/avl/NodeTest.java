@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class NodeTest {
   @Test
   public void testInsert() {

@@ -30,6 +30,8 @@ public enum TokenType {
   Or,
   // end
   End,
+  // eror
+  Error,
   ;
 
   public boolean isComparable() {

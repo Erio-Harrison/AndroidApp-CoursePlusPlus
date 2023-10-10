@@ -1,9 +1,14 @@
 package com.example.couseplusplus.model.course;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public interface CourseRepository {
-  List<Course> getAll();
+  void listenChange(Consumer<List<NewCourse>> listener);
 
-  List<Course> findAll(String hint);
+  List<NewCourse> getAll();
+
+  List<NewCourse> findByCourseCode(String hint);
+
+  List<NewCourse> findByCourseName(String hint);
 }

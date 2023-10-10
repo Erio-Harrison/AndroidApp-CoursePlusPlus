@@ -19,4 +19,9 @@ public class Token {
   public Object value() {
     return value;
   }
+
+  @Override
+  public String toString() {
+    return String.format("Token{tokenType=%s, value=%s}", tokenType, value);
+  }
 }
