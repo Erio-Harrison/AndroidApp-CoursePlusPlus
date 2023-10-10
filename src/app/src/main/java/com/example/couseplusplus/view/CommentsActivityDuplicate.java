@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.couseplusplus.AddComment;
 import com.example.couseplusplus.CommentAdapter;
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
@@ -94,6 +95,14 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
           commentAdapter = new CommentAdapter(commentList);
           commentRecycleView.setAdapter(commentAdapter);
         });
+
+    findViewById(R.id.moveToCommentAct)
+        .setOnClickListener(
+            view -> {
+              startActivity(
+                  new Intent(getApplicationContext(), AddComment.class)
+                      .putExtra("courseCode", courseCodeInfo));
+            });
   }
 
   // FIXME consolidate NewComment and Comment later
