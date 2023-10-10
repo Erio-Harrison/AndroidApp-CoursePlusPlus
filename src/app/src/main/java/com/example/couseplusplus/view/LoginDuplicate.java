@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,10 +15,9 @@ import com.example.couseplusplus.R;
 import com.example.couseplusplus.Register;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
-import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginDuplicate extends AppCompatActivity {
-  TextInputEditText editTextEmail, editTextPassword;
+  EditText editTextEmail, editTextPassword;
   Button buttonLogin;
   ProgressBar progressBar;
   TextView textView;
