@@ -4,8 +4,6 @@ package com.example.couseplusplus.data.comment;
  * @author Yuki Misumi (u7582380)
  */
 public class FirebaseComment {
-  String id;
-  String courseCode;
   int year;
   int semester;
   String text;
@@ -13,22 +11,6 @@ public class FirebaseComment {
   String postedDateTime;
 
   public FirebaseComment() {}
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getCourseCode() {
-    return courseCode;
-  }
-
-  public void setCourseCode(String courseCode) {
-    this.courseCode = courseCode;
-  }
 
   public int getYear() {
     return year;

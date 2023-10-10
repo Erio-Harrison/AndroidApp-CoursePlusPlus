@@ -46,7 +46,8 @@ public class CommentDatasource implements CommentRepository {
                 snapshot
                     .getChildren()
                     .forEach(
-                        commentSnapshot -> comments.add(CommentCreator.create(commentSnapshot)));
+                        commentSnapshot ->
+                            comments.add(CommentCreator.create(commentSnapshot, courseCode)));
                 cache = new CommentCache(comments);
                 commentFinder = new CommentFinder(cache);
                 code = courseCode;

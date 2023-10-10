@@ -9,13 +9,13 @@ import java.util.Objects;
  * @author Yuki Misumi (u7582380)
  */
 public class CommentCreator {
-  public static NewComment create(DataSnapshot snapshot) {
+  public static NewComment create(DataSnapshot snapshot, String courseCode) {
     FirebaseComment value =
         Objects.requireNonNull(
             snapshot.getValue(FirebaseComment.class), "Failed to get comment data");
     return new NewComment(
-        value.id,
-        value.courseCode,
+        String.format("%s%s", courseCode, snapshot.getKey()),
+        courseCode,
         value.year,
         value.semester,
         value.text,
