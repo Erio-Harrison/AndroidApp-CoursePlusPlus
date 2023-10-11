@@ -30,6 +30,8 @@ public interface CommentRepository {
    * @return
    */
   List<NewComment> findAll(String courseCode, ParseTree parseTree);
+
   void addHelpfulness(String courseCode, String commentId, int helpfulness);
+
   void addComment(String courseCode, Comment comment);
 }
