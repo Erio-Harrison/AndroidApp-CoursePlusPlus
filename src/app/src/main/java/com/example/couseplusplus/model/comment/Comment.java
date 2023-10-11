@@ -2,6 +2,8 @@ package com.example.couseplusplus.model.comment;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -54,6 +56,10 @@ public class Comment {
 
   public String text() {
     return text;
+  }
+
+  public List<String> words() {
+    return Arrays.asList(text.split(" "));
   }
 
   public int helpfulness() {
