@@ -1,7 +1,7 @@
 package com.example.couseplusplus.service.comment;
 
+import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.comment.CommentRepository;
-import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.model.query.QueryParseTreeCreator;
 import com.example.couseplusplus.model.query.parser.ParseTree;
@@ -24,34 +24,34 @@ public class CommentService {
     this.queryParseTreeCreator = queryParseTreeCreator;
   }
 
-  public void listenChange(String courseCode, Consumer<List<NewComment>> listener) {
+  public void listenChange(String courseCode, Consumer<List<Comment>> listener) {
     commentRepository.listenChange(courseCode, listener);
   }
 
-  public List<NewComment> getAll(String courseCode) {
+  public List<Comment> getAll(String courseCode) {
     return commentRepository.getAll(courseCode);
   }
 
-  public List<NewComment> findAll(String courseCode, Query query) {
+  public List<Comment> findAll(String courseCode, Query query) {
     ParseTree parseTree = queryParseTreeCreator.create(query);
     return commentRepository.findAll(courseCode, parseTree);
   }
 
-  public List<NewComment> sort(List<NewComment> comments, boolean ascending, SortingAspect aspect) {
-    Comparator<NewComment> comparator = getComparator(aspect);
+  public List<Comment> sort(List<Comment> comments, boolean ascending, SortingAspect aspect) {
+    Comparator<Comment> comparator = getComparator(aspect);
     return comments.stream()
         .sorted(ascending ? comparator : Collections.reverseOrder(comparator))
         .collect(Collectors.toList());
   }
 
-  Comparator<NewComment> getComparator(SortingAspect aspect) {
+  Comparator<Comment> getComparator(SortingAspect aspect) {
     switch (aspect) {
       case Helpfulness:
-        return Comparator.comparing(NewComment::helpfulness);
+        return Comparator.comparing(Comment::helpfulness);
       case EnrolDate:
-        return Comparator.comparing(NewComment::enrolKey);
+        return Comparator.comparing(Comment::enrolKey);
       case PostedDateTime:
-        return Comparator.comparing(NewComment::postedDateTime);
+        return Comparator.comparing(Comment::postedDateTime);
       default:
         throw new IllegalArgumentException(String.format("%s is not supported", aspect));
     }

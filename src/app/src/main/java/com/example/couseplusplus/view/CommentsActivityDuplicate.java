@@ -13,7 +13,7 @@ import com.example.couseplusplus.AddComment;
 import com.example.couseplusplus.CommentAdapter;
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
-import com.example.couseplusplus.model.comment.NewComment;
+import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.service.comment.CommentService;
 import com.example.couseplusplus.service.comment.SortingAspect;
@@ -24,7 +24,7 @@ import java.util.List;
 public class CommentsActivityDuplicate extends AppCompatActivity {
   RecyclerView commentRecycleView;
   CommentAdapter commentAdapter;
-  List<NewComment> commentList = new ArrayList<>();
+  List<Comment> commentList = new ArrayList<>();
   CommentService commentService = IoCContainer.commentService();
 
   @Override

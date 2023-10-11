@@ -13,7 +13,7 @@ import java.util.Objects;
  *
  * @author Yuki Misumi (u7582380)
  */
-public class NewComment {
+public class Comment {
   String id;
   String courseCode;
   int year;
@@ -22,7 +22,7 @@ public class NewComment {
   int helpfulness;
   LocalDateTime postedDateTime;
 
-  public NewComment(
+  public Comment(
       String id,
       String courseCode,
       int year,
@@ -81,7 +81,7 @@ public class NewComment {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    NewComment that = (NewComment) o;
+    Comment that = (Comment) o;
     return year == that.year
         && semester == that.semester
         && helpfulness == that.helpfulness

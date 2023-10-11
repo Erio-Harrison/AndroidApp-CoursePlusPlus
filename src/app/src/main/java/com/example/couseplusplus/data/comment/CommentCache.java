@@ -1,20 +1,20 @@
 package com.example.couseplusplus.data.comment;
 
 import com.example.couseplusplus.data.avl.AVLTree;
-import com.example.couseplusplus.model.comment.NewComment;
+import com.example.couseplusplus.model.comment.Comment;
 import java.util.List;
 
 /**
  * @author Yuki Misumi (u7582380)
  */
 public class CommentCache {
-  List<NewComment> comments;
-  AVLTree<Integer, NewComment> helpfulTree;
-  AVLTree<String, NewComment> enrolTree;
-  AVLTree<String, NewComment> postedTree;
-  AVLTree<String, NewComment> textTree;
+  List<Comment> comments;
+  AVLTree<Integer, Comment> helpfulTree;
+  AVLTree<String, Comment> enrolTree;
+  AVLTree<String, Comment> postedTree;
+  AVLTree<String, Comment> textTree;
 
-  public CommentCache(List<NewComment> comments) {
+  public CommentCache(List<Comment> comments) {
     this.comments = comments;
     helpfulTree = new AVLTree<>();
     enrolTree = new AVLTree<>();
@@ -30,23 +30,23 @@ public class CommentCache {
         });
   }
 
-  public List<NewComment> comments() {
+  public List<Comment> comments() {
     return comments;
   }
 
-  public AVLTree<Integer, NewComment> helpfulTree() {
+  public AVLTree<Integer, Comment> helpfulTree() {
     return helpfulTree;
   }
 
-  public AVLTree<String, NewComment> enrolTree() {
+  public AVLTree<String, Comment> enrolTree() {
     return enrolTree;
   }
 
-  public AVLTree<String, NewComment> postedTree() {
+  public AVLTree<String, Comment> postedTree() {
     return postedTree;
   }
 
-  public AVLTree<String, NewComment> textTree() {
+  public AVLTree<String, Comment> textTree() {
     return textTree;
   }
 }

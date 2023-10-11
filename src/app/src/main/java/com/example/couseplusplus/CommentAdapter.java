@@ -6,13 +6,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.couseplusplus.model.comment.NewComment;
+import com.example.couseplusplus.model.comment.Comment;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
-  private List<NewComment> commentList;
+  private List<Comment> commentList;
 
-  public CommentAdapter(List<NewComment> commentList) {
+  public CommentAdapter(List<Comment> commentList) {
     this.commentList = commentList;
   }
 
@@ -27,7 +27,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
   @Override
   public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-    NewComment commentItem = commentList.get(position);
+    Comment commentItem = commentList.get(position);
     holder.commentCodeTextView.setText(commentItem.enrolKey());
     holder.commentNameTextView.setText(commentItem.text());
     holder.commentHelpfulnessTextView.setText(Integer.toString(commentItem.helpfulness()));
