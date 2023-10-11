@@ -2,9 +2,7 @@ package com.example.couseplusplus.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +15,7 @@ import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.service.comment.CommentService;
 import com.example.couseplusplus.service.comment.SortingAspect;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,44 +42,34 @@ public class CommentsActivity extends AppCompatActivity {
     commentRecycleView = findViewById(R.id.comment_rv);
     commentRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-    Button sortButton = findViewById(R.id.sort_button);
-    RadioButton helpfulRadio = findViewById(R.id.helpful_radio_button);
-    RadioButton enrolRadio = findViewById(R.id.enrol_radio_button);
-    RadioButton postedRadio = findViewById(R.id.posted_radio_button);
+    FloatingActionButton sortButton = findViewById(R.id.sort_comment_button);
     sortButton.setOnClickListener(
         view -> {
-          if (sortButton.getText().toString().contains("Down")) sortButton.setText("Sort Up");
-          else sortButton.setText("Sort Down");
-          sortBy(sortButton, helpfulRadio, enrolRadio);
-        });
-    helpfulRadio.setOnCheckedChangeListener(
-        (view, isChecked) -> {
-          if (!isChecked) return;
-          sortBy(SortingAspect.Helpfulness, sortButton);
-        });
-    enrolRadio.setOnCheckedChangeListener(
-        (view, isChecked) -> {
-          if (!isChecked) return;
-          sortBy(SortingAspect.EnrolDate, sortButton);
-        });
-    postedRadio.setOnCheckedChangeListener(
-        (view, isChecked) -> {
-          if (!isChecked) return;
-          sortBy(SortingAspect.PostedDateTime, sortButton);
+          sortBy(SortingAspect.Helpfulness);
         });
 
-    EditText searchInput = findViewById(R.id.comment_search_input);
-    Button searchButton = findViewById(R.id.comment_search_button);
-    searchButton.setOnClickListener(
-        view -> {
-          String searchInputString = searchInput.getText().toString();
-          Query query = new Query(searchInputString);
-          commentList =
-              query.isBlank()
-                  ? commentService.getAll(courseCodeInfo)
-                  : commentService.findAll(courseCodeInfo, query);
-          commentAdapter = new CommentAdapter(commentList);
-          commentRecycleView.setAdapter(commentAdapter);
+    FloatingActionButton filterButton = findViewById(R.id.filter_comment_button);
+
+    SearchView searchBar = findViewById(R.id.search_bar);
+    searchBar.setOnQueryTextListener(
+        new SearchView.OnQueryTextListener() {
+          @Override
+          public boolean onQueryTextSubmit(String s) {
+            Query query = new Query(s);
+            commentList = commentService.findAll(courseCodeInfo, query);
+            commentAdapter = new CommentAdapter(commentList);
+            commentRecycleView.setAdapter(commentAdapter);
+            return true;
+          }
+
+          @Override
+          public boolean onQueryTextChange(String s) {
+            if (!s.isBlank()) return false;
+            commentList = commentService.getAll(courseCodeInfo);
+            commentAdapter = new CommentAdapter(commentList);
+            commentRecycleView.setAdapter(commentAdapter);
+            return true;
+          }
         });
 
     commentService.listenChange(
@@ -91,7 +80,7 @@ public class CommentsActivity extends AppCompatActivity {
           commentRecycleView.setAdapter(commentAdapter);
         });
 
-    findViewById(R.id.moveToCommentAct)
+    findViewById(R.id.add_comment_button)
         .setOnClickListener(
             view -> {
               startActivity(
@@ -100,15 +89,8 @@ public class CommentsActivity extends AppCompatActivity {
             });
   }
 
-  void sortBy(Button sortButton, RadioButton helpfulRadio, RadioButton enrolRadio) {
-    if (helpfulRadio.isChecked()) sortBy(SortingAspect.Helpfulness, sortButton);
-    else if (enrolRadio.isChecked()) sortBy(SortingAspect.EnrolDate, sortButton);
-    else sortBy(SortingAspect.PostedDateTime, sortButton);
-  }
-
-  void sortBy(SortingAspect aspect, Button sortButton) {
-    commentList =
-        commentService.sort(commentList, sortButton.getText().toString().contains("Up"), aspect);
+  void sortBy(SortingAspect aspect) {
+    commentList = commentService.sort(commentList, true, aspect);
     commentAdapter = new CommentAdapter(commentList);
     commentRecycleView.setAdapter(commentAdapter);
   }
