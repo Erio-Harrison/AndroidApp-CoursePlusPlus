@@ -1,25 +1,26 @@
 package com.example.couseplusplus.model.comment;
 
-import com.google.firebase.database.Exclude;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * Represents a comment of a course.
+ *
+ * @author Yuki Misumi (u7582380)
+ */
 public class Comment {
+  public static final String WordSplitRegex = "[ .?!]";
   String id;
   String courseCode;
   int year;
   int semester;
   String text;
   int helpfulness;
-  String postedDateTime;
-  String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
-  DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
-
-  public Comment() {
-    // Default constructor required for Firebase
-  }
+  LocalDateTime postedDateTime;
 
   public Comment(
       String id,
@@ -28,7 +29,7 @@ public class Comment {
       int semester,
       String text,
       int helpfulness,
-      String postedDateTime) {
+      LocalDateTime postedDateTime) {
     this.id = id;
     this.courseCode = courseCode;
     this.year = year;
@@ -38,62 +39,65 @@ public class Comment {
     this.postedDateTime = postedDateTime;
   }
 
-  public String getId() {
+  public String id() {
     return id;
   }
 
-  public String getCourseCode() {
+  public String courseCode() {
     return courseCode;
   }
 
-  public int getYear() {
+  public int year() {
     return year;
   }
 
-  public int getSemester() {
+  public int semester() {
     return semester;
   }
 
-  public String getText() {
+  public String text() {
     return text;
   }
 
-  public int getHelpfulness() {
+  public List<String> words() {
+    if (text.isBlank()) return List.of();
+    return Arrays.asList(text.split(WordSplitRegex));
+  }
+
+  public int helpfulness() {
     return helpfulness;
   }
 
-  public LocalDateTime getPostedDateTime() {
-    return LocalDateTime.parse(postedDateTime, formatter);
-  }
-
-  // Exclude the 'id' field from Firebase serialization
-  @Exclude
-  public void setId(String id) {
-    this.id = id;
+  public LocalDateTime postedDateTime() {
+    return postedDateTime;
   }
 
   public String enrolKey() {
     return String.format("%sS%s", year, semester);
   }
 
-  public String date() {
+  public String formattedDateString() {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
 
-    // Format the LocalDateTime instance to a String
-    String formattedString = getPostedDateTime().format(formatter);
-    return formattedString;
+    return postedDateTime.format(formatter);
   }
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Comment comment = (Comment) o;
-    return Objects.equals(id, comment.id);
+    Comment that = (Comment) o;
+    return year == that.year
+        && semester == that.semester
+        && helpfulness == that.helpfulness
+        && Objects.equals(id, that.id)
+        && Objects.equals(courseCode, that.courseCode)
+        && Objects.equals(text, that.text)
+        && Objects.equals(postedDateTime, that.postedDateTime);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(id, courseCode, year, semester, text, helpfulness, postedDateTime);
   }
 }

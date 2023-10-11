@@ -29,9 +29,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
   public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     Comment commentItem = commentList.get(position);
     holder.commentCodeTextView.setText(commentItem.enrolKey());
-    holder.commentNameTextView.setText(commentItem.getText());
-    holder.commentHelpfulnessTextView.setText(Integer.toString(commentItem.getHelpfulness()));
-    holder.commentDateTextView.setText(commentItem.date());
+    holder.commentNameTextView.setText(commentItem.text());
+    holder.commentHelpfulnessTextView.setText(Integer.toString(commentItem.helpfulness()));
+    holder.commentDateTextView.setText(commentItem.formattedDateString());
   }
 
   @Override

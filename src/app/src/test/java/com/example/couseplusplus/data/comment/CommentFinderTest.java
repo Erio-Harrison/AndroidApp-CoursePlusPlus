@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.query.Query;
+import com.example.couseplusplus.model.query.QueryParseTreeCreator;
 import com.example.couseplusplus.model.query.parser.ParseTree;
 import com.example.couseplusplus.model.query.parser.Parser;
 import com.example.couseplusplus.model.query.tokenizer.Tokenizer;
@@ -11,6 +12,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class CommentFinderTest {
   @Test
   public void walks() {
@@ -55,26 +59,26 @@ public class CommentFinderTest {
     List<Comment> result4 = uut.walk(parseTree4);
     assertEquals(5, result4.size());
 
-    ParseTree parseTree5 = parse("helpful > 10 & text ~ \"hell\"");
+    ParseTree parseTree5 = parse("helpful > 10 & text ~ \"hello\"");
     List<Comment> result5 = uut.walk(parseTree5);
     assertEquals(2, result5.size());
 
-    ParseTree parseTree6 = parse("helpful > 10 | text ~ \"hell\"");
+    ParseTree parseTree6 = parse("helpful > 10 | text ~ \"hello\"");
     List<Comment> result6 = uut.walk(parseTree6);
     assertEquals(6, result6.size());
 
-    ParseTree parseTree7 = parse("enrol > 2023S1 & helpful > 10 & text ~ \"hell\"");
+    ParseTree parseTree7 = parse("enrol > 2023S1 & helpful > 10 & text ~ \"hello\"");
     List<Comment> result7 = uut.walk(parseTree7);
     assertEquals(1, result7.size());
 
-    ParseTree parseTree8 = parse("enrol > 2023S1 | (helpful > 10 & text ~ \"hell\")");
+    ParseTree parseTree8 = parse("enrol > 2023S1 | (helpful > 10 & text ~ \"hello\")");
     List<Comment> result8 = uut.walk(parseTree8);
     assertEquals(3, result8.size());
   }
 
   ParseTree parse(String queryString) {
-    Tokenizer tokenizer = new Tokenizer(new Query(queryString));
-    Parser uut = new Parser(tokenizer);
-    return uut.parse();
+    QueryParseTreeCreator queryParseTreeCreator =
+        new QueryParseTreeCreator(Tokenizer::new, Parser::new);
+    return queryParseTreeCreator.create(new Query(queryString));
   }
 }
