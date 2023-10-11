@@ -33,5 +33,5 @@ public interface CommentRepository {
 
   void addHelpfulness(String courseCode, String commentId, int helpfulness);
 
-  void addComment(String courseCode, Comment comment);
+  void addComment(String courseCode, NewComment comment);
 }

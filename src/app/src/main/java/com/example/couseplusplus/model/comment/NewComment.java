@@ -1,6 +1,8 @@
 package com.example.couseplusplus.model.comment;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Objects;
 
 // FIXME consolidate with Comment in the future.
@@ -67,6 +69,12 @@ public class NewComment {
 
   public String enrolKey() {
     return String.format("%sS%s", year, semester);
+  }
+
+  public String formattedDateString() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
+
+    return postedDateTime.format(formatter);
   }
 
   @Override

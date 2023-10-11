@@ -4,7 +4,6 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.util.Log;
 import androidx.annotation.NonNull;
-import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.comment.CommentRepository;
 import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.parser.ParseTree;
@@ -80,7 +79,7 @@ public class CommentDatasource implements CommentRepository {
   public void addHelpfulness(String courseCode, String commentId, int helpfulness) {}
 
   @Override
-  public void addComment(String courseCode, Comment comment) {}
+  public void addComment(String courseCode, NewComment comment) {}
 
   boolean isNotReady() {
     return Objects.isNull(cache);

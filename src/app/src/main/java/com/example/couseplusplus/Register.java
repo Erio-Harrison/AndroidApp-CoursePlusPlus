@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
+import com.example.couseplusplus.view.LoginDuplicate;
+import com.example.couseplusplus.view.MainActivityDuplicate;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.Objects;
 
@@ -32,7 +34,7 @@ public class Register extends AppCompatActivity {
     super.onStart();
     User user = userService.getCurrentUser();
     if (Objects.nonNull(user)) {
-      Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+      Intent intent = new Intent(getApplicationContext(), MainActivityDuplicate.class);
       startActivity(intent);
       finish();
     }
@@ -54,7 +56,7 @@ public class Register extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            Intent intent = new Intent(getApplicationContext(), Login.class);
+            Intent intent = new Intent(getApplicationContext(), LoginDuplicate.class);
             startActivity(intent);
             finish();
           }
@@ -86,7 +88,7 @@ public class Register extends AppCompatActivity {
                   progressBar.setVisibility(View.GONE);
                   if (result.isSuccessful()) {
                     Toast.makeText(Register.this, "Account created.", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    Intent intent = new Intent(getApplicationContext(), LoginDuplicate.class);
                     startActivity(intent);
                     finish();
                   } else {
