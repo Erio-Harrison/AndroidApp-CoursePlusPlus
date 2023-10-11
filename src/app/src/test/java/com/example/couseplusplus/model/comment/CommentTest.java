@@ -1,8 +1,7 @@
-package com.example.couseplusplus.data.comment;
+package com.example.couseplusplus.model.comment;
 
 import static org.junit.Assert.*;
 
-import com.example.couseplusplus.model.comment.Comment;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.Test;

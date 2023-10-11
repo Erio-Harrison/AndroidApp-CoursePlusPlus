@@ -1,6 +1,6 @@
 package com.example.couseplusplus.data.course;
 
-import com.example.couseplusplus.data.avl.AVLTree;
+import com.example.couseplusplus.data.invertedindex.StringInvertedIndex;
 import com.example.couseplusplus.model.course.Course;
 import java.util.List;
 
@@ -9,18 +9,18 @@ import java.util.List;
  */
 public class CourseCache {
   List<Course> courses;
-  AVLTree<String, Course> codeTree;
-  AVLTree<String, Course> nameTree;
+  StringInvertedIndex<Course> codeIndex;
+  StringInvertedIndex<Course> nameIndex;
 
   public CourseCache(List<Course> courses) {
     this.courses = courses;
-    codeTree = new AVLTree<>();
-    nameTree = new AVLTree<>();
+    codeIndex = new StringInvertedIndex<>();
+    nameIndex = new StringInvertedIndex<>();
 
     courses.forEach(
         course -> {
-          codeTree.insert(course.courseCode(), course);
-          nameTree.insert(course.courseName(), course);
+          course.splitCourseCode().forEach(chunk -> codeIndex.add(chunk, course));
+          course.splitCourseName().forEach(chunk -> nameIndex.add(chunk, course));
         });
   }
 
@@ -28,11 +28,11 @@ public class CourseCache {
     return courses;
   }
 
-  public AVLTree<String, Course> codeTree() {
-    return codeTree;
+  public StringInvertedIndex<Course> codeIndex() {
+    return codeIndex;
   }
 
-  public AVLTree<String, Course> nameTree() {
-    return nameTree;
+  public StringInvertedIndex<Course> nameIndex() {
+    return nameIndex;
   }
 }
