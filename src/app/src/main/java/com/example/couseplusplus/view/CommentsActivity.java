@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // FIXME always sort by something
-public class CommentsActivityDuplicate extends AppCompatActivity {
+public class CommentsActivity extends AppCompatActivity {
   RecyclerView commentRecycleView;
   CommentAdapter commentAdapter;
   List<Comment> commentList = new ArrayList<>();
@@ -30,7 +30,7 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_comments_duplicate);
+    setContentView(R.layout.activity_comments);
     Intent intent = getIntent();
     String courseCodeInfo = intent.getStringExtra("courseCode");
     String courseNameInfo = intent.getStringExtra("courseName");

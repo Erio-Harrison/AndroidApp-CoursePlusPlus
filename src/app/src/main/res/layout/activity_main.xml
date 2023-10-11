@@ -20,6 +20,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:id="@+id/course_search_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="e.g. COMP6442"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/course_search_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/course_rv"
         android:layout_width="match_parent"

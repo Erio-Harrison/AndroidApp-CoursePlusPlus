@@ -16,7 +16,7 @@ import com.example.couseplusplus.Register;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
 
-public class LoginDuplicate extends AppCompatActivity {
+public class Login extends AppCompatActivity {
   EditText editTextEmail, editTextPassword;
   Button buttonLogin;
   ProgressBar progressBar;
@@ -29,7 +29,7 @@ public class LoginDuplicate extends AppCompatActivity {
     super.onStart();
     User user = userService.getCurrentUser();
     if (user != null) {
-      Intent intent = new Intent(getApplicationContext(), MainActivityDuplicate.class);
+      Intent intent = new Intent(getApplicationContext(), MainActivity.class);
       startActivity(intent);
       finish();
     }
@@ -63,12 +63,12 @@ public class LoginDuplicate extends AppCompatActivity {
           password = String.valueOf(editTextPassword.getText());
 
           if (TextUtils.isEmpty(email)) {
-            Toast.makeText(LoginDuplicate.this, "Enter Email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this, "Enter Email", Toast.LENGTH_SHORT).show();
             return;
           }
 
           if (TextUtils.isEmpty(password)) {
-            Toast.makeText(LoginDuplicate.this, "Enter Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
           }
 
@@ -78,14 +78,12 @@ public class LoginDuplicate extends AppCompatActivity {
               result -> {
                 progressBar.setVisibility(View.GONE);
                 if (result.isSuccessful()) {
-                  Toast.makeText(LoginDuplicate.this, "Login Successful", Toast.LENGTH_SHORT)
-                      .show();
-                  Intent intent = new Intent(getApplicationContext(), MainActivityDuplicate.class);
+                  Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                  Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                   startActivity(intent);
                   finish();
                 } else {
-                  Toast.makeText(LoginDuplicate.this, "Authentication failed.", Toast.LENGTH_SHORT)
-                      .show();
+                  Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
               });
         });

@@ -31,16 +31,16 @@
             android:name=".AddComment"
             android:exported="true">
         </activity>
-        <activity android:name=".view.MainActivityDuplicate" android:exported="true">
+        <activity android:name=".view.MainActivity" android:exported="true">
         </activity>
-        <activity android:name=".view.LoginDuplicate" android:exported="true">
+        <activity android:name=".view.Login" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.CommentsActivityDuplicate" android:exported="true">
+        <activity android:name=".view.CommentsActivity" android:exported="true">
         </activity>
     </application>
 
