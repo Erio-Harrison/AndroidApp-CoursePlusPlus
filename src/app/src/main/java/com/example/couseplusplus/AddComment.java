@@ -2,6 +2,7 @@ package com.example.couseplusplus;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -68,7 +69,11 @@ public class AddComment extends AppCompatActivity {
     postButton.setOnClickListener(
         view -> {
           LocalDateTime currentTime = LocalDateTime.now();
-          String userComment = commentSpace.getText().toString();
+          String userComment = commentSpace.getText().toString().trim();
+          if (TextUtils.isEmpty(userComment)) {
+            Toast.makeText(this, "Empty reviews are not allowed", Toast.LENGTH_SHORT).show();
+            return;
+          }
           String postedDateTime =
               currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS"));
           int year = Integer.parseInt(yearsSpinner.getSelectedItem().toString());
@@ -90,8 +95,6 @@ public class AddComment extends AppCompatActivity {
           newComment.put("year", year);
           newComment.put("helpfulness", helpfulness);
           newComment.put("postedDateTime", postedDateTime);
-
-          Log.d("FINAL STRING", newComment.toString());
 
           mDatabase
               .child("comment")
