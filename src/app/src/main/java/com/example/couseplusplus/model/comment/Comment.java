@@ -5,9 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 
-// FIXME consolidate with Comment in the future.
-//    the sole reason of this class is to avoid merge conflict
-//    with Comment class.
 /**
  * Represents a comment of a course.
  *
