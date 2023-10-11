@@ -14,7 +14,7 @@ public class CommentCreator {
         Objects.requireNonNull(
             snapshot.getValue(FirebaseComment.class), "Failed to get comment data");
     return new NewComment(
-        String.format("%s%s", courseCode, snapshot.getKey()),
+        snapshot.getKey(),
         courseCode,
         value.year,
         value.semester,
