@@ -2,6 +2,7 @@ package com.example.couseplusplus.data.comment;
 
 import com.example.couseplusplus.data.avl.AVLTree;
 import com.example.couseplusplus.data.invertedindex.InvertedIndex;
+import com.example.couseplusplus.data.invertedindex.StringInvertedIndex;
 import com.example.couseplusplus.model.comment.Comment;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class CommentCache {
     helpfulTree = new AVLTree<>();
     enrolTree = new AVLTree<>();
     postedTree = new AVLTree<>();
-    textIndex = new InvertedIndex<>();
+    textIndex = new StringInvertedIndex<>();
 
     comments.forEach(
         comment -> {

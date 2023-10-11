@@ -27,10 +27,11 @@ public class TextBased implements CommentFindingStrategy {
     return words(key).stream()
         .map(textIndex::get)
         .flatMap(Collection::stream)
+        .distinct()
         .collect(Collectors.toList());
   }
 
   List<String> words(String key) {
-    return Arrays.asList(key.split(" "));
+    return Arrays.asList(key.split(Comment.WordSplitRegex));
   }
 }

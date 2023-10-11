@@ -13,6 +13,7 @@ import java.util.Objects;
  * @author Yuki Misumi (u7582380)
  */
 public class Comment {
+  public static final String WordSplitRegex = "[ .?!]";
   String id;
   String courseCode;
   int year;
@@ -59,7 +60,8 @@ public class Comment {
   }
 
   public List<String> words() {
-    return Arrays.asList(text.split(" "));
+    if (text.isBlank()) return List.of();
+    return Arrays.asList(text.split(WordSplitRegex));
   }
 
   public int helpfulness() {
