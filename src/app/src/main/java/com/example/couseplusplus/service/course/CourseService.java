@@ -1,7 +1,7 @@
 package com.example.couseplusplus.service.course;
 
+import com.example.couseplusplus.model.course.Course;
 import com.example.couseplusplus.model.course.CourseRepository;
-import com.example.couseplusplus.model.course.NewCourse;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -18,11 +18,11 @@ public class CourseService {
     this.courseRepository = courseRepository;
   }
 
-  public void listenChange(Consumer<List<NewCourse>> listener) {
+  public void listenChange(Consumer<List<Course>> listener) {
     courseRepository.listenChange(listener);
   }
 
-  public List<NewCourse> findAll(String hint) {
+  public List<Course> findAll(String hint) {
     return Stream.of(
             courseRepository.findByCourseCode(hint), courseRepository.findByCourseName(hint))
         .flatMap(Collection::stream)
@@ -30,7 +30,7 @@ public class CourseService {
         .collect(Collectors.toList());
   }
 
-  public List<NewCourse> getAll() {
+  public List<Course> getAll() {
     return courseRepository.getAll();
   }
 }

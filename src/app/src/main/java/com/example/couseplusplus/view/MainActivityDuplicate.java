@@ -19,7 +19,6 @@ import com.example.couseplusplus.service.user.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class MainActivityDuplicate extends AppCompatActivity {
 
@@ -66,15 +65,7 @@ public class MainActivityDuplicate extends AppCompatActivity {
     searchButton.setOnClickListener(
         view -> {
           String input = searchInput.getText().toString();
-          // FIXME consolidate NewCourse and Course later
-          courseList =
-              input.isBlank()
-                  ? courseService.getAll().stream()
-                      .map(c -> new Course(c.courseCode(), c.courseName()))
-                      .collect(Collectors.toList())
-                  : courseService.findAll(input).stream()
-                      .map(c -> new Course(c.courseCode(), c.courseName()))
-                      .collect(Collectors.toList());
+          courseList = input.isBlank() ? courseService.getAll() : courseService.findAll(input);
           courseAdapter = new CourseAdapter(courseList);
           courseRecycleView.setAdapter(courseAdapter);
         });
@@ -83,10 +74,7 @@ public class MainActivityDuplicate extends AppCompatActivity {
     courseRecycleView.setLayoutManager(new LinearLayoutManager(this));
     courseService.listenChange(
         courses -> {
-          courseList =
-              courses.stream()
-                  .map(c -> new Course(c.courseCode(), c.courseName()))
-                  .collect(Collectors.toList());
+          courseList = courses;
           if (Objects.nonNull(courseAdapter)) return;
           courseAdapter = new CourseAdapter(courseList);
           courseRecycleView.setAdapter(courseAdapter);
@@ -102,8 +90,8 @@ public class MainActivityDuplicate extends AppCompatActivity {
               public void onItemClick(View view, int position) {
                 Intent intent =
                     new Intent(MainActivityDuplicate.this, CommentsActivityDuplicate.class);
-                intent.putExtra("courseCode", courseList.get(position).getCourseCode());
-                intent.putExtra("courseName", courseList.get(position).getCourseName());
+                intent.putExtra("courseCode", courseList.get(position).courseCode());
+                intent.putExtra("courseName", courseList.get(position).courseName());
                 startActivity(intent);
               }
 
