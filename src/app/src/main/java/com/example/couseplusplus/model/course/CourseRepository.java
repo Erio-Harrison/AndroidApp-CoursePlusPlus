@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public interface CourseRepository {
-  void listenChange(Consumer<List<NewCourse>> listener);
+  void listenChange(Consumer<List<Course>> listener);
 
-  List<NewCourse> getAll();
+  List<Course> getAll();
 
-  List<NewCourse> findByCourseCode(String hint);
+  List<Course> findByCourseCode(String hint);
 
-  List<NewCourse> findByCourseName(String hint);
+  List<Course> findByCourseName(String hint);
 }

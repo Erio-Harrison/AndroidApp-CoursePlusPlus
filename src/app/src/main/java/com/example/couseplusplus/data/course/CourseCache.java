@@ -1,18 +1,18 @@
 package com.example.couseplusplus.data.course;
 
 import com.example.couseplusplus.data.avl.AVLTree;
-import com.example.couseplusplus.model.course.NewCourse;
+import com.example.couseplusplus.model.course.Course;
 import java.util.List;
 
 /**
  * @author Yuki Misumi (u7582380)
  */
 public class CourseCache {
-  List<NewCourse> courses;
-  AVLTree<String, NewCourse> codeTree;
-  AVLTree<String, NewCourse> nameTree;
+  List<Course> courses;
+  AVLTree<String, Course> codeTree;
+  AVLTree<String, Course> nameTree;
 
-  public CourseCache(List<NewCourse> courses) {
+  public CourseCache(List<Course> courses) {
     this.courses = courses;
     codeTree = new AVLTree<>();
     nameTree = new AVLTree<>();
@@ -24,15 +24,15 @@ public class CourseCache {
         });
   }
 
-  public List<NewCourse> courses() {
+  public List<Course> courses() {
     return courses;
   }
 
-  public AVLTree<String, NewCourse> codeTree() {
+  public AVLTree<String, Course> codeTree() {
     return codeTree;
   }
 
-  public AVLTree<String, NewCourse> nameTree() {
+  public AVLTree<String, Course> nameTree() {
     return nameTree;
   }
 }

@@ -4,8 +4,8 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.util.Log;
 import androidx.annotation.NonNull;
+import com.example.couseplusplus.model.course.Course;
 import com.example.couseplusplus.model.course.CourseRepository;
-import com.example.couseplusplus.model.course.NewCourse;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +31,7 @@ public class CourseDatasource implements CourseRepository {
   CourseFinder courseFinder;
 
   @Override
-  public void listenChange(Consumer<List<NewCourse>> listener) {
+  public void listenChange(Consumer<List<Course>> listener) {
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
     mDatabase
@@ -40,7 +40,7 @@ public class CourseDatasource implements CourseRepository {
             new ValueEventListener() {
               @Override
               public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<NewCourse> courses = new ArrayList<>();
+                List<Course> courses = new ArrayList<>();
                 snapshot
                     .getChildren()
                     .forEach(courseSnapshot -> courses.add(CourseCreator.create(courseSnapshot)));
@@ -57,19 +57,19 @@ public class CourseDatasource implements CourseRepository {
   }
 
   @Override
-  public List<NewCourse> getAll() {
+  public List<Course> getAll() {
     if (Objects.isNull(cache)) return List.of();
     return cache.courses();
   }
 
   @Override
-  public List<NewCourse> findByCourseCode(String hint) {
+  public List<Course> findByCourseCode(String hint) {
     if (Objects.isNull(cache)) return List.of();
     return courseFinder.findByCourseCode(hint);
   }
 
   @Override
-  public List<NewCourse> findByCourseName(String hint) {
+  public List<Course> findByCourseName(String hint) {
     if (Objects.isNull(cache)) return List.of();
     return courseFinder.findByCourseName(hint);
   }

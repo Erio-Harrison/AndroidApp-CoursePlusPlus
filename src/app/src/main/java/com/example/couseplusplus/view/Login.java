@@ -1,4 +1,4 @@
-package com.example.couseplusplus;
+package com.example.couseplusplus.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,19 +10,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.couseplusplus.IoCContainer;
+import com.example.couseplusplus.R;
+import com.example.couseplusplus.Register;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
-import com.google.android.material.textfield.TextInputEditText;
 
-/**
- * Author: Min su Park
- *
- * <p>Login is the first activity users will need authentification. Can branch into Register,
- * MainActivity
- */
 public class Login extends AppCompatActivity {
-  TextInputEditText editTextEmail;
-  EditText editTextPassword;
+  EditText editTextEmail, editTextPassword;
   Button buttonLogin;
   ProgressBar progressBar;
   TextView textView;

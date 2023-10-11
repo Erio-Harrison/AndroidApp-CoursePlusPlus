@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
+import com.example.couseplusplus.view.Login;
+import com.example.couseplusplus.view.MainActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import java.util.Objects;
 

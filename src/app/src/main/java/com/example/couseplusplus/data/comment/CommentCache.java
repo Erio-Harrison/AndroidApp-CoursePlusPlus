@@ -1,52 +1,54 @@
 package com.example.couseplusplus.data.comment;
 
 import com.example.couseplusplus.data.avl.AVLTree;
-import com.example.couseplusplus.model.comment.NewComment;
+import com.example.couseplusplus.data.invertedindex.InvertedIndex;
+import com.example.couseplusplus.data.invertedindex.StringInvertedIndex;
+import com.example.couseplusplus.model.comment.Comment;
 import java.util.List;
 
 /**
  * @author Yuki Misumi (u7582380)
  */
 public class CommentCache {
-  List<NewComment> comments;
-  AVLTree<Integer, NewComment> helpfulTree;
-  AVLTree<String, NewComment> enrolTree;
-  AVLTree<String, NewComment> postedTree;
-  AVLTree<String, NewComment> textTree;
+  List<Comment> comments;
+  AVLTree<Integer, Comment> helpfulTree;
+  AVLTree<String, Comment> enrolTree;
+  AVLTree<String, Comment> postedTree;
+  InvertedIndex<String, Comment> textIndex;
 
-  public CommentCache(List<NewComment> comments) {
+  public CommentCache(List<Comment> comments) {
     this.comments = comments;
     helpfulTree = new AVLTree<>();
     enrolTree = new AVLTree<>();
     postedTree = new AVLTree<>();
-    textTree = new AVLTree<>();
+    textIndex = new StringInvertedIndex<>();
 
     comments.forEach(
         comment -> {
           helpfulTree.insert(comment.helpfulness(), comment);
           enrolTree.insert(comment.enrolKey(), comment);
           postedTree.insert(comment.postedDateTime().toString(), comment);
-          textTree.insert(comment.text(), comment);
+          comment.words().forEach(word -> textIndex.add(word, comment));
         });
   }
 
-  public List<NewComment> comments() {
+  public List<Comment> comments() {
     return comments;
   }
 
-  public AVLTree<Integer, NewComment> helpfulTree() {
+  public AVLTree<Integer, Comment> helpfulTree() {
     return helpfulTree;
   }
 
-  public AVLTree<String, NewComment> enrolTree() {
+  public AVLTree<String, Comment> enrolTree() {
     return enrolTree;
   }
 
-  public AVLTree<String, NewComment> postedTree() {
+  public AVLTree<String, Comment> postedTree() {
     return postedTree;
   }
 
-  public AVLTree<String, NewComment> textTree() {
-    return textTree;
+  public InvertedIndex<String, Comment> textIndex() {
+    return textIndex;
   }
 }

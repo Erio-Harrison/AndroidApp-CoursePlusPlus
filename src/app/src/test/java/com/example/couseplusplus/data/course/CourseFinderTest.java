@@ -2,7 +2,7 @@ package com.example.couseplusplus.data.course;
 
 import static org.junit.Assert.*;
 
-import com.example.couseplusplus.model.course.NewCourse;
+import com.example.couseplusplus.model.course.Course;
 import java.util.List;
 import org.junit.Test;
 
@@ -15,14 +15,14 @@ public class CourseFinderTest {
     CourseCache courseCache =
         new CourseCache(
             List.of(
-                new NewCourse("COMP1110", ""),
-                new NewCourse("COMP6310", ""),
-                new NewCourse("DAWS3110", ""),
-                new NewCourse("DAWS4110", ""),
-                new NewCourse("DAWS5110", ""),
-                new NewCourse("LAWS5110", "")));
+                new Course("COMP1110", ""),
+                new Course("COMP6310", ""),
+                new Course("DAWS3110", ""),
+                new Course("DAWS4110", ""),
+                new Course("DAWS5110", ""),
+                new Course("LAWS5110", "")));
     CourseFinder uut = new CourseFinder(courseCache);
-    List<NewCourse> result = uut.findByCourseCode("COMP");
+    List<Course> result = uut.findByCourseCode("COMP");
     assertEquals(2, result.size());
   }
 }

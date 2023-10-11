@@ -1,7 +1,7 @@
 package com.example.couseplusplus.data.comment.findingstrategy;
 
 import com.example.couseplusplus.data.comment.CommentCache;
-import com.example.couseplusplus.model.comment.NewComment;
+import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.query.parser.EnrolDateNode;
 import com.example.couseplusplus.model.query.parser.TerminalNode;
 import com.example.couseplusplus.model.query.tokenizer.TokenType;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class EnrolBased implements CommentFindingStrategy {
   @Override
-  public List<NewComment> find(
+  public List<Comment> find(
       TokenType operatorType, TerminalNode terminalNode, CommentCache commentCache) {
     EnrolDateNode enrolDateNode = (EnrolDateNode) terminalNode;
     String key = enrolDateNode.value().toString();

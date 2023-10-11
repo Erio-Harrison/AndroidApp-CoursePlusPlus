@@ -18,9 +18,9 @@ public interface CommentRepository {
    * @param courseCode
    * @param listener a function to be called when there's a change to the subject comment data
    */
-  void listenChange(String courseCode, Consumer<List<NewComment>> listener);
+  void listenChange(String courseCode, Consumer<List<Comment>> listener);
 
-  List<NewComment> getAll(String courseCode);
+  List<Comment> getAll(String courseCode);
 
   /**
    * finds the comments that match with the given parse tree.
@@ -29,7 +29,7 @@ public interface CommentRepository {
    * @param parseTree
    * @return
    */
-  List<NewComment> findAll(String courseCode, ParseTree parseTree);
+  List<Comment> findAll(String courseCode, ParseTree parseTree);
 
   void addHelpfulness(String courseCode, String commentId, int helpfulness);
 

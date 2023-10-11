@@ -14,26 +14,23 @@ import com.example.couseplusplus.CommentAdapter;
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.model.comment.Comment;
-import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.service.comment.CommentService;
 import com.example.couseplusplus.service.comment.SortingAspect;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 // FIXME always sort by something
-public class CommentsActivityDuplicate extends AppCompatActivity {
+public class CommentsActivity extends AppCompatActivity {
   RecyclerView commentRecycleView;
   CommentAdapter commentAdapter;
-  List<NewComment> newCommentList = new ArrayList<>();
   List<Comment> commentList = new ArrayList<>();
   CommentService commentService = IoCContainer.commentService();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_comments_duplicate);
+    setContentView(R.layout.activity_comments);
     Intent intent = getIntent();
     String courseCodeInfo = intent.getStringExtra("courseCode");
     String courseNameInfo = intent.getStringExtra("courseName");
@@ -78,11 +75,10 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
         view -> {
           String searchInputString = searchInput.getText().toString();
           Query query = new Query(searchInputString);
-          newCommentList =
+          commentList =
               query.isBlank()
                   ? commentService.getAll(courseCodeInfo)
                   : commentService.findAll(courseCodeInfo, query);
-          newCommentsToComments();
           commentAdapter = new CommentAdapter(commentList);
           commentRecycleView.setAdapter(commentAdapter);
         });
@@ -90,8 +86,7 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
     commentService.listenChange(
         courseCodeInfo,
         comments -> {
-          newCommentList = comments;
-          newCommentsToComments();
+          commentList = comments;
           commentAdapter = new CommentAdapter(commentList);
           commentRecycleView.setAdapter(commentAdapter);
         });
@@ -105,23 +100,6 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
             });
   }
 
-  // FIXME consolidate NewComment and Comment later
-  void newCommentsToComments() {
-    commentList =
-        newCommentList.stream()
-            .map(
-                c ->
-                    new Comment(
-                        c.id(),
-                        c.courseCode(),
-                        c.year(),
-                        c.semester(),
-                        c.text(),
-                        c.helpfulness(),
-                        c.postedDateTime().toString()))
-            .collect(Collectors.toList());
-  }
-
   void sortBy(Button sortButton, RadioButton helpfulRadio, RadioButton enrolRadio) {
     if (helpfulRadio.isChecked()) sortBy(SortingAspect.Helpfulness, sortButton);
     else if (enrolRadio.isChecked()) sortBy(SortingAspect.EnrolDate, sortButton);
@@ -129,9 +107,8 @@ public class CommentsActivityDuplicate extends AppCompatActivity {
   }
 
   void sortBy(SortingAspect aspect, Button sortButton) {
-    newCommentList =
-        commentService.sort(newCommentList, sortButton.getText().toString().contains("Up"), aspect);
-    newCommentsToComments();
+    commentList =
+        commentService.sort(commentList, sortButton.getText().toString().contains("Up"), aspect);
     commentAdapter = new CommentAdapter(commentList);
     commentRecycleView.setAdapter(commentAdapter);
   }

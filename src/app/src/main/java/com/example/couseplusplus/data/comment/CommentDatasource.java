@@ -6,7 +6,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.comment.CommentRepository;
-import com.example.couseplusplus.model.comment.NewComment;
 import com.example.couseplusplus.model.query.parser.ParseTree;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +33,7 @@ public class CommentDatasource implements CommentRepository {
   CommentFinder commentFinder;
 
   @Override
-  public void listenChange(String courseCode, Consumer<List<NewComment>> listener) {
+  public void listenChange(String courseCode, Consumer<List<Comment>> listener) {
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     mDatabase
         .child("comment")
@@ -43,7 +42,7 @@ public class CommentDatasource implements CommentRepository {
             new ValueEventListener() {
               @Override
               public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<NewComment> comments = new ArrayList<>();
+                List<Comment> comments = new ArrayList<>();
                 snapshot
                     .getChildren()
                     .forEach(
@@ -63,14 +62,14 @@ public class CommentDatasource implements CommentRepository {
   }
 
   @Override
-  public List<NewComment> getAll(String courseCode) {
+  public List<Comment> getAll(String courseCode) {
     if (isNotReady()) return List.of();
     validate(courseCode);
     return cache.comments();
   }
 
   @Override
-  public List<NewComment> findAll(String courseCode, ParseTree parseTree) {
+  public List<Comment> findAll(String courseCode, ParseTree parseTree) {
     if (isNotReady()) return List.of();
     validate(courseCode);
     return Objects.requireNonNullElse(commentFinder.walk(parseTree), List.of());
