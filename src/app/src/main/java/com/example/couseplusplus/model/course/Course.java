@@ -1,11 +1,15 @@
 package com.example.couseplusplus.model.course;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * @author Yuki Misumi (u7582380)
  */
 public class Course {
+  public static final String CourseNameSplitRegex = " ";
   private String courseCode;
   private String courseName;
 
@@ -20,6 +24,19 @@ public class Course {
 
   public String courseName() {
     return courseName;
+  }
+
+  public List<String> splitCourseCode() {
+    List<String> result = new ArrayList<>();
+    int length = courseCode.length();
+    for (int i = 0; i < length; i++) {
+      result.add(courseCode.substring(0, i + 1));
+    }
+    return result;
+  }
+
+  public List<String> splitCourseName() {
+    return Arrays.asList(courseName.split(CourseNameSplitRegex));
   }
 
   @Override
