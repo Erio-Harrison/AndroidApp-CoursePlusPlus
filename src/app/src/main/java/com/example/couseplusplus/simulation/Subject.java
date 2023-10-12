@@ -2,7 +2,6 @@ package com.example.couseplusplus.simulation;
 
 import java.util.List;
 
-
 /** Observer pattern! Responsible for notifying observers the event. */
 public interface Subject {
   default void emit(ActionType actionType, List<String> arguments) {
@@ -10,8 +9,6 @@ public interface Subject {
   }
 
   void register(Observer observer);
-
-  void remove(Observer observer);
 
   List<Observer> observers();
 }

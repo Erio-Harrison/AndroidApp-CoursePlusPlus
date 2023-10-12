@@ -1,5 +1,15 @@
-ReadComments,ACST3032
-ReadComments,ACST3001
-
-AddComment,ACST3001,2022,1,This course is great!,3,2023-01-15T02:27:20.466960
-AddComment,ACST3032,2022,1,The professor is helpful!,4,2023-01-16T02:17:21.466960
+AddComment,commentSimulation1,ACST3001,2021,1,This course is great!,3,07-15-2023 14:25:45
+AddComment,commentSimulation2,ACST3032,2022,1,The professor is helpful!,4,07-12-2023 13:25:45
+AddComment,commentSimulation3,COMP2100,2023,2,Loved the course materials!,5,07-20-2023 10:15:25
+AddComment,commentSimulation4,ACST3004,2022,2,Assignments were too tough!,2,07-22-2023 16:40:30
+AddComment,commentSimulation5,COMP2400,2022,2,Excellent course for beginners!,4,07-30-2023 12:25:55
+AddComment,commentSimulation6,COMP1100,2022,1,Too much theory!,3,07-18-2023 09:15:45
+AddComment,commentSimulation7,COMP2100,2023,1,Interactive and engaging sessions!,4,07-10-2023 15:05:25
+addHelpfulness,ACST3001,comment3,3
+addHelpfulness,ACST3002,comment4,6
+addHelpfulness,ACST3032,commentSimulation2,5
+addHelpfulness,COMP2100,commentSimulation3,4
+addHelpfulness,ACST3004,commentSimulation4,2
+addHelpfulness,COMP2400,commentSimulation5,5
+addHelpfulness,COMP1100,commentSimulation6,4
+addHelpfulness,COMP2100,commentSimulation7,5
