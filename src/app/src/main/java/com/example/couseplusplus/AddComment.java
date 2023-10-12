@@ -1,9 +1,9 @@
 package com.example.couseplusplus;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,12 +11,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+
+import com.example.couseplusplus.data.comment.FirebaseComment;
+import com.example.couseplusplus.service.comment.FireBaseCommentService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * Author: Min su Park
@@ -25,39 +25,33 @@ import java.util.Map;
  */
 public class AddComment extends AppCompatActivity {
   public TextView title;
-  public DatabaseReference mDatabase;
   public EditText commentSpace;
   public Button postButton;
-  String courseCodeInfo;
-  public Spinner selectYear;
+  public String courseCodeInfo;
   public Spinner selectSemester;
+  FireBaseCommentService fireBaseCommentService;
 
+  @SuppressLint({"SetTextI18n", "CutPasteId"})
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_comment);
     title = findViewById(R.id.addCommentTitle);
-    mDatabase = FirebaseDatabase.getInstance().getReference();
     commentSpace = findViewById(R.id.comment_space);
     postButton = findViewById(R.id.post_comment);
-    selectYear = findViewById(R.id.selectYear);
     selectSemester = findViewById(R.id.selectSemester);
+    fireBaseCommentService = IoCContainer.fireBaseCommentService();
     Intent intent = getIntent();
     courseCodeInfo = intent.getStringExtra("courseCode");
 
     title.setText("Please write a comment for the course: " + courseCodeInfo);
 
-    String[] years = {
-      "2015", "2016", "2017", "2017", "2018", "2019", "2020", "2021", "2022", "2023"
-    };
-    String[] semesters = {"Semester 1", "Semester 2"};
-
     ArrayAdapter<String> yearAdapter =
-        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, years);
+        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, FirebaseComment.DISPLAY_YEARS);
     yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     ArrayAdapter<String> semesterAdapter =
-        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, semesters);
+        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, FirebaseComment.DISPLAY_SEMESTERS);
     semesterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     Spinner yearsSpinner = findViewById(R.id.selectYear);
@@ -80,39 +74,21 @@ public class AddComment extends AppCompatActivity {
           int helpfulness = 0;
           int semester = selectSemester.getSelectedItem().equals("Semester 1") ? 1 : 2;
 
-          //            Comment newComment = new Comment(
-          //                    null,
-          //                    null,
-          //                    year,
-          //                    semester,
-          //                    userComment,
-          //                    helpfulness,
-          //                    null
-          //            );
-          Map<String, Object> newComment = new HashMap<>();
-          newComment.put("text", userComment);
-          newComment.put("semester", semester);
-          newComment.put("year", year);
-          newComment.put("helpfulness", helpfulness);
-          newComment.put("postedDateTime", postedDateTime);
+          FirebaseComment newComment = new FirebaseComment();
+          newComment.setText(userComment);
+          newComment.setSemester(semester);
+          newComment.setYear(year);
+          newComment.setHelpfulness(helpfulness);
+          newComment.setPostedDateTime(postedDateTime);
 
-          mDatabase
-              .child("comment")
-              .child(courseCodeInfo)
-              .push()
-              .setValue(newComment)
-              .addOnCompleteListener(
-                  task -> {
-                    if (task.isSuccessful()) {
-                      Toast.makeText(
-                              AddComment.this, "Comment added successfully", Toast.LENGTH_SHORT)
-                          .show();
-                    } else {
-                      Log.e("AddComment", "Failed to add comment to Firebase", task.getException());
-                      Toast.makeText(AddComment.this, "Failed to add comment", Toast.LENGTH_SHORT)
-                          .show();
-                    }
-                  });
+          fireBaseCommentService.addComment(courseCodeInfo,newComment, isSuccessful -> {
+              if (isSuccessful) {
+                  Toast.makeText(this, "Comment added successfully", Toast.LENGTH_SHORT).show();
+              } else {
+                  Toast.makeText(this, "Failed to add comment", Toast.LENGTH_SHORT).show();
+              }
+          });
+
         });
   }
 }

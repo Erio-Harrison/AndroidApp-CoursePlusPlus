@@ -10,6 +10,7 @@ import com.example.couseplusplus.model.query.parser.GracefulParser;
 import com.example.couseplusplus.model.query.tokenizer.GracefulTokenizer;
 import com.example.couseplusplus.model.user.UserRepository;
 import com.example.couseplusplus.service.comment.CommentService;
+import com.example.couseplusplus.service.comment.FireBaseCommentService;
 import com.example.couseplusplus.service.course.CourseService;
 import com.example.couseplusplus.service.user.UserService;
 
@@ -24,6 +25,7 @@ public class IoCContainer {
   private static final CourseService courseService = new CourseService(courseRepository);
 
   private static final CommentRepository commentRepository = CommentDatasource.getInstance();
+  private static final FireBaseCommentService fireBaseCommentService = new FireBaseCommentService(commentRepository);
   private static final QueryParseTreeCreator queryParserTreeCreator =
       new QueryParseTreeCreator(GracefulTokenizer::new, GracefulParser::new);
   private static final CommentService commentService =
@@ -40,4 +42,5 @@ public class IoCContainer {
   public static CommentService commentService() {
     return commentService;
   }
+  public static FireBaseCommentService fireBaseCommentService() { return fireBaseCommentService;}
 }
