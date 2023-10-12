@@ -25,7 +25,8 @@ public class IoCContainer {
   private static final CourseService courseService = new CourseService(courseRepository);
 
   private static final CommentRepository commentRepository = CommentDatasource.getInstance();
-  private static final FireBaseCommentService fireBaseCommentService = new FireBaseCommentService(commentRepository);
+  private static final FireBaseCommentService fireBaseCommentService =
+      new FireBaseCommentService(commentRepository);
   private static final QueryParseTreeCreator queryParserTreeCreator =
       new QueryParseTreeCreator(GracefulTokenizer::new, GracefulParser::new);
   private static final CommentService commentService =
@@ -42,5 +43,8 @@ public class IoCContainer {
   public static CommentService commentService() {
     return commentService;
   }
-  public static FireBaseCommentService fireBaseCommentService() { return fireBaseCommentService;}
+
+  public static FireBaseCommentService fireBaseCommentService() {
+    return fireBaseCommentService;
+  }
 }

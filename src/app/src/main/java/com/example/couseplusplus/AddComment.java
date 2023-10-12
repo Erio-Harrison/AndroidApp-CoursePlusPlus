@@ -11,12 +11,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.couseplusplus.data.comment.FirebaseComment;
 import com.example.couseplusplus.service.comment.FireBaseCommentService;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 
 /**
  * Author: Min su Park
@@ -47,11 +45,13 @@ public class AddComment extends AppCompatActivity {
     title.setText("Please write a comment for the course: " + courseCodeInfo);
 
     ArrayAdapter<String> yearAdapter =
-        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, FirebaseComment.DISPLAY_YEARS);
+        new ArrayAdapter<>(
+            this, android.R.layout.simple_spinner_item, FirebaseComment.DISPLAY_YEARS);
     yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     ArrayAdapter<String> semesterAdapter =
-        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, FirebaseComment.DISPLAY_SEMESTERS);
+        new ArrayAdapter<>(
+            this, android.R.layout.simple_spinner_item, FirebaseComment.DISPLAY_SEMESTERS);
     semesterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     Spinner yearsSpinner = findViewById(R.id.selectYear);
@@ -81,14 +81,16 @@ public class AddComment extends AppCompatActivity {
           newComment.setHelpfulness(helpfulness);
           newComment.setPostedDateTime(postedDateTime);
 
-          fireBaseCommentService.addComment(courseCodeInfo,newComment, isSuccessful -> {
-              if (isSuccessful) {
+          fireBaseCommentService.addComment(
+              courseCodeInfo,
+              newComment,
+              isSuccessful -> {
+                if (isSuccessful) {
                   Toast.makeText(this, "Comment added successfully", Toast.LENGTH_SHORT).show();
-              } else {
+                } else {
                   Toast.makeText(this, "Failed to add comment", Toast.LENGTH_SHORT).show();
-              }
-          });
-
+                }
+              });
         });
   }
 }

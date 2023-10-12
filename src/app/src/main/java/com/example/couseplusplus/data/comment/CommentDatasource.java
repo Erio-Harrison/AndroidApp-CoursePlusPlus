@@ -3,9 +3,7 @@ package com.example.couseplusplus.data.comment;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.comment.CommentRepository;
 import com.example.couseplusplus.model.query.parser.ParseTree;
@@ -81,27 +79,27 @@ public class CommentDatasource implements CommentRepository {
   public void addHelpfulness(String courseCode, String commentId, int helpfulness) {}
 
   /**
-   * @author Min su Park
-   * This is where firebase logic will be handled so that the service side does not have to deal with it.
-   *
+   * @author Min su Park This is where firebase logic will be handled so that the service side does
+   *     not have to deal with it.
    * @param courseCode The course for which users will comment on
    * @param comment The instance of FirebaseComment where relevant comment data is stored
-   * @param onCompleteListener The completion of uploading to Firebase. This is separated as another parameter because
-   *                           UI handling needs to be done in AddComment.java
+   * @param onCompleteListener The completion of uploading to Firebase. This is separated as another
+   *     parameter because UI handling needs to be done in AddComment.java
    */
   @Override
-  public void addComment(String courseCode, FirebaseComment comment, Consumer<Boolean> onCompleteListener) {
-    DatabaseReference mDatabase =  FirebaseDatabase.getInstance().getReference();
+  public void addComment(
+      String courseCode, FirebaseComment comment, Consumer<Boolean> onCompleteListener) {
+    DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     mDatabase
-            .child("comment")
-            .child(courseCode)
-            .push()
-            .setValue(comment)
-            .addOnCompleteListener(
-                    task -> {
-                      boolean result = task.isSuccessful();
-                      onCompleteListener.accept(result);
-                    });
+        .child("comment")
+        .child(courseCode)
+        .push()
+        .setValue(comment)
+        .addOnCompleteListener(
+            task -> {
+              boolean result = task.isSuccessful();
+              onCompleteListener.accept(result);
+            });
   }
 
   boolean isNotReady() {
