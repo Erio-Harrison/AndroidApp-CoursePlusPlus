@@ -1,4 +1,4 @@
-package com.example.couseplusplus;
+package com.example.couseplusplus.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,6 +11,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.couseplusplus.IoCContainer;
+import com.example.couseplusplus.R;
 import com.example.couseplusplus.data.comment.FirebaseComment;
 import com.example.couseplusplus.service.comment.FireBaseCommentService;
 import java.time.LocalDateTime;

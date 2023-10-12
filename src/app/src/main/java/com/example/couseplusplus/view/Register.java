@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Objects;
 
 /**
- * Author: Min su Park
+ * @author: Min su Park
  *
  * <p>Register adds users into the Authentication database in firebase. Once registered, user will
  * be taken to MainActivity
