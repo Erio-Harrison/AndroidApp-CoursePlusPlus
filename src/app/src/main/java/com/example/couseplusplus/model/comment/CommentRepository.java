@@ -33,5 +33,13 @@ public interface CommentRepository {
 
   void addHelpfulness(String courseCode, String commentId, int helpfulness);
 
-  void addComment(String courseCode, Comment comment);
+  /**
+   * @author Min su Park
+   *     <p>This method adds the comment to firebase from the FirebaseCommentService
+   * @param courseCode The course for which users will comment on
+   * @param comment The instance of FirebaseComment where relevant comment data is stored
+   * @param onCompleteListener The completion of uploading to Firebase. This is separated as another
+   *     parameter because UI handling needs to be done in AddComment.java
+   */
+  void addComment(String courseCode, Comment comment, Consumer<Boolean> onCompleteListener);
 }

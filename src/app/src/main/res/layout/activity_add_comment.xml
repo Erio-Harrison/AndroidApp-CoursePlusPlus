@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".AddComment">
+    tools:context=".view.AddComment">
 
 
     <TextView
