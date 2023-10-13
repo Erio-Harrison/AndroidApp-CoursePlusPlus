@@ -12,7 +12,7 @@
         android:id="@+id/course_code_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/course_code"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,77 +42,35 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cql_switch" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_comment_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:clickable="true"
-        android:contentDescription="Add comment"
-        android:src="@drawable/baseline_add_comment_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/sort_comment_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:clickable="true"
-        android:contentDescription="Sort comments"
-        android:src="@drawable/baseline_sort_24"
-        app:fabCustomSize="42dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filter_comment_button"
-        app:maxImageSize="20dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/filter_comment_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="65dp"
-        android:clickable="true"
-        android:contentDescription="Filter comments"
-        android:src="@drawable/baseline_filter_list_24"
-        android:tooltipText="Filter"
-        app:fabCustomSize="42dp"
-        app:layout_constraintBottom_toTopOf="@+id/add_comment_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:maxImageSize="20dp" />
-
-    <SearchView
-        android:id="@+id/search_bar"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:contentDescription="hello"
-        android:queryHint="great course"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_name_info" />
+        app:layout_constraintTop_toBottomOf="@+id/course_name_info">
 
-    <Switch
-        android:id="@+id/cql_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="CQL"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.99"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/filter_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/filter"
+            app:icon="@drawable/baseline_filter_list_24" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sort_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/sort"
+            app:icon="@drawable/baseline_sort_24" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

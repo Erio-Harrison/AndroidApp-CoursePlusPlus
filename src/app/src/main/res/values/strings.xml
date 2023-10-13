@@ -15,4 +15,18 @@
     <string name="post_comment">Post Comment</string>
     <string name="select_a_semester">Select a semester</string>
     <string name="select_a_year">Select a Year</string>
+    <string name="desc">Descending</string>
+    <string name="asc">Ascending</string>
+    <string name="search_menu_title">Search</string>
+    <string name="add_comment_title">Add Comment</string>
+    <string name="sort_title">Sort</string>
+    <string name="account_menu_title">Account</string>
+    <string name="logout_menu_title">Logout</string>
+    <string name="sort_by_posted">Post On</string>
+    <string name="sort_by_helpful">Helpful</string>
+    <string name="sort_by_enrol_date">Enrol On</string>
+    <string name="enable_raw_query">Raw Query</string>
+    <string name="others">Others</string>
+    <string name="filter">0 Filter</string>
+    <string name="sort">Sort</string>
 </resources>

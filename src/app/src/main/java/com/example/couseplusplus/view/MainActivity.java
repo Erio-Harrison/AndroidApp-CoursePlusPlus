@@ -14,11 +14,13 @@ import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.RecyclerViewClickListener;
 import com.example.couseplusplus.model.course.Course;
+import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.course.CourseService;
 import com.example.couseplusplus.service.user.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,15 +46,13 @@ public class MainActivity extends AppCompatActivity {
     searchInput = findViewById(R.id.course_search_input);
     searchButton = findViewById(R.id.course_search_button);
 
-    userService
-        .findCurrentUser()
-        .ifPresentOrElse(
-            user -> textView.setText(user.userName()),
-            () -> {
-              Intent intent = new Intent(getApplicationContext(), Login.class);
-              startActivity(intent);
-              finish();
-            });
+    Optional<User> optionalUser = userService.findCurrentUser();
+    if (optionalUser.isPresent()) textView.setText(optionalUser.get().userName());
+    else {
+      Intent intent = new Intent(getApplicationContext(), Login.class);
+      startActivity(intent);
+      finish();
+    }
 
     logoutButton.setOnClickListener(
         view -> {
