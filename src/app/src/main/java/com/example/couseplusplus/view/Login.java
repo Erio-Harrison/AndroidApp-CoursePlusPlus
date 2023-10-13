@@ -17,12 +17,10 @@ import com.example.couseplusplus.service.user.UserService;
 
 /**
  * @author: Min su Park
- *
- * <p>This Activity Class is the entry point to the App. Here users will either have to authenticate
- * themselves in logging-in via firebase authentication. Upon success login, users will be taken to
- * MainActivity
- *
- * <p>Additionally, users can register ID and Password to firebase.
+ *     <p>This Activity Class is the entry point to the App. Here users will either have to
+ *     authenticate themselves in logging-in via firebase authentication. Upon success login, users
+ *     will be taken to MainActivity
+ *     <p>Additionally, users can register ID and Password to firebase.
  */
 public class Login extends AppCompatActivity {
   EditText editTextEmail, editTextPassword;

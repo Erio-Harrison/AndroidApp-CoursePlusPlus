@@ -8,6 +8,7 @@ import com.example.couseplusplus.model.query.parser.ParseTree;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,23 @@ public class CommentService {
     return comments.stream()
         .sorted(ascending ? comparator : Collections.reverseOrder(comparator))
         .collect(Collectors.toList());
+  }
+
+  /**
+   * @author Min su Park
+   * @param courseCode Intended course to comment on
+   * @param comment Comment, including all its components
+   * @param onCompleteListener True if upload successful
+   */
+  public void addComment(String courseCode, Comment comment, Consumer<Boolean> onCompleteListener) {
+    if (Objects.isNull(courseCode) || courseCode.isBlank()) {
+      throw new IllegalArgumentException("courseCode could not be identified");
+    }
+    if (Objects.isNull(comment)) {
+      throw new IllegalArgumentException("comment could not be identified");
+    }
+
+    commentRepository.addComment(courseCode, comment, onCompleteListener);
   }
 
   Comparator<Comment> getComparator(SortingAspect aspect) {

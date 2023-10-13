@@ -11,14 +11,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
-import com.example.couseplusplus.data.comment.FirebaseComment;
 import com.example.couseplusplus.model.comment.Comment;
-import com.example.couseplusplus.service.comment.FireBaseCommentService;
+import com.example.couseplusplus.service.comment.CommentService;
 import java.time.LocalDateTime;
-
 
 /**
  * Author: Min su Park
@@ -31,7 +28,7 @@ public class AddComment extends AppCompatActivity {
   public Button postButton;
   public String courseCodeInfo;
   public Spinner selectSemester;
-  FireBaseCommentService fireBaseCommentService;
+  CommentService CommentService;
 
   @SuppressLint({"SetTextI18n", "CutPasteId"})
   @Override
@@ -42,20 +39,22 @@ public class AddComment extends AppCompatActivity {
     commentSpace = findViewById(R.id.comment_space);
     postButton = findViewById(R.id.post_comment);
     selectSemester = findViewById(R.id.selectSemester);
-    fireBaseCommentService = IoCContainer.fireBaseCommentService();
+    CommentService = IoCContainer.commentService();
     Intent intent = getIntent();
     courseCodeInfo = intent.getStringExtra("courseCode");
+    String[] DISPLAY_YEARS = {
+      "2015", "2016", "2017", "2017", "2018", "2019", "2020", "2021", "2022", "2023"
+    };
+    String[] DISPLAY_SEMESTERS = {"Semester 1", "Semester 2"};
 
     title.setText("Please write a comment for the course: " + courseCodeInfo);
 
     ArrayAdapter<String> yearAdapter =
-        new ArrayAdapter<>(
-            this, android.R.layout.simple_spinner_item, FirebaseComment.DISPLAY_YEARS);
+        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, DISPLAY_YEARS);
     yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     ArrayAdapter<String> semesterAdapter =
-        new ArrayAdapter<>(
-            this, android.R.layout.simple_spinner_item, FirebaseComment.DISPLAY_SEMESTERS);
+        new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, DISPLAY_SEMESTERS);
     semesterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
     Spinner yearsSpinner = findViewById(R.id.selectYear);
@@ -76,9 +75,11 @@ public class AddComment extends AppCompatActivity {
           int helpfulness = 0;
           int semester = selectSemester.getSelectedItem().equals("Semester 1") ? 1 : 2;
 
-          Comment newComment = new Comment(null, courseCodeInfo, year, semester, userComment,helpfulness,currentTime);
+          Comment newComment =
+              new Comment(
+                  null, courseCodeInfo, year, semester, userComment, helpfulness, currentTime);
 
-          fireBaseCommentService.addComment(
+          CommentService.addComment(
               courseCodeInfo,
               newComment,
               isSuccessful -> {
