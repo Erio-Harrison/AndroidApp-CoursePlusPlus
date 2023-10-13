@@ -1,13 +1,16 @@
 package com.example.couseplusplus.simulation;
 
-import com.example.couseplusplus.data.comment.CommentDatasource;
 import com.example.couseplusplus.model.comment.CommentRepository;
 import java.util.List;
 
 public class AddHelpfulnessHandler implements Observer {
-  private final CommentRepository commentRepository = new CommentDatasource();
+  private CommentRepository commentRepository;
 
-  @Override
+    public AddHelpfulnessHandler(CommentRepository commentRepository) {
+      this.commentRepository = commentRepository;
+    }
+
+    @Override
   public void on(ActionType actionType, List<String> arguments) {
     if (actionType != ActionType.addHelpfulness) return;
     commentRepository.addHelpfulness(

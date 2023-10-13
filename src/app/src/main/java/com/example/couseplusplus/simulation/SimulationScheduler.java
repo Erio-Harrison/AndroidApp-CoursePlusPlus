@@ -1,6 +1,9 @@
 package com.example.couseplusplus.simulation;
 
 import android.content.Context;
+
+import com.example.couseplusplus.model.comment.CommentRepository;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,13 +23,14 @@ public class SimulationScheduler implements Subject {
   private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
   private int currentScheduleIndex = 0;
 
+  private CommentRepository commentRepository;
   public SimulationScheduler(Context context) {
     this.context = context;
     schedules = new ArrayList<>();
     observers = new ArrayList<>();
 
-    register(new AddCommentHandler());
-    register(new AddHelpfulnessHandler());
+    register(new AddCommentHandler(commentRepository));
+    register(new AddHelpfulnessHandler(commentRepository));
   }
 
   public void readSchedules() {

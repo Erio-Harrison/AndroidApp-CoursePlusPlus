@@ -1,7 +1,5 @@
 package com.example.couseplusplus.simulation;
 
-import android.util.Log;
-import com.example.couseplusplus.data.comment.CommentDatasource;
 import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.comment.CommentRepository;
 import java.time.LocalDateTime;
@@ -10,8 +8,11 @@ import java.util.List;
 
 public class AddCommentHandler implements Observer {
 
-  private final CommentRepository commentRepository = CommentDatasource.getInstance();
+  private CommentRepository commentRepository;
 
+  public AddCommentHandler(CommentRepository commentRepository){
+    this.commentRepository=commentRepository;
+  }
   @Override
   public void on(ActionType actionType, List<String> arguments) {
     if (actionType != ActionType.addComment) return;
@@ -29,6 +30,5 @@ public class AddCommentHandler implements Observer {
             Integer.parseInt(arguments.get(5)),
             time);
     commentRepository.addComment(comment.courseCode(), comment);
-    Log.i("Simulation", "Added Comment " + comment.toString());
   }
 }
