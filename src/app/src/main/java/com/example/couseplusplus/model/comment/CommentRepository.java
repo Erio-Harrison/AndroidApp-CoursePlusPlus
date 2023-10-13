@@ -1,6 +1,5 @@
 package com.example.couseplusplus.model.comment;
 
-import com.example.couseplusplus.data.comment.FirebaseComment;
 import com.example.couseplusplus.model.query.parser.ParseTree;
 import java.util.List;
 import java.util.function.Consumer;
@@ -42,5 +41,5 @@ public interface CommentRepository {
    * @param onCompleteListener The completion of uploading to Firebase. This is separated as another
    *     parameter because UI handling needs to be done in AddComment.java
    */
-  void addComment(String courseCode, FirebaseComment comment, Consumer<Boolean> onCompleteListener);
+  void addComment(String courseCode, Comment comment, Consumer<Boolean> onCompleteListener);
 }

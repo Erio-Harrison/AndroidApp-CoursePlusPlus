@@ -15,9 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.data.comment.FirebaseComment;
+import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.service.comment.FireBaseCommentService;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 /**
  * Author: Min su Park
@@ -71,18 +72,11 @@ public class AddComment extends AppCompatActivity {
             Toast.makeText(this, "Empty reviews are not allowed", Toast.LENGTH_SHORT).show();
             return;
           }
-          String postedDateTime =
-              currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS"));
           int year = Integer.parseInt(yearsSpinner.getSelectedItem().toString());
           int helpfulness = 0;
           int semester = selectSemester.getSelectedItem().equals("Semester 1") ? 1 : 2;
 
-          FirebaseComment newComment = new FirebaseComment();
-          newComment.setText(userComment);
-          newComment.setSemester(semester);
-          newComment.setYear(year);
-          newComment.setHelpfulness(helpfulness);
-          newComment.setPostedDateTime(postedDateTime);
+          Comment newComment = new Comment(null, courseCodeInfo, year, semester, userComment,helpfulness,currentTime);
 
           fireBaseCommentService.addComment(
               courseCodeInfo,

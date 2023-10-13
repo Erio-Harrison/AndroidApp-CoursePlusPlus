@@ -1,6 +1,6 @@
 package com.example.couseplusplus.service.comment;
 
-import com.example.couseplusplus.data.comment.FirebaseComment;
+import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.model.comment.CommentRepository;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -18,7 +18,7 @@ public class FireBaseCommentService {
   }
 
   public void addComment(
-      String courseCode, FirebaseComment comment, Consumer<Boolean> onCompleteListener) {
+          String courseCode, Comment comment, Consumer<Boolean> onCompleteListener) {
     if (Objects.isNull(courseCode) || courseCode.isBlank()) {
       throw new IllegalArgumentException("courseCode could not be identified");
     }

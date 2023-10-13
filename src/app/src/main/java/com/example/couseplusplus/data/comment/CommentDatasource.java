@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -88,13 +90,22 @@ public class CommentDatasource implements CommentRepository {
    */
   @Override
   public void addComment(
-      String courseCode, FirebaseComment comment, Consumer<Boolean> onCompleteListener) {
+      String courseCode, Comment comment, Consumer<Boolean> onCompleteListener) {
     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+    FirebaseComment uploadComment = new FirebaseComment();
+    uploadComment.setHelpfulness(comment.helpfulness());
+    uploadComment.setSemester(comment.semester());
+    uploadComment.setText(comment.text());
+    uploadComment.setYear(comment.year());
+    uploadComment.setPostedDateTime(comment.postedDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")));
+
+
     mDatabase
         .child("comment")
         .child(courseCode)
         .push()
-        .setValue(comment)
+        .setValue(uploadComment)
         .addOnCompleteListener(
             task -> {
               boolean result = task.isSuccessful();
