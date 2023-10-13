@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Couse++"
+rootProject.name = "Course++"
 include(":app")

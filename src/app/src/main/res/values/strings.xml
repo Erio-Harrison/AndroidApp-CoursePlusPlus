@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Couse++</string>
+    <string name="app_name">Course++</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
