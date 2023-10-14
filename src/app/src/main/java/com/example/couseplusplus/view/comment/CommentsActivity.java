@@ -244,8 +244,11 @@ public class CommentsActivity extends AppCompatActivity
     commentService.listenChange(
         courseCodeInfo,
         comments -> {
-          commentList = comments;
-          sortBy(sortingAspect);
+          if (Objects.nonNull(courseCode)) search();
+          else {
+            commentList = comments;
+            sortBy(sortingAspect);
+          }
           reflectSearchAndSort();
         });
   }
