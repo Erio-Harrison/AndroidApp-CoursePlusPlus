@@ -2,11 +2,12 @@ package com.example.couseplusplus.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.couseplusplus.CourseAdapter;
@@ -14,61 +15,71 @@ import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.RecyclerViewClickListener;
 import com.example.couseplusplus.model.course.Course;
-import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.course.CourseService;
 import com.example.couseplusplus.service.user.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity {
 
-  Button logoutButton;
-  TextView textView;
-  UserService userService;
+  UserService userService = IoCContainer.userService();
   RecyclerView courseRecycleView;
   CourseAdapter courseAdapter;
   List<Course> courseList = new ArrayList<>();
-  CourseService courseService;
-  EditText searchInput;
-  Button searchButton;
+  CourseService courseService = IoCContainer.courseService();
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.courses_menu, menu);
+    setListeners(menu);
+    return true;
+  }
+
+  void setListeners(Menu menu) {
+    MenuItem searchItem = menu.findItem(R.id.search_in_course);
+    SearchView searchView = (SearchView) Objects.requireNonNull(searchItem.getActionView());
+    searchView.setOnQueryTextListener(
+        new SearchView.OnQueryTextListener() {
+          @Override
+          public boolean onQueryTextSubmit(String text) {
+            doSearch(text);
+            return true;
+          }
+
+          @Override
+          public boolean onQueryTextChange(String text) {
+            if (!text.isBlank()) return false;
+            doSearch(text);
+            return true;
+          }
+
+          void doSearch(String text) {
+            courseList = text.isBlank() ? courseService.getAll() : courseService.findAll(text);
+            courseAdapter = new CourseAdapter(courseList);
+            courseRecycleView.setAdapter(courseAdapter);
+          }
+        });
+
+    LogoutLabeler.label(R.id.logout_in_course, menu, userService, this);
+
+    menu.findItem(R.id.logout_in_course)
+        .setOnMenuItemClickListener(
+            item -> {
+              userService.logout();
+              Intent logoutIntent = new Intent(getApplicationContext(), Login.class);
+              startActivity(logoutIntent);
+              finish();
+              return true;
+            });
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    SupportActionBarTitleSetter.set("Course", this);
     setContentView(R.layout.activity_main);
-
-    userService = IoCContainer.userService();
-    courseService = IoCContainer.courseService();
-    logoutButton = findViewById(R.id.logout);
-    textView = findViewById(R.id.user_details);
-    searchInput = findViewById(R.id.course_search_input);
-    searchButton = findViewById(R.id.course_search_button);
-
-    Optional<User> optionalUser = userService.findCurrentUser();
-    if (optionalUser.isPresent()) textView.setText(optionalUser.get().userName());
-    else {
-      Intent intent = new Intent(getApplicationContext(), Login.class);
-      startActivity(intent);
-      finish();
-    }
-
-    logoutButton.setOnClickListener(
-        view -> {
-          userService.logout();
-          Intent intent = new Intent(getApplicationContext(), Login.class);
-          startActivity(intent);
-          finish();
-        });
-
-    searchButton.setOnClickListener(
-        view -> {
-          String input = searchInput.getText().toString();
-          courseList = input.isBlank() ? courseService.getAll() : courseService.findAll(input);
-          courseAdapter = new CourseAdapter(courseList);
-          courseRecycleView.setAdapter(courseAdapter);
-        });
 
     courseRecycleView = (RecyclerView) findViewById(R.id.course_rv);
     courseRecycleView.setLayoutManager(new LinearLayoutManager(this));

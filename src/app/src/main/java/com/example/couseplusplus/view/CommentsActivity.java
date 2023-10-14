@@ -3,7 +3,6 @@ package com.example.couseplusplus.view;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.SearchView;
@@ -122,6 +120,8 @@ public class CommentsActivity extends AppCompatActivity
               return true;
             });
 
+    LogoutLabeler.label(R.id.logout, menu, userService, this);
+
     menu.findItem(R.id.logout)
         .setOnMenuItemClickListener(
             item -> {
@@ -136,7 +136,7 @@ public class CommentsActivity extends AppCompatActivity
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setTitle();
+    SupportActionBarTitleSetter.set("Comment", this);
     setContentView(R.layout.activity_comments);
     Intent intent = getIntent();
     String courseCodeInfo = intent.getStringExtra("courseCode");
@@ -240,16 +240,13 @@ public class CommentsActivity extends AppCompatActivity
           popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
         });
 
-    commentService.listenChange(courseCodeInfo, comments -> search());
-  }
-
-  void setTitle() {
-    ActionBar actionBar = getSupportActionBar();
-    if (Objects.isNull(actionBar)) {
-      Log.i(getClass().getSimpleName(), "getSupportActionBar() returned null");
-      return;
-    }
-    actionBar.setTitle("Comment");
+    commentService.listenChange(
+        courseCodeInfo,
+        comments -> {
+          commentList = comments;
+          sortBy(sortingAspect);
+          reflectSearchAndSort();
+        });
   }
 
   void sortByThenReflect(SortingAspect aspect) {

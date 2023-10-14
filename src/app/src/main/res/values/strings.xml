@@ -25,7 +25,7 @@
     <string name="sort_by_posted">Post On</string>
     <string name="sort_by_helpful">Helpful</string>
     <string name="sort_by_enrol_date">Enrol On</string>
-    <string name="enable_raw_query">Raw Query</string>
+    <string name="enable_raw_query">Enable Raw Query</string>
     <string name="others">Others</string>
     <string name="filter">Filter</string>
     <string name="sort">Sort</string>
