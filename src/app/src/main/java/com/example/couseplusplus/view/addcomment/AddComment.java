@@ -103,6 +103,7 @@ public class AddComment extends AppCompatActivity {
               isSuccessful -> {
                 if (isSuccessful) {
                   Toast.makeText(this, "Comment added successfully", Toast.LENGTH_SHORT).show();
+                  finish();
                 } else {
                   Toast.makeText(this, "Failed to add comment", Toast.LENGTH_SHORT).show();
                 }
