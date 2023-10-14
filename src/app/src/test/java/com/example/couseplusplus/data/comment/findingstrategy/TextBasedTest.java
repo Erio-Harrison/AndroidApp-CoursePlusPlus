@@ -32,10 +32,20 @@ public class TextBasedTest {
     assertEquals(3, result.size());
     assertEquals(
         Set.of("1", "2", "3"), result.stream().map(Comment::id).collect(Collectors.toSet()));
-    assertThrows(UnsupportedOperationException.class, () -> uut.find(TokenType.Equal, terminalNode, commentCache));
-    assertThrows(UnsupportedOperationException.class, () -> uut.find(TokenType.EqualOrMoreThan, terminalNode, commentCache));
-    assertThrows(UnsupportedOperationException.class, () -> uut.find(TokenType.EqualOrLessThan, terminalNode, commentCache));
-    assertThrows(UnsupportedOperationException.class, () -> uut.find(TokenType.MoreThan, terminalNode, commentCache));
-    assertThrows(UnsupportedOperationException.class, () -> uut.find(TokenType.LessThan, terminalNode, commentCache));
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> uut.find(TokenType.Equal, terminalNode, commentCache));
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> uut.find(TokenType.EqualOrMoreThan, terminalNode, commentCache));
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> uut.find(TokenType.EqualOrLessThan, terminalNode, commentCache));
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> uut.find(TokenType.MoreThan, terminalNode, commentCache));
+    assertThrows(
+        UnsupportedOperationException.class,
+        () -> uut.find(TokenType.LessThan, terminalNode, commentCache));
   }
 }

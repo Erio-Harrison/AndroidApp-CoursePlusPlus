@@ -9,9 +9,9 @@ import org.junit.Test;
  */
 public class UserDatasourceTest {
 
-    @Test
-    public void testGetInstance() {
-        UserDatasource uut = UserDatasource.getInstance();
-        assertEquals(UserDatasource.getInstance(), uut);
-    }
+  @Test
+  public void testGetInstance() {
+    UserDatasource uut = UserDatasource.getInstance();
+    assertEquals(UserDatasource.getInstance(), uut);
+  }
 }
