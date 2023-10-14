@@ -54,6 +54,8 @@ public class CommentsActivity extends AppCompatActivity
   SortingDirection sortingDirection = SortingDirection.Descending;
   MaterialButton filterButton;
   MaterialButton sortButton;
+
+  TextView commentsHitCount;
   Query query = new Query("");
   QueryElements queryElements =
       new QueryElements(
@@ -135,6 +137,8 @@ public class CommentsActivity extends AppCompatActivity
     Intent intent = getIntent();
     String courseCodeInfo = intent.getStringExtra("courseCode");
     String courseNameInfo = intent.getStringExtra("courseName");
+
+    commentsHitCount = findViewById(R.id.comments_hit);
 
     // TODO: Make helpfulness clickable
     TextView courseCodeInfoTextView = findViewById(R.id.course_code_info);
@@ -256,6 +260,7 @@ public class CommentsActivity extends AppCompatActivity
   void reflectSearchAndSort() {
     commentAdapter = new CommentAdapter(commentList);
     commentRecycleView.setAdapter(commentAdapter);
+    commentsHitCount.setText(String.valueOf(commentList.size()));
   }
 
   @Override

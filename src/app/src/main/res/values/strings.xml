@@ -29,4 +29,6 @@
     <string name="others">Others</string>
     <string name="filter">Filter</string>
     <string name="sort">Sort</string>
+    <string name="comments_found">comments found</string>
+    <string name="courses_found">courses found</string>
 </resources>

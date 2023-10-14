@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
   CourseAdapter courseAdapter;
   List<Course> courseList = new ArrayList<>();
   CourseService courseService = IoCContainer.courseService();
+  TextView coursesHitCount;
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
           void doSearch(String text) {
             courseList = text.isBlank() ? courseService.getAll() : courseService.findAll(text);
-            courseAdapter = new CourseAdapter(courseList);
-            courseRecycleView.setAdapter(courseAdapter);
+            reflectCourseListChange();
           }
         });
 
@@ -73,14 +74,15 @@ public class MainActivity extends AppCompatActivity {
     SupportActionBarTitleSetter.set("Course", this);
     setContentView(R.layout.activity_main);
 
+    coursesHitCount = findViewById(R.id.courses_hit);
+
     courseRecycleView = (RecyclerView) findViewById(R.id.course_rv);
     courseRecycleView.setLayoutManager(new LinearLayoutManager(this));
     courseService.listenChange(
         courses -> {
           courseList = courses;
           if (Objects.nonNull(courseAdapter)) return;
-          courseAdapter = new CourseAdapter(courseList);
-          courseRecycleView.setAdapter(courseAdapter);
+          reflectCourseListChange();
         });
 
     // Set an OnClickListener for the RecyclerView items
@@ -100,5 +102,11 @@ public class MainActivity extends AppCompatActivity {
               @Override
               public void onLongItemClick(View view, int position) {}
             }));
+  }
+
+  void reflectCourseListChange() {
+    courseAdapter = new CourseAdapter(courseList);
+    courseRecycleView.setAdapter(courseAdapter);
+    coursesHitCount.setText(String.valueOf(courseList.size()));
   }
 }
