@@ -21,7 +21,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.couseplusplus.AddComment;
 import com.example.couseplusplus.CommentAdapter;
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;

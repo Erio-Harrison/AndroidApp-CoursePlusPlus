@@ -2,6 +2,9 @@ package com.example.couseplusplus.data.comment;
 
 /**
  * @author Yuki Misumi (u7582380)
+ * @author Min su Park
+ *     <p>This is the class which will be used to proccess and ultimately passed to firebase
+ *     database
  */
 public class FirebaseComment {
   int year;

@@ -13,10 +13,10 @@
         android:theme="@style/Theme.CoursePlusPlus"
         tools:targetApi="31">
         <activity
-            android:name=".Register"
+            android:name=".view.Register"
             android:exported="false" />
-        <activity
-            android:name=".AddComment"
+       <activity
+            android:name=".view.AddComment"
             android:exported="true">
         </activity>
         <activity android:name=".view.MainActivity" android:exported="true">
