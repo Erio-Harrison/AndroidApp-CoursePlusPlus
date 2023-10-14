@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import java.time.LocalDate;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class SemesterCalculatorTest {
   @Test
   public void testCalculate() {

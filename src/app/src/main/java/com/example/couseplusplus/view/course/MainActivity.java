@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author Yuki Misumi (u7582380) - polished layout
+ */
 public class MainActivity extends AppCompatActivity {
 
   UserService userService = IoCContainer.userService();

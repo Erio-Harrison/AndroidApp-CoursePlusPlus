@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public enum HelpfulFilterOption {
   None("None", new Pair<>(null, null)),
   Small("1 Or More", new Pair<>(1, null)),

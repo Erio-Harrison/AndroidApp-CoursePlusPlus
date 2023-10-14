@@ -4,6 +4,9 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class YearGenerator {
   public static List<String> generateAsString(Year from, Year until) {
     ArrayList<String> result = new ArrayList<>();

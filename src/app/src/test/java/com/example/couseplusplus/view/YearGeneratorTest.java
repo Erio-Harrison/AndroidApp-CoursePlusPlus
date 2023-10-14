@@ -7,6 +7,9 @@ import java.time.Year;
 import java.util.List;
 import org.junit.Test;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class YearGeneratorTest {
   @Test
   public void testUntilThisYear() {

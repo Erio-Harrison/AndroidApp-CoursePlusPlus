@@ -18,9 +18,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Objects;
 
 /**
- * @author: Min su Park
- *     <p>Register adds users into the Authentication database in firebase. Once registered, user
- *     will be taken to MainActivity
+ * Register adds users into the Authentication database in firebase. Once registered, user will be
+ * taken to MainActivity
+ *
+ * @author Min su Park
  */
 public class Register extends AppCompatActivity {
   TextInputEditText editTextEmail, editTextPassword;

@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.couseplusplus.IoCContainer;
@@ -25,12 +24,12 @@ import java.time.Year;
 import java.util.List;
 
 /**
- * Author: Min su Park
+ * AddComment is used as the main Comment-adding activity. This class supersedes CommentsActivity
  *
- * <p>AddComment is used as the main Comment-adding activity. This class supersedes CommentsActivity
+ * @author Min su Park
+ * @author Yuki Misumi (u7582380) - polished layout
  */
 public class AddComment extends AppCompatActivity {
-  public TextView title;
   public EditText commentSpace;
   public Button postButton;
   public String courseCodeInfo;

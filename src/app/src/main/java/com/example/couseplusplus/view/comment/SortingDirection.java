@@ -2,6 +2,9 @@ package com.example.couseplusplus.view.comment;
 
 import com.example.couseplusplus.R;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public enum SortingDirection {
   Ascending(true, R.drawable.baseline_sort_24_rev),
   Descending(false, R.drawable.baseline_sort_24),

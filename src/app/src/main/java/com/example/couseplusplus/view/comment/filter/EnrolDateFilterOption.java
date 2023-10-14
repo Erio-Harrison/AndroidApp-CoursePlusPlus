@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public enum EnrolDateFilterOption {
   None("None", () -> new Pair<>(null, null), () -> new Pair<>(null, null)),
   Small(

@@ -8,6 +8,9 @@ import com.example.couseplusplus.service.user.UserService;
 import com.example.couseplusplus.view.Login;
 import java.util.Optional;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class LogoutConfigHandler {
   int id;
   Menu menu;

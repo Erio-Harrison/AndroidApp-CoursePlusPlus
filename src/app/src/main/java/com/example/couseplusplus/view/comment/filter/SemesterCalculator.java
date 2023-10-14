@@ -3,6 +3,9 @@ package com.example.couseplusplus.view.comment.filter;
 import java.time.LocalDate;
 import java.time.Month;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class SemesterCalculator {
   public static int calculate(LocalDate localDate) {
     if (localDate.isBefore(LocalDate.of(localDate.getYear(), Month.JANUARY, 1))

@@ -5,6 +5,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Objects;
 
+/**
+ * @author Yuki Misumi (u7582380)
+ */
 public class SupportActionBarTitleSetter {
   public static void set(String title, AppCompatActivity activity) {
     ActionBar actionBar = activity.getSupportActionBar();
