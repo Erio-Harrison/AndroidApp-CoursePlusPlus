@@ -10,8 +10,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +32,8 @@ import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.service.comment.CommentService;
 import com.example.couseplusplus.service.comment.SortingAspect;
 import com.example.couseplusplus.service.user.UserService;
+import com.example.couseplusplus.view.query.Pair;
+import com.example.couseplusplus.view.query.QueryElements;
 import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +42,7 @@ import java.util.Objects;
 // FIXME always sort by something
 public class CommentsActivity extends AppCompatActivity
     implements PopupMenu.OnMenuItemClickListener {
+  String courseCode;
   RecyclerView commentRecycleView;
   CommentAdapter commentAdapter;
   List<Comment> commentList = new ArrayList<>();
@@ -47,6 +53,14 @@ public class CommentsActivity extends AppCompatActivity
   SortingDirection sortingDirection = SortingDirection.Descending;
   MaterialButton filterButton;
   MaterialButton sortButton;
+  Query query = new Query("");
+  QueryElements queryElements =
+      new QueryElements(
+          new Pair<>(null, null),
+          new Pair<>(null, null),
+          new Pair<>(null, null),
+          new Pair<>(null, null),
+          null);
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,7 +72,7 @@ public class CommentsActivity extends AppCompatActivity
 
   void setListeners(Menu menu) {
     Intent intent = getIntent();
-    String courseCodeInfo = intent.getStringExtra("courseCode");
+    courseCode = intent.getStringExtra("courseCode");
 
     MenuItem searchItem = menu.findItem(R.id.search);
     SearchView searchView = (SearchView) Objects.requireNonNull(searchItem.getActionView());
@@ -66,22 +80,21 @@ public class CommentsActivity extends AppCompatActivity
         new SearchView.OnQueryTextListener() {
           @Override
           public boolean onQueryTextSubmit(String text) {
-            Query query = new Query(text);
-            commentList = commentService.findAll(courseCodeInfo, query);
-            commentAdapter = new CommentAdapter(commentList);
-            commentRecycleView.setAdapter(commentAdapter);
-            sortBy(sortingAspect);
+            doSearch(text);
             return true;
           }
 
           @Override
-          public boolean onQueryTextChange(String newText) {
-            if (!newText.isBlank()) return false;
-            commentList = commentService.getAll(courseCodeInfo);
-            commentAdapter = new CommentAdapter(commentList);
-            commentRecycleView.setAdapter(commentAdapter);
-            sortBy(sortingAspect);
+          public boolean onQueryTextChange(String text) {
+            if (!text.isBlank()) return false;
+            doSearch(text);
             return true;
+          }
+
+          void doSearch(String text) {
+            if (usesRawQuery) query = new Query(text);
+            else queryElements = queryElements.updateTextHint(text);
+            search();
           }
         });
 
@@ -90,7 +103,7 @@ public class CommentsActivity extends AppCompatActivity
             item -> {
               Intent addCommentIntent =
                   new Intent(getApplicationContext(), AddComment.class)
-                      .putExtra("courseCode", courseCodeInfo);
+                      .putExtra("courseCode", courseCode);
               startActivity(addCommentIntent);
               return true;
             });
@@ -103,6 +116,9 @@ public class CommentsActivity extends AppCompatActivity
               searchItem.setIcon(
                   usesRawQuery ? R.drawable.baseline_code_24 : R.drawable.baseline_search_24);
               filterButton.setEnabled(!usesRawQuery);
+              queryElements.updateTextHint("");
+              query = new Query("");
+              search();
               return true;
             });
 
@@ -147,33 +163,84 @@ public class CommentsActivity extends AppCompatActivity
               ResourcesCompat.getDrawable(
                   getResources(), sortingDirection.drawableId(), getTheme());
           sortButton.setIcon(drawable);
-          sortBy(sortingAspect);
+          sortByThenReflect(sortingAspect);
           return true;
         });
 
     filterButton = findViewById(R.id.filter_button);
     LayoutInflater inflater = LayoutInflater.from(this);
     View popupView = inflater.inflate(R.layout.filter, null);
-    filterButton.setOnClickListener(
-        view -> {
-          int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
-          PopupWindow popupWindow = new PopupWindow(popupView, wrapContent, wrapContent, true);
-          popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-          popupView.setOnTouchListener(
-              (v, event) -> {
-                popupWindow.dismiss();
-                v.performClick();
-                return true;
-              });
+    Spinner helpfulOptions = popupView.findViewById(R.id.helpful_filter_options);
+    helpfulOptions.setAdapter(
+        new ArrayAdapter<>(
+            getApplicationContext(),
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+            HelpfulFilterOption.titles()));
+    helpfulOptions.setOnItemSelectedListener(
+        new AdapterView.OnItemSelectedListener() {
+          @Override
+          public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            Object item = adapterView.getItemAtPosition(i);
+            HelpfulFilterOption option = HelpfulFilterOption.getBy(item.toString());
+            queryElements = queryElements.updateHelpful(option.minMax());
+          }
+
+          @Override
+          public void onNothingSelected(AdapterView<?> adapterView) {}
         });
 
-    commentService.listenChange(
-        courseCodeInfo,
-        comments -> {
-          commentList = comments;
-          commentAdapter = new CommentAdapter(commentList);
-          commentRecycleView.setAdapter(commentAdapter);
+    Spinner enrolOptions = popupView.findViewById(R.id.enrol_filter_options);
+    enrolOptions.setAdapter(
+        new ArrayAdapter<>(
+            getApplicationContext(),
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+            EnrolDateFilterOption.titles()));
+    enrolOptions.setOnItemSelectedListener(
+        new AdapterView.OnItemSelectedListener() {
+          @Override
+          public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            Object item = adapterView.getItemAtPosition(i);
+            EnrolDateFilterOption option = EnrolDateFilterOption.getBy(item.toString());
+            queryElements = queryElements.updateEnrol(option.yearMinMax(), option.semesterMinMax());
+          }
+
+          @Override
+          public void onNothingSelected(AdapterView<?> adapterView) {}
         });
+
+    Spinner postedOptions = popupView.findViewById(R.id.posted_filter_options);
+    postedOptions.setAdapter(
+        new ArrayAdapter<>(
+            getApplicationContext(),
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
+            PostedDateFilterOption.titles()));
+    postedOptions.setOnItemSelectedListener(
+        new AdapterView.OnItemSelectedListener() {
+          @Override
+          public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            Object item = adapterView.getItemAtPosition(i);
+            PostedDateFilterOption option = PostedDateFilterOption.getBy(item.toString());
+            queryElements = queryElements.updatePosted(option.datetimeMinMax());
+          }
+
+          @Override
+          public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
+
+    filterButton.setOnClickListener(
+        view -> {
+          PopupWindow popupWindow =
+              new PopupWindow(
+                  popupView,
+                  LinearLayout.LayoutParams.MATCH_PARENT,
+                  LinearLayout.LayoutParams.WRAP_CONTENT,
+                  true);
+          popupWindow.setOnDismissListener(this::search);
+          popupWindow.setElevation(12);
+          popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        });
+
+    commentService.listenChange(courseCodeInfo, comments -> search());
   }
 
   void setTitle() {
@@ -185,9 +252,17 @@ public class CommentsActivity extends AppCompatActivity
     actionBar.setTitle("Comment");
   }
 
+  void sortByThenReflect(SortingAspect aspect) {
+    sortBy(aspect);
+    reflectSearchAndSort();
+  }
+
   void sortBy(SortingAspect aspect) {
     if (sortingDirection == SortingDirection.Nowhere) return;
     commentList = commentService.sort(commentList, sortingDirection.isAscending(), aspect);
+  }
+
+  void reflectSearchAndSort() {
     commentAdapter = new CommentAdapter(commentList);
     commentRecycleView.setAdapter(commentAdapter);
   }
@@ -212,8 +287,18 @@ public class CommentsActivity extends AppCompatActivity
 
   void sortAndCheck(MenuItem item, SortingAspect aspect) {
     sortButton.setText(SortingAspectTextHandler.stringify(aspect));
-    sortBy(aspect);
+    sortByThenReflect(aspect);
     item.setChecked(true);
     sortingAspect = aspect;
+  }
+
+  void search() {
+    Query query = usesRawQuery ? this.query : queryElements.toQuery();
+    commentList =
+        query.isBlank()
+            ? commentService.getAll(courseCode)
+            : commentService.findAll(courseCode, query);
+    sortBy(sortingAspect);
+    reflectSearchAndSort();
   }
 }

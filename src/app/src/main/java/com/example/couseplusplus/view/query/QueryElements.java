@@ -28,6 +28,27 @@ public class QueryElements {
     this.textHint = textHint;
   }
 
+  public QueryElements updateHelpful(Pair<Integer, Integer> helpfulFilter) {
+    return new QueryElements(
+        helpfulFilter, enrolYearFilter, enrolSemesterFilter, postedDateTimeFilter, textHint);
+  }
+
+  public QueryElements updateEnrol(
+      Pair<Integer, Integer> enrolYearFilter, Pair<Integer, Integer> enrolSemesterFilter) {
+    return new QueryElements(
+        helpfulFilter, enrolYearFilter, enrolSemesterFilter, postedDateTimeFilter, textHint);
+  }
+
+  public QueryElements updatePosted(Pair<LocalDateTime, LocalDateTime> postedDateTimeFilter) {
+    return new QueryElements(
+        helpfulFilter, enrolYearFilter, enrolSemesterFilter, postedDateTimeFilter, textHint);
+  }
+
+  public QueryElements updateTextHint(String textHint) {
+    return new QueryElements(
+        helpfulFilter, enrolYearFilter, enrolSemesterFilter, postedDateTimeFilter, textHint);
+  }
+
   public Query toQuery() {
     return new QueryBuilder()
         .ifThen(
@@ -36,7 +57,7 @@ public class QueryElements {
         .ifThen(
             () -> Objects.nonNull(helpfulFilter.second),
             builder -> {
-              addAndIfEmptyBuilder(builder);
+              addAndIfNotFirstTime(builder);
               builder.helpful().equalsOrLess().value(helpfulFilter.second);
             })
         .ifThen(
@@ -44,7 +65,7 @@ public class QueryElements {
                 Objects.nonNull(enrolYearFilter.first)
                     && Objects.nonNull(enrolSemesterFilter.first),
             builder -> {
-              addAndIfEmptyBuilder(builder);
+              addAndIfNotFirstTime(builder);
               builder
                   .enrol()
                   .equalsOrMore()
@@ -55,7 +76,7 @@ public class QueryElements {
                 Objects.nonNull(enrolYearFilter.second)
                     && Objects.nonNull(enrolSemesterFilter.second),
             builder -> {
-              addAndIfEmptyBuilder(builder);
+              addAndIfNotFirstTime(builder);
               builder
                   .enrol()
                   .equalsOrLess()
@@ -64,30 +85,34 @@ public class QueryElements {
         .ifThen(
             () -> Objects.nonNull(postedDateTimeFilter.first),
             builder -> {
-              addAndIfEmptyBuilder(builder);
+              addAndIfNotFirstTime(builder);
               builder.posted().equalsOrMore().localDateTimeValue(postedDateTimeFilter.first);
             })
         .ifThen(
             () -> Objects.nonNull(postedDateTimeFilter.second),
             builder -> {
-              addAndIfEmptyBuilder(builder);
+              addAndIfNotFirstTime(builder);
               builder.posted().equalsOrLess().localDateTimeValue(postedDateTimeFilter.second);
             })
         .ifThen(
-            () -> Objects.nonNull(textHint),
+            () -> Objects.nonNull(textHint) && !textHint.isBlank(),
             builder -> {
-              addAndIfEmptyBuilder(builder);
+              addAndIfNotFirstTime(builder);
               builder.text().like().textValue(textHint);
             })
         .build();
   }
 
-  void addAndIfEmptyBuilder(QueryBuilder builder) {
+  void addAndIfNotFirstTime(QueryBuilder builder) {
     if (builder.isEmpty()) return;
     builder.and();
   }
 
   String enrolValue(Integer year, Integer semester) {
     return String.format("%sS%s", year, semester);
+  }
+
+  public String textHint() {
+    return textHint;
   }
 }

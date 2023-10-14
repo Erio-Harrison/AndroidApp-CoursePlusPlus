@@ -27,6 +27,6 @@
     <string name="sort_by_enrol_date">Enrol On</string>
     <string name="enable_raw_query">Raw Query</string>
     <string name="others">Others</string>
-    <string name="filter">0 Filter</string>
+    <string name="filter">Filter</string>
     <string name="sort">Sort</string>
 </resources>

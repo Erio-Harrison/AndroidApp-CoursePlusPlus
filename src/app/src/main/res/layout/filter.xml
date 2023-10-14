@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter_options"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="#fff"
+    android:orientation="vertical"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="20dp">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/enrol_filter_option_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
-</RelativeLayout>
+        android:text="Enrol Date" />
+
+    <Spinner
+        android:id="@+id/enrol_filter_options"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/helpful_filter_option_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Helpfulness" />
+
+    <Spinner
+        android:id="@+id/helpful_filter_options"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/posted_filter_option_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Posted Date" />
+
+    <Spinner
+        android:id="@+id/posted_filter_options"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp" />
+
+</LinearLayout>
