@@ -1,4 +1,4 @@
-package com.example.couseplusplus.view;
+package com.example.couseplusplus.view.course;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.couseplusplus.CourseAdapter;
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
-import com.example.couseplusplus.RecyclerViewClickListener;
 import com.example.couseplusplus.model.course.Course;
 import com.example.couseplusplus.service.course.CourseService;
 import com.example.couseplusplus.service.user.UserService;
+import com.example.couseplusplus.view.activityhandler.LogoutConfigHandler;
+import com.example.couseplusplus.view.activityhandler.SupportActionBarTitleSetter;
+import com.example.couseplusplus.view.comment.CommentsActivity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

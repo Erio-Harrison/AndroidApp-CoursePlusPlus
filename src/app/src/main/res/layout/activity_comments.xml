@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="8dp"
-    tools:context=".view.CommentsActivity">
+    tools:context=".view.comment.CommentsActivity">
 
     <TextView
         android:id="@+id/course_code_info"

@@ -1,10 +1,11 @@
-package com.example.couseplusplus.view;
+package com.example.couseplusplus.view.activityhandler;
 
 import android.content.Intent;
 import android.view.Menu;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
+import com.example.couseplusplus.view.Login;
 import java.util.Optional;
 
 public class LogoutConfigHandler {

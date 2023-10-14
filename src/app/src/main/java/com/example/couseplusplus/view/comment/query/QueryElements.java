@@ -1,4 +1,4 @@
-package com.example.couseplusplus.view.query;
+package com.example.couseplusplus.view.comment.query;
 
 import com.example.couseplusplus.model.query.Query;
 import com.example.couseplusplus.model.query.QueryBuilder;

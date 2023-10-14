@@ -2,8 +2,8 @@ package com.example.couseplusplus.model.query;
 
 import static org.junit.Assert.*;
 
-import com.example.couseplusplus.view.query.Pair;
-import com.example.couseplusplus.view.query.QueryElements;
+import com.example.couseplusplus.view.comment.query.Pair;
+import com.example.couseplusplus.view.comment.query.QueryElements;
 import java.time.LocalDateTime;
 import org.junit.Test;
 

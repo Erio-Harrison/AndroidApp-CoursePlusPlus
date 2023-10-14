@@ -1,4 +1,4 @@
-package com.example.couseplusplus.view;
+package com.example.couseplusplus.view.activityhandler;
 
 import android.util.Log;
 import androidx.appcompat.app.ActionBar;

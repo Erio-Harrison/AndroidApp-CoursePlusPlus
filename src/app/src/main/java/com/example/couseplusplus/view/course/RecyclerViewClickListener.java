@@ -1,4 +1,4 @@
-package com.example.couseplusplus;
+package com.example.couseplusplus.view.course;
 
 import android.content.Context;
 import android.view.GestureDetector;

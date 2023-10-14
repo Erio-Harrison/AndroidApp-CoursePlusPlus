@@ -1,4 +1,4 @@
-package com.example.couseplusplus.view;
+package com.example.couseplusplus.view.comment;
 
 import com.example.couseplusplus.R;
 

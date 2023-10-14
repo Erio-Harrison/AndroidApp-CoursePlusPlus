@@ -1,4 +1,4 @@
-package com.example.couseplusplus.view.query;
+package com.example.couseplusplus.view.comment.query;
 
 /**
  * A utility for tuple

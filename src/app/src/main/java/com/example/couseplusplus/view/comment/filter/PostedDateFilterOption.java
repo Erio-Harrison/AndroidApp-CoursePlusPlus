@@ -1,6 +1,6 @@
-package com.example.couseplusplus.view;
+package com.example.couseplusplus.view.comment.filter;
 
-import com.example.couseplusplus.view.query.Pair;
+import com.example.couseplusplus.view.comment.query.Pair;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;

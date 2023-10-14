@@ -14,6 +14,7 @@ import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
+import com.example.couseplusplus.view.course.MainActivity;
 
 /**
  * @author: Min su Park

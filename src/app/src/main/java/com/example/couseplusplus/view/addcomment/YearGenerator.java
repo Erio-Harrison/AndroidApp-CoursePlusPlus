@@ -1,4 +1,4 @@
-package com.example.couseplusplus.view;
+package com.example.couseplusplus.view.addcomment;
 
 import java.time.Year;
 import java.util.ArrayList;
