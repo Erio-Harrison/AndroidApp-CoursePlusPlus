@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public enum HelpfulFilterOption {
-  Option1("None", new Pair<>(null, null)),
-  Option2("1 Or More", new Pair<>(1, null)),
-  Option3("10 Or More", new Pair<>(10, null)),
-  Option4("50 Or More", new Pair<>(50, null)),
+  None("None", new Pair<>(null, null)),
+  Small("1 Or More", new Pair<>(1, null)),
+  Medium("10 Or More", new Pair<>(10, null)),
+  Large("50 Or More", new Pair<>(50, null)),
   ;
 
   final String title;
@@ -28,7 +28,7 @@ public enum HelpfulFilterOption {
   }
 
   public static List<String> titles() {
-    return List.of(Option1.title, Option2.title, Option3.title, Option4.title);
+    return List.of(None.title, Small.title, Medium.title, Large.title);
   }
 
   public Pair<Integer, Integer> minMax() {

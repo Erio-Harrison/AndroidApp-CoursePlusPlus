@@ -2,15 +2,14 @@ package com.example.couseplusplus.view.comment.filter;
 
 import com.example.couseplusplus.view.comment.query.Pair;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum EnrolDateFilterOption {
-  Option1("None", () -> new Pair<>(null, null), () -> new Pair<>(null, null)),
-  Option2(
+  None("None", () -> new Pair<>(null, null), () -> new Pair<>(null, null)),
+  Small(
       "This Semester",
       () -> {
         LocalDate now = LocalDate.now();
@@ -18,20 +17,17 @@ public enum EnrolDateFilterOption {
       },
       () -> {
         LocalDate now = LocalDate.now();
-        if (now.isBefore(LocalDate.of(now.getYear(), Month.FEBRUARY, 1))
-            && now.isAfter(
-                LocalDate.of(now.getYear(), Month.NOVEMBER, Month.NOVEMBER.length(false))))
-          return new Pair<>(2, 2);
-        return new Pair<>(1, 1);
+        int semester = SemesterCalculator.calculate(now);
+        return new Pair<>(semester, semester);
       }),
-  Option3(
+  Medium(
       "This Year",
       () -> {
         LocalDate now = LocalDate.now();
         return new Pair<>(now.getYear(), now.getYear());
       },
       () -> new Pair<>(1, 2)),
-  Option4(
+  Large(
       "These 2 Years",
       () -> {
         LocalDate now = LocalDate.now();
@@ -61,7 +57,7 @@ public enum EnrolDateFilterOption {
   }
 
   public static List<String> titles() {
-    return List.of(Option1.title, Option2.title, Option3.title, Option4.title);
+    return List.of(None.title, Small.title, Medium.title, Large.title);
   }
 
   public Pair<Integer, Integer> yearMinMax() {

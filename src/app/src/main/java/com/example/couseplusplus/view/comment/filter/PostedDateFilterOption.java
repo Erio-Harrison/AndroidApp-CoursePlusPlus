@@ -10,8 +10,8 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum PostedDateFilterOption {
-  Option1("None", () -> new Pair<>(null, null)),
-  Option2(
+  None("None", () -> new Pair<>(null, null)),
+  Small(
       "This Month",
       () -> {
         LocalDate now = LocalDate.now();
@@ -19,7 +19,7 @@ public enum PostedDateFilterOption {
         LocalDateTime end = now.withDayOfMonth(now.lengthOfMonth()).plusDays(1).atStartOfDay();
         return new Pair<>(start, end);
       }),
-  Option3(
+  Medium(
       "This Year",
       () -> {
         LocalDate now = LocalDate.now();
@@ -27,7 +27,7 @@ public enum PostedDateFilterOption {
         LocalDateTime end = now.withMonth(Month.DECEMBER.getValue()).atStartOfDay();
         return new Pair<>(start, end);
       }),
-  Option4(
+  Large(
       "These 2 Years",
       () -> {
         LocalDate now = LocalDate.now();
@@ -55,7 +55,7 @@ public enum PostedDateFilterOption {
   }
 
   public static List<String> titles() {
-    return List.of(Option1.title, Option2.title, Option3.title, Option4.title);
+    return List.of(None.title, Small.title, Medium.title, Large.title);
   }
 
   public Pair<LocalDateTime, LocalDateTime> datetimeMinMax() {
