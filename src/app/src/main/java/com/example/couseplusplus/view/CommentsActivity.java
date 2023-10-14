@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-// FIXME always sort by something
 public class CommentsActivity extends AppCompatActivity
     implements PopupMenu.OnMenuItemClickListener {
   String courseCode;
@@ -119,17 +118,8 @@ public class CommentsActivity extends AppCompatActivity
               return true;
             });
 
-    LogoutLabeler.label(R.id.logout, menu, userService, this);
-
-    menu.findItem(R.id.logout)
-        .setOnMenuItemClickListener(
-            item -> {
-              userService.logout();
-              Intent logoutIntent = new Intent(getApplicationContext(), Login.class);
-              startActivity(logoutIntent);
-              finish();
-              return true;
-            });
+    var handler = new LogoutConfigHandler(R.id.logout, menu, userService, this);
+    handler.configure();
   }
 
   @Override

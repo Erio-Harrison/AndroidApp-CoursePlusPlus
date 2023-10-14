@@ -62,17 +62,8 @@ public class MainActivity extends AppCompatActivity {
           }
         });
 
-    LogoutLabeler.label(R.id.logout_in_course, menu, userService, this);
-
-    menu.findItem(R.id.logout_in_course)
-        .setOnMenuItemClickListener(
-            item -> {
-              userService.logout();
-              Intent logoutIntent = new Intent(getApplicationContext(), Login.class);
-              startActivity(logoutIntent);
-              finish();
-              return true;
-            });
+    var handler = new LogoutConfigHandler(R.id.logout_in_course, menu, userService, this);
+    handler.configure();
   }
 
   @Override
