@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/others"
+        android:title="@string/others"
+        android:icon="@drawable/baseline_more_vert_24"
+        app:showAsAction="collapseActionView|ifRoom"
+        >
+        <menu>
+            <item
+                android:id="@+id/logout_in_add_comment"
+                android:title="@string/log_out"
+                />
+        </menu>
+    </item>
+</menu>

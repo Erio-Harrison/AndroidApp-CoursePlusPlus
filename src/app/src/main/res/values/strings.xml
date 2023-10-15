@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Couse++</string>
+    <string name="app_name">Course++</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -7,7 +7,7 @@
     <string name="click_to_login">Click to Login</string>
     <string name="log_out">Log out</string>
     <string name="please_write_a_comment_for_this_course">Please write a comment for this course</string>
-    <string name="share_your_throughts">Share your throughts!</string>
+    <string name="share_your_throughts">Share your thoughts!</string>
     <string name="share_your_thoughts">Share your thoughts</string>
     <string name="add_comment">Add Comment</string>
     <string name="course_code">Course Code</string>
@@ -15,4 +15,20 @@
     <string name="post_comment">Post Comment</string>
     <string name="select_a_semester">Select a semester</string>
     <string name="select_a_year">Select a Year</string>
+    <string name="desc">Descending</string>
+    <string name="asc">Ascending</string>
+    <string name="search_menu_title">Search</string>
+    <string name="add_comment_title">Add Comment</string>
+    <string name="sort_title">Sort</string>
+    <string name="account_menu_title">Account</string>
+    <string name="logout_menu_title">Logout</string>
+    <string name="sort_by_posted">Post On</string>
+    <string name="sort_by_helpful">Helpful</string>
+    <string name="sort_by_enrol_date">Enrol On</string>
+    <string name="enable_raw_query">Enable Raw Query</string>
+    <string name="others">Others</string>
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="comments_found">comments found</string>
+    <string name="courses_found">courses found</string>
 </resources>

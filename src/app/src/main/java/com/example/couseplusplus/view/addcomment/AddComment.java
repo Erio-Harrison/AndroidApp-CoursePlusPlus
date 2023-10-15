@@ -1,53 +1,70 @@
-package com.example.couseplusplus.view;
+package com.example.couseplusplus.view.addcomment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.model.comment.Comment;
 import com.example.couseplusplus.service.comment.CommentService;
+import com.example.couseplusplus.service.user.UserService;
+import com.example.couseplusplus.view.activityhandler.LogoutConfigHandler;
+import com.example.couseplusplus.view.activityhandler.SupportActionBarTitleSetter;
 import java.time.LocalDateTime;
+import java.time.Year;
+import java.util.List;
 
 /**
- * Author: Min su Park
+ * AddComment is used as the main Comment-adding activity. This class supersedes CommentsActivity
  *
- * <p>AddComment is used as the main Comment-adding activity. This class supersedes CommentsActivity
+ * @author Min su Park
+ * @author Yuki Misumi (u7582380) - polished layout
  */
 public class AddComment extends AppCompatActivity {
-  public TextView title;
   public EditText commentSpace;
   public Button postButton;
   public String courseCodeInfo;
   public Spinner selectSemester;
   CommentService CommentService;
 
+  UserService userService = IoCContainer.userService();
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.add_comment_menu, menu);
+    setListeners(menu);
+    return true;
+  }
+
+  void setListeners(Menu menu) {
+    var handler = new LogoutConfigHandler(R.id.logout_in_add_comment, menu, userService, this);
+    handler.configure();
+  }
+
   @SuppressLint({"SetTextI18n", "CutPasteId"})
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_add_comment);
-    title = findViewById(R.id.addCommentTitle);
     commentSpace = findViewById(R.id.comment_space);
     postButton = findViewById(R.id.post_comment);
     selectSemester = findViewById(R.id.selectSemester);
     CommentService = IoCContainer.commentService();
     Intent intent = getIntent();
     courseCodeInfo = intent.getStringExtra("courseCode");
-    String[] DISPLAY_YEARS = {
-      "2015", "2016", "2017", "2017", "2018", "2019", "2020", "2021", "2022", "2023"
-    };
+    SupportActionBarTitleSetter.set(String.format("Add Comment To %s", courseCodeInfo), this);
+    List<String> DISPLAY_YEARS = YearGenerator.generateAsString(Year.of(2015), Year.now());
     String[] DISPLAY_SEMESTERS = {"Semester 1", "Semester 2"};
-
-    title.setText("Please write a comment for the course: " + courseCodeInfo);
 
     ArrayAdapter<String> yearAdapter =
         new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, DISPLAY_YEARS);
@@ -59,6 +76,7 @@ public class AddComment extends AppCompatActivity {
 
     Spinner yearsSpinner = findViewById(R.id.selectYear);
     yearsSpinner.setAdapter(yearAdapter);
+    yearsSpinner.setSelection(DISPLAY_YEARS.size() - 1);
 
     Spinner semesterSpinner = findViewById(R.id.selectSemester);
     semesterSpinner.setAdapter(semesterAdapter);
@@ -85,6 +103,7 @@ public class AddComment extends AppCompatActivity {
               isSuccessful -> {
                 if (isSuccessful) {
                   Toast.makeText(this, "Comment added successfully", Toast.LENGTH_SHORT).show();
+                  finish();
                 } else {
                   Toast.makeText(this, "Failed to add comment", Toast.LENGTH_SHORT).show();
                 }

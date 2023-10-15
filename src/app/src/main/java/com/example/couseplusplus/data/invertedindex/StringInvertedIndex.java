@@ -6,9 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * An inverted index implementation
+ * A string inverted index implementation
  *
- * @param <K>
  * @param <V>
  * @author Yuki Misumi (u7582380)
  */

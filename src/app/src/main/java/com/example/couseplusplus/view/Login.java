@@ -14,13 +14,16 @@ import com.example.couseplusplus.IoCContainer;
 import com.example.couseplusplus.R;
 import com.example.couseplusplus.model.user.User;
 import com.example.couseplusplus.service.user.UserService;
+import com.example.couseplusplus.view.course.MainActivity;
 
 /**
- * @author: Min su Park
- *     <p>This Activity Class is the entry point to the App. Here users will either have to
- *     authenticate themselves in logging-in via firebase authentication. Upon success login, users
- *     will be taken to MainActivity
- *     <p>Additionally, users can register ID and Password to firebase.
+ * This Activity Class is the entry point to the App. Here users will either have to authenticate
+ * themselves in logging-in via firebase authentication. Upon success login, users will be taken to
+ * MainActivity
+ *
+ * <p>Additionally, users can register ID and Password to firebase.
+ *
+ * @author Min su Park
  */
 public class Login extends AppCompatActivity {
   EditText editTextEmail, editTextPassword;
@@ -84,7 +87,8 @@ public class Login extends AppCompatActivity {
               result -> {
                 progressBar.setVisibility(View.GONE);
                 if (result.isSuccessful()) {
-                  Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                  String text = String.format("Welcome %s!", result.user().userName());
+                  Toast.makeText(Login.this, text, Toast.LENGTH_SHORT).show();
                   Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                   startActivity(intent);
                   finish();
