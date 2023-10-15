@@ -1,0 +1,50 @@
+import json
+import random
+from datetime import datetime, timedelta
+
+# Define the path to the uploaded JSON file
+uploaded_file_path = 'D:\\store\\course.json'
+
+def generate_random_comment_text():
+    sample_texts = ["This course is great!", "Not recommended!", "I learned a lot!", "Could be better!", "Highly recommended!"]
+    return random.choice(sample_texts)
+
+def generate_random_timestamp():
+    random_days = random.randint(1, 365)
+    random_seconds = random.randint(0, 59)
+    random_minutes = random.randint(0, 59)
+    random_hours = random.randint(0, 23)
+    random_timestamp = datetime.now() - timedelta(days=random_days, hours=random_hours, minutes=random_minutes, seconds=random_seconds)
+    return random_timestamp.isoformat()
+
+def generate_random_comment_instance(comment_num):
+    return {
+        f'comment{comment_num}': {
+            'text': generate_random_comment_text(),
+            'year': random.randint(2022, 2023),
+            'semester': random.randint(1, 2),
+            'postedDateTime': generate_random_timestamp(),
+            'helpfulness': random.randint(0, 10)
+        }
+    }
+
+# Load the uploaded JSON file
+with open(uploaded_file_path, 'r') as file:
+    uploaded_data = json.load(file)
+
+# Iterate over each course and add random comments in sequential order
+for course_code in uploaded_data.get("courses", {}):
+    current_comments = uploaded_data.get("comments", {}).get(course_code, {})
+    max_comment_num = max([int(key.replace('comment', '')) for key in current_comments.keys()]) if current_comments else 0
+    for i in range(1, 11):  # Adding 10 new random comments
+        new_comment_num = max_comment_num + i
+        new_comment = generate_random_comment_instance(new_comment_num)
+        current_comments.update(new_comment)
+    uploaded_data.get("comments", {})[course_code] = current_comments  # Update the uploaded_data with new comments
+
+# Define the new file path to save the updated JSON data
+new_file_path = 'D:\\store\\course_updated_withComment_Branch.json'
+
+# Write the updated JSON structure to the new file
+with open(new_file_path, 'w') as file:
+    json.dump(uploaded_data, file, indent=4)  # Using 4 spaces for indentation

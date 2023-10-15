@@ -1,1 +1,15 @@
-AddComment,COMP6442,2023S2,I like this course so much,0,2023-10-10
+addComment,commentSimulation1,ACST3001,2021,1,This course is great!,3,15-07-2023 14:25:45
+addComment,commentSimulation2,ACST3032,2022,1,The professor is helpful!,4,12-07-2023 13:25:45
+addComment,commentSimulation3,COMP2100,2023,2,Loved the course materials!,5,20-07-2023 10:15:25
+addComment,commentSimulation4,ACST3004,2022,2,Assignments were too tough!,2,22-07-2023 16:40:30
+addComment,commentSimulation5,COMP2400,2022,2,Excellent course for beginners!,4,30-07-2023 12:25:55
+addComment,commentSimulation6,COMP1100,2022,1,Too much theory!,3,18-07-2023 09:15:45
+addComment,commentSimulation7,COMP2100,2023,1,Interactive and engaging sessions!,4,10-07-2023 15:05:25
+addHelpfulness,ACST3001,comment3,3
+addHelpfulness,ACST3002,comment4,6
+addHelpfulness,ACST3032,commentSimulation2,5
+addHelpfulness,COMP2100,commentSimulation3,4
+addHelpfulness,ACST3004,commentSimulation4,2
+addHelpfulness,COMP2400,commentSimulation5,5
+addHelpfulness,COMP1100,commentSimulation6,4
+addHelpfulness,COMP2100,commentSimulation7,5
